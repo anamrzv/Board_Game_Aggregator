@@ -1,0 +1,16 @@
+.header {
+    background-color: #5e56a3;
+    height: 70px;
+    display: flex;
+    justify-content: right;
+    text-align: right;
+    box-shadow: 0 0 18px 5px #4C4248;
+}
+
+.header p {
+    color: whitesmoke;
+    font-family: "Century Gothic", sans-serif;
+    font-size: 18px;
+    line-height: 15px;
+    margin: 15px 15px;
+}

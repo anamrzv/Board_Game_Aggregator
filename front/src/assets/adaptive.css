@@ -1,0 +1,135 @@
+/* Для телефонов */
+@media (max-width: 780px) {
+    .choose-area {
+        display: flex;
+        flex-direction: column;
+        margin: 10px 10px 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 30px 5px #787099;
+        align-items: center;
+        width: auto;
+    }
+
+    div[class="checkbox-area"] {
+        margin-top: 15px;
+        font-size: 20px;
+    }
+
+    #coordinates-form > div {
+        display: flex;
+        justify-content: center;
+        padding: 30px;
+        width: auto;
+    }
+
+    .buttons-area {
+        margin-top: 15px;
+    }
+
+    .row {
+        width: 200px;
+    }
+
+    .ordinary-btn, .ordinary-btn-R {
+        margin: 3px 8px;
+        width: 50px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .ordinary-btn-selected, .ordinary-btn-selected-R {
+        margin: 3px 8px;
+        width: 50px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .button-row > .gradient-button {
+        padding: 5px 5px;
+        margin: 15px 10px;
+        line-height: 15px;
+    }
+
+    #main-table {
+        margin: 10px 10px 30px;
+        font-size: 10px;
+    }
+
+    caption {
+        font-size: 15px;
+        margin-bottom: 25px;
+    }
+
+    #main-table th {
+        padding: 10px;
+    }
+
+    #main-table td {
+        padding: 8px;
+    }
+
+    .header {
+        height: 50px;
+    }
+
+    .header p {
+        font-size: 12px;
+        margin: 6px 5px;
+    }
+
+    #ttl {
+        margin-left: 5px;
+        margin-right: 5px;
+        font-size: 15px;
+    }
+
+}
+
+@media (min-width: 360px) {
+    .header {
+        margin-bottom: 7px;
+    }
+}
+
+/* Для планшетов */
+@media (min-width: 780px) and (max-width: 1023px) {
+
+    .choose-area {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 20px 10px;
+        background-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 30px 5px #787099;
+        align-items: center;
+        font-size: 16px;
+    }
+
+    div[class="checkbox-area"] {
+        margin-top: 15px;
+    }
+
+    .header {
+        height: 70px;
+        margin-bottom: 7px;
+    }
+
+    .header p {
+        font-size: 20px;
+        margin: 13px 8px;
+    }
+
+    div[class="checkbox-area"] {
+        width: auto
+    }
+
+    .row {
+        width: 350px;
+        display: flex;
+        justify-content: center;
+    }
+
+    #ttl {
+        width: 400px;
+    }
+}
+
