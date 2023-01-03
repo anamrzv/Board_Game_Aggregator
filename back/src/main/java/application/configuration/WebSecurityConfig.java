@@ -30,8 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/api/user").permitAll()
 //                .antMatchers("/api/user/*").permitAll()
 //                .antMatchers("/error").permitAll() // TODO: переделать
-                .antMatchers("/auth").permitAll()
-                .antMatchers("/register").permitAll()
+                .antMatchers("/api/user/auth").permitAll()
+                .antMatchers("/api/user/register").permitAll()
                 .anyRequest().authenticated() //требуем авторизацию
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
