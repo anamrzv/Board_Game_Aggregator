@@ -18,7 +18,7 @@ import static org.springframework.util.StringUtils.hasText;
 @Component
 @Log
 public class JwtProvider {
-    @Value("$(jwt.secret)")
+    @Value("$(jwt_secret)")
     private String jwtSecret;
     @Autowired
     private CustomUserDetailsService userDetailsService;
