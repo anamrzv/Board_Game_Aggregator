@@ -1,0 +1,11 @@
+{
+  "properties": [
+    {
+      "name": "jwt_secret",
+      "type": "java.lang.String",
+      "description": "Secret word.",
+      "sourceType": "application.util.CustomProperties",
+      "defaultValue": "abortish"
+    }
+  ]
+}
