@@ -450,5 +450,4 @@ export default {
 <style>
 @import "../assets/header.css";
 @import "../assets/body.css";
-@import "../assets/adaptive.css";
 </style>

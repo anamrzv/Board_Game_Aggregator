@@ -1,45 +1,17 @@
 <template>
-  <div id="login-body">
+  <div>
+    <div class="header"></div>
 
-    <div class="header">
-      <div>
-        <p>Морозова Анастасия Александровна P3230</p>
-        <p>Вариант 5547</p>
-      </div>
-    </div>
-
-    <div class="container">
+    <div class=container>
       <div class="screen">
+        <div class="cyber">board games</div>
         <div class="screen__content">
-          <form class="login">
-            <div class="login__field">
-              <i class="login__icon fas fa-user"></i>
-              <input type="text" class="login__input" id="loginInput" required placeholder="Логин" v-model.trim="login">
-            </div>
-            <div class="login__field">
-              <i class="login__icon fas fa-lock"></i>
-              <input type="password" class="login__input" id="passwordInput" required placeholder="Пароль"
-                     v-model.trim="password">
-            </div>
-            <a id="forError" style="font-size: 10px; font-style: oblique; color: #4C489D"></a>
-            <button class="button login__submit" @click="loging">
-              <span class="button__text">войти</span>
-              <i class="button__icon fas fa-chevron-right"></i>
-            </button>
-          </form>
-          <div class="social-login">
-            <a href="/" @click="register">регистрация</a>
-          </div>
-        </div>
-        <div class="screen__background">
-          <span class="screen__background__shape screen__background__shape4"></span>
-          <span class="screen__background__shape screen__background__shape3"></span>
-          <span class="screen__background__shape screen__background__shape2"></span>
-          <span class="screen__background__shape screen__background__shape1"></span>
+          <a href="" class="login__link">Without login</a>
+          <a href="" class="login__link">Login as user</a>
+          <a href="" class="login__link">Login as admin</a>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 

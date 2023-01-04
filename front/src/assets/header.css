@@ -1,10 +1,11 @@
 .header {
-    background-color: #5e56a3;
-    height: 70px;
+    background-color: whitesmoke;
+    height: 60px;
+    width: 100%;
+    border-radius: 0px 0px 8px 4px;
     display: flex;
     justify-content: right;
     text-align: right;
-    box-shadow: 0 0 18px 5px #4C4248;
 }
 
 .header p {
