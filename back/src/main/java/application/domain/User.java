@@ -15,13 +15,11 @@ import java.util.Set;
 @Table(name = "users", indexes = {@Index(name = "User_Role_Index", columnList = "user_role")})
 public class User {
     @Id
-    @NotNull
     @Column(name = "login")
     private String username;
     @NotNull
     @Column(name = "hashed_password")
     private String password;
-    @Column(name = "salt")
     private String salt;
     private String mail;
     @Column(name = "wants_mailing")
@@ -34,7 +32,7 @@ public class User {
     @ManyToMany
     private Set<Forum> favouriteForums;
     @ManyToMany
-    private Set<Game> gamesInCart;
+    private Set<Game> gamesInCart; //TODO: сделать добавление
     @ManyToMany
     private Set<Game> gamesInFavourites;
 

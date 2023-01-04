@@ -77,9 +77,9 @@ values ('ana.mrzv', 'd3ad1ns1d3666666', 'test@mail.ru', true, 'h0wt0d011ph3lp!',
        ('serge', 'xicpwndyjhget666', 'serge@mail.ru', true, 'qwertyuiopasdfg', 1, null),
        ('shop1', ';kqclboqeoucvqo', 'shop@mail.ru', false, 'qwertyuiopasdfg', 3, 'GaGa');
 
-insert into Game_Comment (Game_ID, User_ID, Content)
-values (1, 3, 'Лучшая игра в моей жизни, напишу ее реализацию на Си'),
-       (2, 4, 'Неплохо');
+insert into Game_Comment (Game_ID, User_Login, Content)
+values (1, 'yuko', 'Лучшая игра в моей жизни, напишу ее реализацию на Си'),
+       (2, 'serge', 'Неплохо');
 
 insert into Game_to_Shop
 values (1,1,5327),
@@ -91,21 +91,21 @@ insert into Forum_Topic (Name)
 values ('Посоветуйте игру для троих человек'),
        ('Лучшая игра для программиста?');
 
-insert into Topic_Comment (Forum_ID, User_ID, Content)
-values (1, 4, 'Сам задаюсь этим вопросом....'),
-       (2, 3, 'Разработанная им самим');
+insert into Topic_Comment (Forum_ID, User_Login, Content)
+values (1, 'serge', 'Сам задаюсь этим вопросом....'),
+       (2, 'yuko', 'Разработанная им самим');
 
-insert into Carts_of_Users (User_ID, Game_ID)
-values (3, 1),
-       (4, 2);
+insert into Carts_of_Users (User_Login, Game_ID)
+values ('yuko', 1),
+       ('serge', 2);
 
-insert into Favorites_of_Users (User_ID, Game_ID)
-values (3, 2),
-       (4, 1),
-       (4, 2);
+insert into Favorites_of_Users (User_Login, Game_ID)
+values ('yuko', 2),
+       ('serge', 1),
+       ('serge', 2);
 
-insert into Users_Fav_Forums (User_ID, Forum_ID)
-values (3, 1),
-       (3, 2),
-       (4, 1),
-       (4, 2);
+insert into Users_Fav_Forums (User_Login, Forum_ID)
+values ('yuko', 1),
+       ('yuko', 2),
+       ('serge', 1),
+       ('serge', 2);

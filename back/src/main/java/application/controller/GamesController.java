@@ -23,6 +23,11 @@ public class GamesController {
     @Autowired
     private GameService gameService;
 
+    /**
+     * @param search поисковая строка, которая парсится на ноды и ищет игры в соотвествтии с фильтром
+     *               если фильтра нет, возвращает все игры
+     * @return список игр
+     */
     @GetMapping(value = "/",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<List<Game>> showAllGames(@RequestParam(value = "search") String search) {
@@ -34,11 +39,13 @@ public class GamesController {
             Specification<Game> spec = rootNode.accept(new CustomRsqlVisitor<Game>());
             games = gameService.findAll(spec);
         }
-        if (games != null) {
-            return ResponseEntity.ok().body(games);
-        } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
+        return ResponseEntity.ok().body(games);
     }
 
+    /**
+     * @param gameId
+     * @return информацию о конкретной игры
+     */
     @GetMapping(value = "/{game_id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<GameResponse> showGameById(@PathVariable(value = "game_id") int gameId) {

@@ -90,8 +90,7 @@ create table User_Role
 --Пользователь(10)
 create table Users
 (
-    ID              serial primary key,
-    Login           varchar(20)                                                       not null,
+    Login           varchar(20) primary key,
     Hashed_Password varchar(16)                                                       not null,
     Mail            varchar(320)                                                      not null,
     Wants_Mailing   boolean                                                           not null,
@@ -105,7 +104,7 @@ create table Game_Comment
 (
     ID      serial primary key,
     Game_ID integer references Board_Game on delete restrict on update cascade not null,
-    User_ID integer references Users on delete restrict on update cascade      not null,
+    User_Login varchar(20) references Users on delete restrict on update cascade  not null,
     Date    timestamp default current_timestamp                                not null,
     Content text                                                               not null
 );
@@ -131,7 +130,7 @@ create table Topic_Comment
 (
     ID       serial primary key,
     Forum_ID integer references Forum_Topic on delete restrict on update cascade not null,
-    User_ID  integer references Users on delete restrict on update cascade        not null,
+    User_Login  varchar(20) references Users on delete restrict on update cascade        not null,
     Date     timestamp default current_timestamp                                  not null,
     Content  text                                                                 not null
 );
@@ -139,26 +138,26 @@ create table Topic_Comment
 --Ассоциация-Корзина-Игра(15)
 create table Carts_of_Users
 (
-    User_ID     integer references Users on delete restrict on update cascade      not null,
+    User_Login  varchar(20) references Users on delete restrict on update cascade  not null,
     Game_ID     integer references Board_Game on delete restrict on update cascade not null,
     Date_of_add timestamp default current_timestamp not null,
     Date_of_buy timestamp,
-    primary key (User_ID, Game_ID)
+    primary key (User_Login, Game_ID)
 );
 
 --Ассоциация-Фавориты-Игры(16)
 create table Favorites_of_Users
 (
-    User_ID     integer references Users on delete restrict on update cascade      not null,
+    User_Login  varchar(20) references Users on delete restrict on update cascade      not null,
     Game_ID     integer references Board_Game on delete restrict on update cascade not null,
     Date_of_add timestamp default current_timestamp not null,
-    primary key (User_ID, Game_ID)
+    primary key (User_Login, Game_ID)
 );
 
 --Связь-Пользователи-Темы(17)
 create table Users_Fav_Forums
 (
-    User_ID  integer references Users on delete restrict on update cascade       not null,
+    User_Login varchar(20) references Users on delete restrict on update cascade       not null,
     Forum_ID integer references Forum_Topic on delete restrict on update cascade not null,
-    primary key (User_ID, Forum_ID)
+    primary key (User_Login, Forum_ID)
 );

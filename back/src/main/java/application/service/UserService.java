@@ -20,13 +20,13 @@ public class UserService {
     private static final Random RANDOM = new SecureRandom();
 
     @Transactional
-    public User saveUser(String login, String password, String mail, boolean wantsMailing) {
+    public void saveUser(String login, String password, String mail, boolean wantsMailing) {
         byte[] salt = new byte[6];
         RANDOM.nextBytes(salt);
         String saltString = new String(salt, StandardCharsets.UTF_8);
         UserRole general_user = new UserRole(1);
-        User user = new User(login, PasswordHasher.encryptStringSHA(pepper + password + saltString), saltString, mail, wantsMailing, general_user, null, null, null);
-        return userRepository.save(user);
+        User user = new User(login, PasswordHasher.encryptStringSHA(pepper + password + saltString), saltString, mail, wantsMailing, general_user, null, null, null, null);
+        userRepository.save(user);
     }
 
     @Transactional

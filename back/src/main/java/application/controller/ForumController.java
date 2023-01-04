@@ -19,6 +19,9 @@ public class ForumController {
     @Autowired
     private ForumService forumService;
 
+    /**
+     * @return список всех форумов
+     */
     @GetMapping(value = "/forums",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<List<Forum>> showAllForums() {
@@ -29,6 +32,10 @@ public class ForumController {
         } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * @param forumId
+     * @return информацию о форуме и все комментарии в нем
+     */
     @GetMapping(value = "/forums/{forum_id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<ForumResponse> showGameById(@PathVariable(value = "forum_id") int forumId) {
