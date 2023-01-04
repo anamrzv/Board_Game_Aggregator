@@ -4,7 +4,7 @@ values ('Стандартный'), ('VIP');
 
 insert into Shop (Name, Shop_Type_ID, Address, City, Phone)
 values ('GaGa',1,'м. Маяковская, Невский, 69', 'Спб', '313-26-44 многоканальный'),
-       ('GaGa',1,'м. Пионерская, Коломяжский, 26', 'Спб', '313-26-44 многоканальный'),
+       ('Буквоед',1,'м. Пионерская, Коломяжский, 26', 'Спб', '313-26-44 многоканальный'),
        ('GaGa',1,'м. Дыбенко, ул. Дыбенко, 24 к.1', 'Спб', '313-26-44 многоканальный'),
        ('GaGa',1,'м. Купчино, Балканская пл., 5 О', 'Спб', '313-26-44 многоканальный'),
        ('GaGa',1,'м. Пр-т Просвещения, Хошимина, 13 к.1', 'Спб', '313-26-44 многоканальный'),
@@ -66,14 +66,16 @@ values (1, 9),
        (2, 7);
 
 insert into User_Role (Name)
-values ('Обычный'),
-       ('Администратор');
+values ('ROLE_USER'),
+       ('ROLE_ADMIN'),
+       ('ROLE_SHOP');
 
-insert into Users (Login, Hashed_Password, Mail, Wants_Mailing, Salt, User_Role)
-values ('ana.mrzv', 'd3ad1ns1d3666666', 'test@mail.ru', true, 'h0wt0d011ph3lp!', 2),
-       ('dasxunya', 'd3s1gn3rd4sh4666', 'test2@mail.ru', false, 'h0wt0d011ph3lp?', 2),
-       ('yuko', '1w0ntt3lluh0wxex', 'yuko@mail.ru', true, 'aoaoaoaoaoaoaoa', 1),
-       ('serge', 'xicpwndyjhget666', 'serge@mail.ru', true, 'qwertyuiopasdfg', 1);
+insert into Users (Login, Hashed_Password, Mail, Wants_Mailing, Salt, User_Role, Shop)
+values ('ana.mrzv', 'd3ad1ns1d3666666', 'test@mail.ru', true, 'h0wt0d011ph3lp!', 2, null),
+       ('dasxunya', 'd3s1gn3rd4sh4666', 'test2@mail.ru', false, 'h0wt0d011ph3lp?', 2, null),
+       ('yuko', '1w0ntt3lluh0wxex', 'yuko@mail.ru', true, 'aoaoaoaoaoaoaoa', 1, null),
+       ('serge', 'xicpwndyjhget666', 'serge@mail.ru', true, 'qwertyuiopasdfg', 1, null),
+       ('shop1', ';kqclboqeoucvqo', 'shop@mail.ru', false, 'qwertyuiopasdfg', 3, 'GaGa');
 
 insert into Game_Comment (Game_ID, User_ID, Content)
 values (1, 3, 'Лучшая игра в моей жизни, напишу ее реализацию на Си'),

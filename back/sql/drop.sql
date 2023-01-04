@@ -11,11 +11,9 @@ DROP TABLE "game_to_theme";
 
 DROP TABLE "game_to_shop";
 
-DROP TABLE "shop";
+DROP TABLE "shop" CASCADE;
 
 DROP TABLE "shop_type";
-
-DROP TABLE "address";
 
 DROP TABLE "game_theme";
 
@@ -27,9 +25,9 @@ DROP TABLE "users";
 
 DROP TABLE "user_role";
 
-DROP TABLE "board_game";
+DROP TABLE "board_game" CASCADE;
 
-DROP TABLE "game_publisher";
+DROP TABLE "game_publisher" CASCADE;
 
 DROP TABLE "game_genre";
 

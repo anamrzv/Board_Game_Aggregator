@@ -1,6 +1,7 @@
 package application.service;
 
 import application.domain.User;
+import application.domain.UserRole;
 import application.repository.UserRepository;
 import application.util.PasswordHasher;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class UserService {
         byte[] salt = new byte[6];
         RANDOM.nextBytes(salt);
         String saltString = new String(salt, StandardCharsets.UTF_8);
-        int general_user = 1;
-        User user = new User(login, PasswordHasher.encryptStringSHA(pepper + password + saltString), saltString, mail, wantsMailing, general_user);
+        UserRole general_user = new UserRole(1);
+        User user = new User(login, PasswordHasher.encryptStringSHA(pepper + password + saltString), saltString, mail, wantsMailing, general_user, null, null, null);
         return userRepository.save(user);
     }
 
@@ -34,8 +35,8 @@ public class UserService {
     }
 
     @Transactional
-    public User findByLoginAndPassword(String login, String password) {
-        User user = userRepository.getByUsername(login);
+    public User findByLoginAndPasswordAndUserRole(String login, String password, UserRole userRole) {
+        User user = userRepository.getByUsernameAndUserRole(login, userRole);
         if (user != null) {
             String saltString = user.getSalt();
             String toBeCheckedPassword = PasswordHasher.encryptStringSHA(pepper + password + saltString);

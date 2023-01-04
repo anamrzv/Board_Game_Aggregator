@@ -2,6 +2,7 @@ package application.controller;
 
 import application.configuration.jwt.JwtProvider;
 import application.domain.User;
+import application.domain.UserRole;
 import application.pojo.UserRequest;
 import application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,32 @@ public class AuthenticationController {
     @Autowired
     private JwtProvider jwtProvider;
 
-    @PostMapping(value = "/auth",
+    @PostMapping(value = "/auth/{auth_type}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<String> auth(@RequestBody UserRequest userRequest) {
-        User user = userService.findByLoginAndPassword(userRequest.getLogin(), userRequest.getPassword());
+    private ResponseEntity<String> auth(@PathVariable(value = "auth_type") String authType, @RequestBody UserRequest userRequest) {
+        UserRole role;
+        switch (authType) {
+            case "user":
+                role = new UserRole(1);
+                break;
+            case "admin":
+                role = new UserRole(2);
+                break;
+            case "shop":
+                role = new UserRole(3);
+                break;
+            default:
+                return new ResponseEntity<>("Неверный параметр для логина", HttpStatus.NOT_FOUND);
+        }
+
+        User user = userService.findByLoginAndPasswordAndUserRole(userRequest.getLogin(), userRequest.getPassword(), role);
         if (user != null) {
             String token = jwtProvider.generateToken(user.getUsername());
             return ResponseEntity.ok(token);
         } else return new ResponseEntity<>("Неверный логин и/или пароль", HttpStatus.NOT_FOUND);
     }
+
 
 }
 

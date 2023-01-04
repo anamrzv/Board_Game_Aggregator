@@ -96,7 +96,8 @@ create table Users
     Mail            varchar(320)                                                      not null,
     Wants_Mailing   boolean                                                           not null,
     Salt            varchar(15)                                                       not null,
-    User_Role       integer references User_Role on delete restrict on update cascade not null
+    User_Role       integer references User_Role on delete restrict on update cascade not null,
+    Shop            varchar(100)
 );
 
 --Комментарии к игре(11)

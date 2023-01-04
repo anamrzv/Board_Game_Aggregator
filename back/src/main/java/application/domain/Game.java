@@ -58,4 +58,12 @@ public class Game {
     @ManyToMany
     private Set<GameTheme> themes;
 
+    @ManyToMany
+    private Set<User> usersWhoAddedInCart;
+    @ManyToMany
+    private Set<User> usersWhoLiked;
+
+    @ManyToMany
+    private Set<Shop> shopsHavingInStock;
+
 }
