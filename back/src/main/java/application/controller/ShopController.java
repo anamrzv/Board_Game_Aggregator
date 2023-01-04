@@ -1,6 +1,6 @@
 package application.controller;
 
-import application.domain.Game;
+import application.domain.GameShop;
 import application.domain.Shop;
 import application.pojo.ShopResponse;
 import application.service.ShopService;
@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,7 +28,7 @@ public class ShopController {
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<ShopResponse> showGamesInStock(@RequestBody String shopName) {
         List<Shop> shops = shopService.findAllByName(shopName);
-        List<Game> inStock = shops.stream()
+        List<GameShop> inStock = shops.stream() //TODO: gameshop -> game
                 .flatMap(shop -> shop.getGamesInStock().stream())
                 .distinct()
                 .collect(Collectors.toList());

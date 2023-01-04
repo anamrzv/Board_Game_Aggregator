@@ -34,5 +34,5 @@ public class GameService {
     public Game findById(int gameId) { return gameRepository.findById(gameId).orElse(null); }
 
     @Transactional
-    public List<GameComment> findAllGameComments(int gameId) { return gameCommentRepository.getByGameId(gameId); }
+    public List<GameComment> findAllGameComments(int gameId) { return gameCommentRepository.getAllByGameId(gameId); }
 }

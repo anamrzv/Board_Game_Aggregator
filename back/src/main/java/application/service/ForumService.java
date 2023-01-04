@@ -31,5 +31,5 @@ public class ForumService {
     public Forum findById(int forumId) { return forumRepository.findById(forumId).orElse(null); }
 
     @Transactional
-    public List<ForumComment> findAllForumComments(int forumId) { return forumCommentRepository.getByForumId(forumId); }
+    public List<ForumComment> findAllForumComments(int forumId) { return forumCommentRepository.getAllByForum(forumId); }
 }

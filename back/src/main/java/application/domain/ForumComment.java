@@ -15,12 +15,10 @@ import java.time.LocalDateTime;
 public class ForumComment {
     @Id
     private Integer id;
-    @OneToOne
-    @JoinColumn(name = "forum_id")
-    private Forum forum;
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "forum_id")
+    private Integer forum;
+    @Column(name = "user_login")
+    private String user;
     private LocalDateTime date;
     private String content;
 }

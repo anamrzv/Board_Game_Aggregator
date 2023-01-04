@@ -1,6 +1,6 @@
 package application.pojo;
 
-import application.domain.Game;
+import application.domain.GameShop;
 import application.domain.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,6 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShopResponse {
-    private List<Game> gamesInStock;
+    private List<GameShop> gamesInStock;
     private List<Shop> shopChain;
 }

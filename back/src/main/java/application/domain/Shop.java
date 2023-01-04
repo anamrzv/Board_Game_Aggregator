@@ -25,6 +25,6 @@ public class Shop {
     private String city;
     private String phone;
 
-    @ManyToMany
-    private Set<Game> gamesInStock;
+    @OneToMany(mappedBy = "shop")
+    private Set<GameShop> gamesInStock;
 }

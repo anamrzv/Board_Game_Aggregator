@@ -15,12 +15,10 @@ import java.time.LocalDateTime;
 public class GameComment {
     @Id
     private Integer id;
-    @OneToOne
-    @JoinColumn(name = "game_id")
-    private Game gameId;
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User userId;
+    @Column(name = "game_id")
+    private Integer gameId;
+    @Column(name = "user_login")
+    private String userId;
     private LocalDateTime date;
     private String content;
 }

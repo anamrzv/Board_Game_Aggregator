@@ -30,9 +30,9 @@ public class GamesController {
      */
     @GetMapping(value = "/",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<List<Game>> showAllGames(@RequestParam(value = "search") String search) {
+    private ResponseEntity<List<Game>> showAllGames(@RequestParam(value = "search", required = false) String search) {
         List<Game> games;
-        if (search.isEmpty()) {
+        if (search == null) {
             games = gameService.findAll();
         } else {
             Node rootNode = new RSQLParser().parse(search);
@@ -44,11 +44,11 @@ public class GamesController {
 
     /**
      * @param gameId
-     * @return информацию о конкретной игры
+     * @return информацию о конкретной игре, комментарии к ней
      */
     @GetMapping(value = "/{game_id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<GameResponse> showGameById(@PathVariable(value = "game_id") int gameId) {
+    private ResponseEntity<GameResponse> showGameById(@PathVariable(value = "game_id") Integer gameId) {
         Game game = gameService.findById(gameId);
         if (game != null) {
             List<GameComment> comments = gameService.findAllGameComments(gameId);

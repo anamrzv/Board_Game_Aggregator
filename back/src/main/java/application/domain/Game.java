@@ -55,15 +55,24 @@ public class Game {
     @OneToOne
     @JoinColumn
     private GamePublisher publisher;
-    @ManyToMany
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "game_to_theme",
+            joinColumns = {
+            @JoinColumn(name = "board_id", referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+            @JoinColumn(name = "theme_id", referencedColumnName = "id")
+            })
     private Set<GameTheme> themes;
 
+    //TODO: доделать
     @ManyToMany
     private Set<User> usersWhoAddedInCart;
     @ManyToMany
     private Set<User> usersWhoLiked;
 
-    @ManyToMany
-    private Set<Shop> shopsHavingInStock;
+//    @OneToMany(mappedBy = "game")
+//    private Set<GameShop> shopsHavingInStock;
 
 }

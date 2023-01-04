@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ForumCommentRepository extends JpaRepository<ForumComment, Integer> {
-    List<ForumComment> getByForumId(int forumId);
+    List<ForumComment> getAllByForum(int forumId);
 }
