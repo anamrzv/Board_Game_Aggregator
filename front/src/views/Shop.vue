@@ -1,22 +1,13 @@
 <template>
   <div>
     <p class="cyber">Shop</p>
-    <div class="main">
+    <div class="main" id="login">
       <input type="checkbox" id="chk" aria-hidden="true">
 
       <div class="signup">
         <form>
-          <label for="chk" aria-hidden="true">Sign up</label>
-          <input type="text" name="txt" placeholder="User name" required="">
-          <input type="password" name="pswd" placeholder="Password" required="">
-          <button>Sign up</button>
-        </form>
-      </div>
-
-      <div class="login">
-        <form>
-          <label for="chk" aria-hidden="true">Login</label>
-          <input type="email" name="email" placeholder="Email" required="">
+          <label class="unfocus__login">Login</label>
+          <input type="text" name="txt" placeholder="Shop name" required="">
           <input type="password" name="pswd" placeholder="Password" required="">
           <button>Login</button>
         </form>

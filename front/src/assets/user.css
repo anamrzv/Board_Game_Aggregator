@@ -107,3 +107,11 @@ button:hover {
     text-align: center;
     margin-bottom: 15px;
 }
+
+.unfocus__login {
+    cursor: auto;
+}
+
+#login {
+    height: 400px;
+}
