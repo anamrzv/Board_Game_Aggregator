@@ -10,6 +10,11 @@
           <input type="text" name="txt" placeholder="User name" required="">
           <input type="email" name="email" placeholder="Email" required="">
           <input type="password" name="pswd" placeholder="Password" required="">
+
+
+          <p class="newsletter">newsletter <input type="checkbox" class="checkmark"><span class="check"></span></p>
+<!--          <p class="newsletter">newsletter <input type="checkbox" class="checkmark"></p>-->
+
           <button>Sign up</button>
         </form>
       </div>
