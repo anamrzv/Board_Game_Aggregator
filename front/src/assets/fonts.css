@@ -1,0 +1,11 @@
+@font-face {
+    font-family: "exwayer";
+    src: local("exwayer"),
+    url("../fonts/exwayer.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "code";
+    src: local("code"),
+    url("../fonts/Code 7x5.ttf") format("truetype");
+}
