@@ -1,17 +1,5 @@
-@font-face {
-    font-family: "exwayer";
-    src: local("exwayer"),
-    url("../fonts/exwayer.ttf") format("truetype");
-}
-
-@font-face {
-    font-family: "code";
-    src: local("code"),
-    url("../fonts/Code 7x5.ttf") format("truetype");
-}
-
 .cyber {
-    font-family: "exwayer";
+    font-family: "exwayer", sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 128px;
@@ -74,11 +62,21 @@
 }
 
 a.login__link {
-    font-family: 'code';
+    font-family: 'code', sans-serif;
     color: whitesmoke;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
     text-decoration: none;
     padding: 20px;
+}
+
+.screen__content > p {
+    font-family: 'code', sans-serif;
+    color: #FF2FEA;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    text-decoration: none;
+    padding: 5px;
 }

@@ -5,6 +5,10 @@ import Main from "./views/Main.vue";
 import Login from "./views/Login.vue";
 import NotFound from "./views/NotFound";
 
+import User from "./views/User.vue";
+import Admin from "./views/Admin.vue";
+import Shop from "./views/Shop.vue";
+
 Vue.use(Router);
 
 const routes = [
@@ -18,6 +22,26 @@ const routes = [
         }
     },
     {
+        path: '/auth',
+        name: 'auth-page',
+        component: Login
+    },
+    {
+        path: '/auth/user',
+        name: 'user-page',
+        component: User
+    },
+    {
+        path: '/auth/admin',
+        name: 'admin-page',
+        component: Admin
+    },
+    {
+        path: '/auth/shop',
+        name: 'shop-page',
+        component: Shop
+    },
+    {
         path: '/main',
         name: 'main',
         component: Main,
@@ -27,11 +51,6 @@ const routes = [
                 name: 'error-page-app',
             });
         }
-    },
-    {
-        path: '/auth',
-        name: 'auth-page',
-        component: Login
     },
     {
         path: '/*',

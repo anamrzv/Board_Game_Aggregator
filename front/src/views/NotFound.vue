@@ -1,18 +1,10 @@
 <template>
   <div id="body-table">
-
-    <div class="header">
-      <div>
-        <p>Морозова Анастасия Александровна P3230</p>
-        <p>Вариант 5547</p>
-      </div>
-    </div>
-
     <div class="errors">
       <h1>Ошибка {{ errorCode }}:</h1>
       <h2>{{ errorMsg }}</h2>
-      <button class="gradient-button" @click="goHome">
-        Войти
+      <button class="back__button" @click="goHome">
+        back
       </button>
     </div>
 
@@ -24,9 +16,9 @@
 @import "../assets/body.css";
 
 .errors {
-  color: #000000;
   text-align: center;
-  margin-top: 200px;
+  margin-top: 40px;
+  color: whitesmoke;
 }
 </style>
 
