@@ -115,3 +115,18 @@ button:hover {
 #login {
     height: 400px;
 }
+
+.checkmark {
+    width: auto;
+    display: inline-block;
+    vertical-align: top;
+    margin: 3.5px 0 0;
+}
+
+.newsletter {
+    text-align: center;
+    color: whitesmoke;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
