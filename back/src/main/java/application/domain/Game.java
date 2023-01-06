@@ -78,13 +78,13 @@ public class Game {
         theme.getGames().remove(this);
     }
 
-    @ManyToMany(mappedBy = "gamesInCart", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<User> usersWhoAddedInCart;
+    private Set<UserCart> usersWhoAddedInCart;
 
-    @ManyToMany(mappedBy = "gamesInFavourites", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<User> usersWhoLiked;
+    private Set<UserFav> usersWhoLiked;
 
     @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
     @JsonIgnore
@@ -94,6 +94,5 @@ public class Game {
     public int hashCode() {
         return 31;
     }
-
 
 }

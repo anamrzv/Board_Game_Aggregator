@@ -1,4 +1,4 @@
-package application.domain;
+package application.domain.composite_keys;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,15 +12,16 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GameShopKey implements Serializable {
+public class UserCartKey implements Serializable {
+
     @Column(name = "game_id")
     Integer gameId;
-    @Column(name = "shop_id")
-    Integer shopId;
 
+    @Column(name = "user_login")
+    String userLogin;
 
     @Override
     public int hashCode() {
-        return 157;
+        return 169;
     }
 }

@@ -1,8 +1,6 @@
 package application.controller;
 
-import application.domain.Forum;
-import application.domain.Game;
-import application.domain.User;
+import application.domain.*;
 import application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,8 +24,8 @@ public class UserController {
     @GetMapping(value = "/cart",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<Set<Game>> showCart(@RequestBody String login) {
-        Set<Game> games;
+    private ResponseEntity<Set<UserCart>> showCart(@RequestBody String login) {
+        Set<UserCart> games;
         User user = userService.findByLogin(login);
         if (user != null) {
             games = user.getGamesInCart();
@@ -42,8 +40,8 @@ public class UserController {
     @GetMapping(value = "/fav",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<Set<Game>> showFavourites(@RequestBody String login) {
-        Set<Game> games;
+    private ResponseEntity<Set<UserFav>> showFavourites(@RequestBody String login) {
+        Set<UserFav> games;
         User user = userService.findByLogin(login);
         if (user != null) {
             games = user.getGamesInFavourites();

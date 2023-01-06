@@ -1,22 +1,23 @@
 package application.domain;
 
-import application.domain.composite_keys.GameShopKey;
+import application.domain.composite_keys.UserCartKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "game_to_shop")
-public class GameShop {
+@Table(name = "favorites_of_users")
+public class UserFav {
     @EmbeddedId
     @JsonIgnore
-    GameShopKey id;
+    UserCartKey id;
 
     @ManyToOne
     @MapsId("gameId")
@@ -24,15 +25,16 @@ public class GameShop {
     Game game;
 
     @ManyToOne
-    @MapsId("shopId")
-    @JoinColumn(name = "shop_id")
+    @MapsId("userLogin")
+    @JoinColumn(name = "user_login")
     @JsonIgnore
-    Shop shop;
+    User user;
 
-    Float price;
+    @Column(name = "date_of_add")
+    LocalDateTime dateOfAdd;
 
     @Override
     public int hashCode() {
-        return 319;
+        return 415;
     }
 }
