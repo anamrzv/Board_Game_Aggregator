@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/forum")
 @CrossOrigin(origins = "*")
 public class ForumController {
     @Autowired
@@ -22,7 +22,7 @@ public class ForumController {
     /**
      * @return список всех форумов
      */
-    @GetMapping(value = "/forums",
+    @GetMapping(value = "/",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<List<Forum>> showAllForums() {
         List<Forum> forums;
@@ -36,7 +36,7 @@ public class ForumController {
      * @param forumId
      * @return информацию о форуме и все комментарии в нем
      */
-    @GetMapping(value = "/forums/{forum_id}",
+    @GetMapping(value = "/{forum_id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<ForumResponse> showGameById(@PathVariable(value = "forum_id") int forumId) {
         Forum forum = forumService.findById(forumId);

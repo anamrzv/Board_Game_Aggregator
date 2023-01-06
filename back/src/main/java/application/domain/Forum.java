@@ -1,13 +1,12 @@
 package application.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -20,6 +19,7 @@ public class Forum {
     private Integer id;
     private String name;
 
-    @ManyToMany
-    private Set<User> usersWhoLiked;
+    @ManyToMany(mappedBy = "favouriteForums", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<User> usersWhoLiked = new HashSet<>();
 }

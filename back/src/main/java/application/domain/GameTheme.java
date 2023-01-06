@@ -23,13 +23,6 @@ public class GameTheme {
     private Set<Game> games = new HashSet<>();
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof Game)) return false;
-        return id != null && id.equals(((GameTheme) o).getId());
-    }
-    @Override
     public int hashCode() {
         return 31;
     }

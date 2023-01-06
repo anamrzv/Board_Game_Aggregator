@@ -18,4 +18,9 @@ public class GameShopKey implements Serializable {
     @Column(name = "shop_id")
     Integer shopId;
 
+
+    @Override
+    public int hashCode() {
+        return 157;
+    }
 }

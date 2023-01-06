@@ -31,7 +31,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/api/user/*").permitAll()
 //                .antMatchers("/error").permitAll() // TODO: переделать
                 .antMatchers("/api/user/*").permitAll()
-                .antMatchers("/api/user/forums/*").permitAll()
+                .antMatchers("/api/game/*").permitAll()
+                .antMatchers("/api/forum/*").permitAll()
+                .antMatchers("/api/shop/*").permitAll()
                 //.antMatchers("/api/user/register").permitAll()
                 .anyRequest().authenticated() //требуем авторизацию
                 .and()

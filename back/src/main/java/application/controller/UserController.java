@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.domain.Forum;
 import application.domain.Game;
 import application.domain.User;
 import application.service.UserService;
@@ -22,7 +23,7 @@ public class UserController {
      * @param login
      * @return все игры, добавленные в корзину пользователем
      */
-    @GetMapping(value = "/сart",
+    @GetMapping(value = "/cart",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<Set<Game>> showCart(@RequestBody String login) {
@@ -47,6 +48,22 @@ public class UserController {
         if (user != null) {
             games = user.getGamesInFavourites();
             return ResponseEntity.ok().body(games);
+        } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
+    }
+
+    /**
+     * @param login
+     * @return все игры, добавленные в избранное пользователем
+     */
+    @GetMapping(value = "/fav_forums",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    private ResponseEntity<Set<Forum>> showFavouriteForums(@RequestBody String login) {
+        Set<Forum> forums;
+        User user = userService.findByLogin(login);
+        if (user != null) {
+            forums = user.getFavouriteForums();
+            return ResponseEntity.ok().body(forums);
         } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
     }
 }

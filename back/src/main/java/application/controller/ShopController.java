@@ -1,19 +1,18 @@
 package application.controller;
 
-import application.domain.GameShop;
 import application.domain.Shop;
-import application.pojo.ShopResponse;
+import application.pojo.ShopWithStockResponse;
 import application.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/shop")
 @CrossOrigin(origins = "*")
 public class ShopController {
     @Autowired
@@ -26,13 +25,14 @@ public class ShopController {
     @GetMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<ShopResponse> showGamesInStock(@RequestBody String shopName) {
+    private ResponseEntity<List<ShopWithStockResponse>> showGamesInStock(@RequestBody String shopName) {
+        List<ShopWithStockResponse> response = new ArrayList<>();
         List<Shop> shops = shopService.findAllByName(shopName);
-        List<GameShop> inStock = shops.stream() //TODO: gameshop -> game
-                .flatMap(shop -> shop.getGamesInStock().stream())
-                .distinct()
-                .collect(Collectors.toList());
-        ShopResponse shopResponse = new ShopResponse(inStock, shops);
-        return ResponseEntity.ok().body(shopResponse);
+        for (Shop shop: shops) {
+            ShopWithStockResponse shopWithStockResponse = new ShopWithStockResponse(shop, shop.getGamesInStock());
+            response.add(shopWithStockResponse);
+        }
+
+        return ResponseEntity.ok().body(response);
     }
 }

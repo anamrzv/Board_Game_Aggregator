@@ -1,5 +1,6 @@
 package application.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -53,8 +54,9 @@ public class Game {
     @OneToOne
     @JoinColumn(name = "mechanics_id")
     private GameMechanics mechanics;
+
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name = "publisher")
     private GamePublisher publisher;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -76,25 +78,22 @@ public class Game {
         theme.getGames().remove(this);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof Game)) return false;
-        return id != null && id.equals(((Game) o).getId());
-    }
+    @ManyToMany(mappedBy = "gamesInCart", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<User> usersWhoAddedInCart;
+
+    @ManyToMany(mappedBy = "gamesInFavourites", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<User> usersWhoLiked;
+
+    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<GameShop> shopsHavingInStock = new HashSet<>();
+
     @Override
     public int hashCode() {
         return 31;
     }
 
-    //TODO: доделать
-    @ManyToMany
-    private Set<User> usersWhoAddedInCart;
-    @ManyToMany
-    private Set<User> usersWhoLiked;
-
-//    @OneToMany(mappedBy = "game")
-//    private Set<GameShop> shopsHavingInStock;
 
 }

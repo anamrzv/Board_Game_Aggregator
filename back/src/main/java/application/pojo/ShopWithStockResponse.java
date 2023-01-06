@@ -6,12 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShopResponse {
-    private List<GameShop> gamesInStock;
-    private List<Shop> shopChain;
+public class ShopWithStockResponse {
+    private Shop shop;
+    private Set<GameShop> gamesWithPrice;
 }
