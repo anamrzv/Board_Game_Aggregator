@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -64,7 +65,28 @@ public class Game {
             inverseJoinColumns = {
             @JoinColumn(name = "theme_id", referencedColumnName = "id")
             })
-    private Set<GameTheme> themes;
+    private Set<GameTheme> themes = new HashSet<>();
+
+    public void addTheme(GameTheme theme){
+        this.themes.add(theme);
+        theme.getGames().add(this);
+    }
+    public void removeTheme(GameTheme theme){
+        this.themes.remove(theme);
+        theme.getGames().remove(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Game)) return false;
+        return id != null && id.equals(((Game) o).getId());
+    }
+    @Override
+    public int hashCode() {
+        return 31;
+    }
 
     //TODO: доделать
     @ManyToMany
