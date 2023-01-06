@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/game_aggregator/user")
 @CrossOrigin(origins = "*")
 public class UserController {
     @Autowired

@@ -2,8 +2,10 @@ package application.controller;
 
 import application.domain.Game;
 import application.domain.GameComment;
+import application.domain.GameShop;
 import application.parsing.CustomRsqlVisitor;
 import application.pojo.GameResponse;
+import application.pojo.GameWithStockResponse;
 import application.service.GameService;
 import cz.jirutka.rsql.parser.RSQLParser;
 import cz.jirutka.rsql.parser.ast.Node;
@@ -14,10 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
-@RequestMapping("/api/game")
+@RequestMapping("/game_aggregator/game")
 @CrossOrigin(origins = "*")
 public class GamesController {
     @Autowired
@@ -52,7 +54,12 @@ public class GamesController {
         Game game = gameService.findById(gameId);
         if (game != null) {
             List<GameComment> comments = gameService.findAllGameComments(gameId);
-            GameResponse response = new GameResponse(game, comments);
+            Set<GameShop> shopsHavingInStock = game.getShopsHavingInStock();
+            List<GameWithStockResponse> prices = new ArrayList<>();
+            for (GameShop gameShop: shopsHavingInStock) {
+                prices.add(new GameWithStockResponse(gameShop.getShop(), gameShop.getPrice()));
+            }
+            GameResponse response = new GameResponse(game, comments, prices);
             return ResponseEntity.ok().body(response);
         } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NOT_FOUND);
     }

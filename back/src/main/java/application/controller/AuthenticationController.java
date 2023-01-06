@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/game_aggregator")
 @CrossOrigin(origins = "*")
 public class AuthenticationController {
 

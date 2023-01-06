@@ -14,4 +14,5 @@ import java.util.List;
 public class GameResponse {
     private Game game;
     private List<GameComment> comments;
+    private List<GameWithStockResponse> prices;
 }

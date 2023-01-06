@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/forum")
+@RequestMapping("/game_aggregator/forum")
 @CrossOrigin(origins = "*")
 public class ForumController {
     @Autowired

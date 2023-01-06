@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/shop")
+@RequestMapping("/game_aggregator/shop")
 @CrossOrigin(origins = "*")
 public class ShopController {
     @Autowired
