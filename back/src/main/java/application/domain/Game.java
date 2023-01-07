@@ -17,7 +17,7 @@ import java.util.Set;
 @Table(name = "board_game")
 public class Game {
     @Id
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String name;
     private String image;
@@ -42,11 +42,11 @@ public class Game {
     private Integer maxPlayAge;
     private Float difficultness;
     private Integer weight;
+
     @Column(name = "wishlist")
     private Integer wishlistCount;
     @Column(name = "own")
     private Integer ownCount;
-
 
     @OneToOne
     @JoinColumn(name = "genre_id")
@@ -62,29 +62,20 @@ public class Game {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "game_to_theme",
             joinColumns = {
-            @JoinColumn(name = "board_id", referencedColumnName = "id")
+                    @JoinColumn(name = "board_id", referencedColumnName = "id")
             },
             inverseJoinColumns = {
-            @JoinColumn(name = "theme_id", referencedColumnName = "id")
+                    @JoinColumn(name = "theme_id", referencedColumnName = "id")
             })
     private Set<GameTheme> themes = new HashSet<>();
 
-    public void addTheme(GameTheme theme){
-        this.themes.add(theme);
-        theme.getGames().add(this);
-    }
-    public void removeTheme(GameTheme theme){
-        this.themes.remove(theme);
-        theme.getGames().remove(this);
-    }
+    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<UserCart> usersWhoAddedInCart = new HashSet<>();
 
     @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<UserCart> usersWhoAddedInCart;
-
-    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<UserFav> usersWhoLiked;
+    private Set<UserFav> usersWhoLiked = new HashSet<>();
 
     @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
     @JsonIgnore
@@ -94,5 +85,4 @@ public class Game {
     public int hashCode() {
         return 31;
     }
-
 }

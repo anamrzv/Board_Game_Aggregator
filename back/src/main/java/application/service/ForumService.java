@@ -28,8 +28,32 @@ public class ForumService {
     }
 
     @Transactional
-    public Forum findById(int forumId) { return forumRepository.findById(forumId).orElse(null); }
+    public Forum findById(int forumId) {
+        return forumRepository.findById(forumId).orElse(null);
+    }
 
     @Transactional
-    public List<ForumComment> findAllForumComments(int forumId) { return forumCommentRepository.getAllByForum(forumId); }
+    public List<ForumComment> findAllForumComments(int forumId) {
+        return forumCommentRepository.getAllByForum(forumId);
+    }
+
+    @Transactional
+    public void deleteCommentById(int commentId) {
+        forumCommentRepository.deleteById(commentId);
+    }
+
+    @Transactional
+    public void deleteForumById(int forumId) {
+        forumRepository.deleteById(forumId);
+    }
+
+    @Transactional
+    public void saveForumComment(ForumComment comment) {
+        forumCommentRepository.save(comment);
+    }
+
+    @Transactional
+    public void saveForum(Forum forum) {
+        forumRepository.save(forum);
+    }
 }

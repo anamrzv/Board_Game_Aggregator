@@ -1,6 +1,7 @@
 package application.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,12 @@ import java.util.Set;
 public class Forum {
     @Id
     private Integer id;
+    @NotNull
     private String name;
+
+    public Forum(String name) {
+        this.name = name;
+    }
 
     @ManyToMany(mappedBy = "favouriteForums", fetch = FetchType.LAZY)
     @JsonIgnore

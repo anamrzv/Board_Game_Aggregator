@@ -30,11 +30,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/api/user").permitAll()
 //                .antMatchers("/api/user/*").permitAll()
 //                .antMatchers("/error").permitAll() // TODO: переделать
-                .antMatchers("/api/user/*").permitAll()
-                .antMatchers("/api/game/*").permitAll()
-                .antMatchers("/api/forum/*").permitAll()
-                .antMatchers("/api/shop/*").permitAll()
-                //.antMatchers("/api/user/register").permitAll()
+                .antMatchers("/game_aggregator/user/*").permitAll()
+                .antMatchers("/game_aggregator/game*").permitAll()
+                .antMatchers("/game_aggregator/forum/*").permitAll()
+                .antMatchers("/game_aggregator/shop/*").permitAll()
+                .antMatchers("/game_aggregator/register/*").permitAll()
+                .antMatchers("/game_aggregator/auth/*").permitAll()
                 .anyRequest().authenticated() //требуем авторизацию
                 .and()
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
