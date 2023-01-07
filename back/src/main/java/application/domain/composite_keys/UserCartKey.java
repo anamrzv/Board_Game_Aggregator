@@ -24,4 +24,12 @@ public class UserCartKey implements Serializable {
     public int hashCode() {
         return 169;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserCartKey that = (UserCartKey) o;
+        return gameId.equals(that.gameId) && userLogin.equals(that.userLogin);
+    }
 }

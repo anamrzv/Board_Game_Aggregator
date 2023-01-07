@@ -2,9 +2,12 @@ package application.controller;
 
 import application.domain.Forum;
 import application.domain.ForumComment;
+import application.domain.User;
 import application.pojo.request.CommentRequest;
+import application.pojo.request.ForumRequest;
 import application.pojo.response.ForumResponse;
 import application.service.ForumService;
+import application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,6 +23,8 @@ import java.util.List;
 public class ForumController {
     @Autowired
     private ForumService forumService;
+    @Autowired
+    private UserService userService;
 
     /**
      * @return список всех форумов
@@ -89,6 +94,21 @@ public class ForumController {
     private ResponseEntity<HttpStatus> deleteForum(@PathVariable(value = "forum_id") int forumId) {
         forumService.deleteForumById(forumId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/fav_forums",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @Secured("ROLE_USER")
+    private ResponseEntity<HttpStatus> addFavForum(@RequestBody ForumRequest forumRequest) {
+        Forum forum = forumService.findById(forumRequest.getForum());
+        User user = userService.findByLogin(forumRequest.getLogin());
+        if (user != null && forum != null) {
+            user.addForumToFav(forum);
+            userService.updateUser(user);
+            forumService.saveForum(forum);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }

@@ -55,27 +55,29 @@ public class User {
     @JsonIgnore
     private Set<UserCart> gamesInCart = new HashSet<>();
 
-    // TODO: переписать методы
-    /* public void addGameToCart(){
-
+    public void addGameToCart(UserCart userCart){
+        this.gamesInCart.add(userCart);
+        userCart.getGame().getUsersWhoAddedInCart().add(userCart);
     }
-    public void removeGameFromCart(){
 
+    public void removeGameFromCart(UserCart userCart){
+        this.gamesInCart.remove(userCart);
+        userCart.getGame().getUsersWhoAddedInCart().remove(userCart);
     }
-     */
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<UserFav> gamesInFavourites = new HashSet<>();
 
-    // TODO: переписать методы
-//    public void addGameToFav(Game game) {
-//
-//    }
-//
-//    public void removeGameFromFav(Game game) {
-//
-//    }
+    public void addGameToFav(UserFav userFav) {
+        this.gamesInFavourites.add(userFav);
+        userFav.getGame().getUsersWhoLiked().add(userFav);
+    }
+
+    public void removeGameFromFav(UserFav userFav) {
+        this.gamesInFavourites.remove(userFav);
+        userFav.getGame().getUsersWhoLiked().remove(userFav);
+    }
 
     @Override
     public int hashCode() {

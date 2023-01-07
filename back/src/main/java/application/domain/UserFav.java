@@ -33,6 +33,12 @@ public class UserFav {
     @Column(name = "date_of_add")
     LocalDateTime dateOfAdd;
 
+    public UserFav(UserCartKey id, Game game, User user) {
+        this.id = id;
+        this.game = game;
+        this.user = user;
+    }
+
     @Override
     public int hashCode() {
         return 415;

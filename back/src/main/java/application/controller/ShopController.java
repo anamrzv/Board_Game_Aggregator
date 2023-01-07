@@ -9,6 +9,7 @@ import application.pojo.response.ShopWithStockResponse;
 import application.service.GameService;
 import application.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@ComponentScan
 @RestController
 @RequestMapping("/game_aggregator/shop")
 @CrossOrigin(origins = "*")

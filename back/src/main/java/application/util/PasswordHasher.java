@@ -13,9 +13,6 @@ public class PasswordHasher {
             byte[] digest = md.digest(string.getBytes(StandardCharsets.UTF_8));
             BigInteger numRepresentation = new BigInteger(1, digest);
             String hashedString = numRepresentation.toString(16);
-            while (hashedString.length() < 32) {
-                hashedString = "0" + hashedString;
-            }
             return hashedString;
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Exception encoding password", e);

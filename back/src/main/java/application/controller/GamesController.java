@@ -1,15 +1,16 @@
 package application.controller;
 
-import application.domain.Game;
-import application.domain.GameComment;
-import application.domain.GameShop;
-import application.domain.GameTheme;
+import application.domain.*;
+import application.domain.composite_keys.UserCartKey;
 import application.parsing.CustomRsqlVisitor;
+import application.pojo.request.CartRequest;
 import application.pojo.request.CommentRequest;
 import application.pojo.request.GameRequest;
 import application.pojo.response.GameResponse;
 import application.pojo.response.GameWithStockResponse;
 import application.service.GameService;
+import application.service.ShopService;
+import application.service.UserService;
 import cz.jirutka.rsql.parser.RSQLParser;
 import cz.jirutka.rsql.parser.RSQLParserException;
 import cz.jirutka.rsql.parser.ast.Node;
@@ -21,7 +22,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/game_aggregator")
@@ -29,6 +33,10 @@ import java.util.*;
 public class GamesController {
     @Autowired
     private GameService gameService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ShopService shopService;
 
     /**
      * @param search поисковая строка, которая парсится на ноды и ищет игры в соотвествтии с фильтром
@@ -98,7 +106,7 @@ public class GamesController {
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(value = "/game/{game_id}",
+    @PutMapping(value = "/game/{game_id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Secured({"ROLE_ADMIN"})
@@ -111,7 +119,62 @@ public class GamesController {
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PutMapping(value = "/new_game",
+    @PatchMapping(value = "/game/{game_id}",
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @Secured({"ROLE_ADMIN"})
+    private ResponseEntity<HttpStatus> deleteGame(@PathVariable(value = "game_id") Integer gameId) {
+        Game game = gameService.findById(gameId);
+        if (game != null) {
+            gameService.deleteGame(game);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * @param gameId
+     * @param login
+     * Добавить игру в избранное
+     */
+    @PostMapping(value = "/game/{game_id}/add_fav",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @Secured({"ROLE_USER"})
+    private ResponseEntity<HttpStatus> addGameToFav(@PathVariable(value = "game_id") Integer gameId, @RequestBody String login) {
+        Game game = gameService.findById(gameId);
+        User user = userService.findByLogin(login);
+        if (game != null && user != null) {
+            UserCartKey key = new UserCartKey(gameId, login);
+            UserFav fav = new UserFav(key, game, user);
+            user.addGameToFav(fav);
+            userService.updateUser(user);
+            gameService.addGame(game);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * @param gameId
+     * Добавить игру в корзину
+     */
+    @PostMapping(value = "/game/{game_id}/add_cart",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @Secured({"ROLE_USER"})
+    private ResponseEntity<HttpStatus> addGameToCart(@PathVariable(value = "game_id") Integer gameId, @RequestBody CartRequest cartRequest) {
+        Game game = gameService.findById(gameId);
+        User user = userService.findByLogin(cartRequest.getLogin());
+        if (game != null && user != null) {
+            UserCartKey key = new UserCartKey(gameId, cartRequest.getLogin());
+            UserCart cart = new UserCart(key, game, user, cartRequest.getShopId());
+            user.addGameToCart(cart);
+            userService.updateUser(user);
+            gameService.addGame(game);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PostMapping(value = "/new_game",
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Secured({"ROLE_ADMIN"})
     private ResponseEntity<HttpStatus> addGame(@RequestBody GameRequest game) {
@@ -123,17 +186,6 @@ public class GamesController {
 
         gameService.addGame(new_game);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @DeleteMapping(value = "/game/{game_id}",
-            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_ADMIN"})
-    private ResponseEntity<HttpStatus> deleteGame(@PathVariable(value = "game_id") Integer gameId) {
-        Game game = gameService.findById(gameId);
-        if (game != null) {
-            gameService.deleteGame(game);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     private void fillGame(@RequestBody GameRequest requestGame, Game game) {
@@ -158,11 +210,10 @@ public class GamesController {
         game.setPublisher(gameService.getPublisherByName(requestGame.getPublisher()));
 
         Set<GameTheme> themes = new HashSet<>();
-        for (String theme: requestGame.getThemes()) {
+        for (String theme : requestGame.getThemes()) {
             themes.add(gameService.getThemeByName(theme));
         }
         game.setThemes(themes);
     }
-
 
 }

@@ -71,7 +71,7 @@ values ('ROLE_USER'),
        ('ROLE_SHOP');
 
 insert into Users (Login, Hashed_Password, Mail, Wants_Mailing, Salt, User_Role, Shop)
-values ('ana.mrzv', 'd3ad1ns1d3666666', 'test@mail.ru', true, 'h0wt0d011ph3lp!', 2, null),
+values ('ana.mrzv', '6f8bebb898b8fdbca67cef240e9be19f21d675c2', 'test@mail.ru', true, 'h0wt0d011ph3lp!', 2, null),
        ('dasxunya', 'd3s1gn3rd4sh4666', 'test2@mail.ru', false, 'h0wt0d011ph3lp?', 2, null),
        ('yuko', '1w0ntt3lluh0wxex', 'yuko@mail.ru', true, 'aoaoaoaoaoaoaoa', 1, null),
        ('serge', 'xicpwndyjhget666', 'serge@mail.ru', true, 'qwertyuiopasdfg', 1, null),
@@ -95,9 +95,9 @@ insert into Topic_Comment (Forum_ID, User_Login, Content)
 values (1, 'serge', 'Сам задаюсь этим вопросом....'),
        (2, 'yuko', 'Разработанная им самим');
 
-insert into Carts_of_Users (User_Login, Game_ID)
-values ('yuko', 1),
-       ('serge', 2);
+insert into Carts_of_Users (User_Login, Game_ID, Shop)
+values ('yuko', 1, 1),
+       ('serge', 2, 3);
 
 insert into Favorites_of_Users (User_Login, Game_ID)
 values ('yuko', 2),

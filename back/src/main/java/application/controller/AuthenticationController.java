@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/game_aggregator")
 @CrossOrigin(origins = "*")
 public class AuthenticationController {
-
     @Autowired
     private UserService userService;
     @Autowired

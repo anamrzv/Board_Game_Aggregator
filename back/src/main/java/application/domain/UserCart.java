@@ -36,6 +36,15 @@ public class UserCart {
     @Column(name = "date_of_buy")
     LocalDateTime dateOfBuy;
 
+    Integer shop;
+
+    public UserCart(UserCartKey id, Game game, User user, Integer shop) {
+        this.id = id;
+        this.game = game;
+        this.user = user;
+        this.shop = shop;
+    }
+
     @Override
     public int hashCode() {
         return 413;
