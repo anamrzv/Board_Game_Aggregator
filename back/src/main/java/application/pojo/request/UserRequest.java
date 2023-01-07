@@ -1,4 +1,4 @@
-package application.pojo;
+package application.pojo.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

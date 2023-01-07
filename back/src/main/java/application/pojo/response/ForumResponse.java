@@ -1,4 +1,4 @@
-package application.pojo;
+package application.pojo.response;
 
 import application.domain.Forum;
 import application.domain.ForumComment;

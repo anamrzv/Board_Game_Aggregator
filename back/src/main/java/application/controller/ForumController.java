@@ -2,8 +2,8 @@ package application.controller;
 
 import application.domain.Forum;
 import application.domain.ForumComment;
-import application.pojo.CommentRequest;
-import application.pojo.ForumResponse;
+import application.pojo.request.CommentRequest;
+import application.pojo.response.ForumResponse;
 import application.service.ForumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

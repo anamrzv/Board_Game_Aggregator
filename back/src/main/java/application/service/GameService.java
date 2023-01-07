@@ -66,6 +66,11 @@ public class GameService {
     }
 
     @Transactional
+    public void deleteGame(Game game) {
+        gameRepository.delete(game);
+    }
+
+    @Transactional
     public GameTheme getThemeByName(String name) {
         return gameThemeRepository.getGameThemeByName(name);
     }

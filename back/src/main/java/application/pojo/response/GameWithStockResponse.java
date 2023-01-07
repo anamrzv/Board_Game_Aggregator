@@ -1,4 +1,4 @@
-package application.pojo;
+package application.pojo.response;
 
 import application.domain.Shop;
 import lombok.AllArgsConstructor;

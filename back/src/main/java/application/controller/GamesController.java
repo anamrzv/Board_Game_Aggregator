@@ -5,10 +5,10 @@ import application.domain.GameComment;
 import application.domain.GameShop;
 import application.domain.GameTheme;
 import application.parsing.CustomRsqlVisitor;
-import application.pojo.CommentRequest;
-import application.pojo.GameRequest;
-import application.pojo.GameResponse;
-import application.pojo.GameWithStockResponse;
+import application.pojo.request.CommentRequest;
+import application.pojo.request.GameRequest;
+import application.pojo.response.GameResponse;
+import application.pojo.response.GameWithStockResponse;
 import application.service.GameService;
 import cz.jirutka.rsql.parser.RSQLParser;
 import cz.jirutka.rsql.parser.RSQLParserException;
@@ -76,7 +76,8 @@ public class GamesController {
     }
 
     @PostMapping(value = "/game/{game_id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Secured({"ROLE_USER"})
     private ResponseEntity<HttpStatus> addComment(@PathVariable(value = "game_id") Integer gameId, @RequestBody CommentRequest comment) {
         if (gameId != null) {
@@ -87,7 +88,8 @@ public class GamesController {
     }
 
     @DeleteMapping(value = "/game/{game_id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Secured({"ROLE_ADMIN"})
     private ResponseEntity<HttpStatus> deleteComment(@PathVariable(value = "game_id") Integer gameId, @RequestBody Integer commentId) {
         if (gameId != null) {
@@ -96,36 +98,25 @@ public class GamesController {
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(value = "/new_game",
+    @PostMapping(value = "/game/{game_id}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @Secured({"ROLE_ADMIN"})
+    private ResponseEntity<HttpStatus> updateGame(@PathVariable(value = "game_id") Integer gameId, @RequestBody GameRequest game) {
+        Game old_game = gameService.findById(gameId);
+        if (old_game != null) {
+            fillGame(game, old_game);
+            gameService.addGame(old_game);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping(value = "/new_game",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @Secured({"ROLE_ADMIN"})
     private ResponseEntity<HttpStatus> addGame(@RequestBody GameRequest game) {
         Game new_game = new Game();
-        new_game.setName(game.getName());
-        new_game.setImage(game.getImage());
-        new_game.setVideo(game.getVideo());
-        new_game.setDescription(game.getDescription());
-        new_game.setMinPlayersNumber(game.getMinPlayersNumber());
-        new_game.setMaxPlayersNumber(game.getMaxPlayersNumber());
-        new_game.setRecPlayersNumber(game.getRecPlayersNumber());
-        new_game.setMinPlayTime(game.getMinPlayTime());
-        new_game.setMaxPlayTime(game.getMaxPlayTime());
-        new_game.setPublishYear(game.getPublishYear());
-        new_game.setDesigners(game.getDesigners());
-        new_game.setMinPlayAge(game.getMinPlayAge());
-        new_game.setMaxPlayAge(game.getMaxPlayAge());
-        new_game.setDifficultness(game.getDifficultness());
-        new_game.setWeight(game.getWeight());
-
-        new_game.setGenre(gameService.getGenreByName(game.getGenre()));
-        new_game.setMechanics(gameService.getMechanicsByName(game.getMechanics()));
-        new_game.setPublisher(gameService.getPublisherByName(game.getPublisher()));
-
-        Set<GameTheme> themes = new HashSet<>();
-        for (String theme: game.getThemes()) {
-            themes.add(gameService.getThemeByName(theme));
-        }
-        new_game.setThemes(themes);
+        fillGame(game, new_game);
 
         new_game.setWishlistCount(0);
         new_game.setOwnCount(0);
@@ -133,5 +124,45 @@ public class GamesController {
         gameService.addGame(new_game);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping(value = "/game/{game_id}",
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @Secured({"ROLE_ADMIN"})
+    private ResponseEntity<HttpStatus> deleteGame(@PathVariable(value = "game_id") Integer gameId) {
+        Game game = gameService.findById(gameId);
+        if (game != null) {
+            gameService.deleteGame(game);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    private void fillGame(@RequestBody GameRequest requestGame, Game game) {
+        game.setName(requestGame.getName());
+        game.setImage(requestGame.getImage());
+        game.setVideo(requestGame.getVideo());
+        game.setDescription(requestGame.getDescription());
+        game.setMinPlayersNumber(requestGame.getMinPlayersNumber());
+        game.setMaxPlayersNumber(requestGame.getMaxPlayersNumber());
+        game.setRecPlayersNumber(requestGame.getRecPlayersNumber());
+        game.setMinPlayTime(requestGame.getMinPlayTime());
+        game.setMaxPlayTime(requestGame.getMaxPlayTime());
+        game.setPublishYear(requestGame.getPublishYear());
+        game.setDesigners(requestGame.getDesigners());
+        game.setMinPlayAge(requestGame.getMinPlayAge());
+        game.setMaxPlayAge(requestGame.getMaxPlayAge());
+        game.setDifficultness(requestGame.getDifficultness());
+        game.setWeight(requestGame.getWeight());
+
+        game.setGenre(gameService.getGenreByName(requestGame.getGenre()));
+        game.setMechanics(gameService.getMechanicsByName(requestGame.getMechanics()));
+        game.setPublisher(gameService.getPublisherByName(requestGame.getPublisher()));
+
+        Set<GameTheme> themes = new HashSet<>();
+        for (String theme: requestGame.getThemes()) {
+            themes.add(gameService.getThemeByName(theme));
+        }
+        game.setThemes(themes);
+    }
+
 
 }
