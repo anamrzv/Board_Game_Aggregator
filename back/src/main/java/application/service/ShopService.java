@@ -25,15 +25,30 @@ public class ShopService {
     }
 
     @Transactional
-    public Shop findShopById(int id) { return shopRepository.getById(id); }
+    public Shop findShopById(int id) {
+        return shopRepository.getById(id);
+    }
 
     @Transactional
-    public void addGameToShop(GameShop gameShop) { gameShopRepository.save(gameShop); }
+    public void addGameToShop(GameShop gameShop) {
+        gameShopRepository.save(gameShop);
+    }
 
     @Transactional
-    public void deleteGameFromShop(GameShopKey key) { gameShopRepository.deleteById(key); }
+    public void deleteGameFromShop(GameShopKey key) {
+        gameShopRepository.deleteById(key);
+    }
 
     @Transactional
-    public GameShop findGameFromShop(GameShopKey key) { return gameShopRepository.findById(key).orElse(null); }
+    public GameShop getGameFromShop(GameShopKey key) {
+        return gameShopRepository.findById(key).orElse(null);
+    }
+
+    @Transactional
+    public GameShop findGameFromShop(GameShopKey key) {
+        return gameShopRepository.findById(key).orElse(null);
+    }
+
+
 
 }

@@ -1,12 +1,15 @@
 package application.controller;
 
 import application.domain.*;
+import application.domain.composite_keys.GameShopKey;
 import application.domain.composite_keys.UserCartKey;
 import application.pojo.request.CartRequest;
 import application.pojo.request.FavRequest;
 import application.pojo.request.ForumRequest;
+import application.pojo.response.ShopGameResponse;
 import application.service.ForumService;
 import application.service.GameService;
+import application.service.ShopService;
 import application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -27,6 +32,8 @@ public class UserController {
     private ForumService forumService;
     @Autowired
     private GameService gameService;
+    @Autowired
+    private ShopService shopService;
 
     /**
      * @param login
@@ -35,12 +42,20 @@ public class UserController {
     @GetMapping(value = "/cart",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<Set<UserCart>> showCart(@RequestBody String login) {
+    private ResponseEntity<List<ShopGameResponse>> showCart(@RequestBody String login) {
         Set<UserCart> games;
         User user = userService.findByLogin(login);
         if (user != null) {
             games = user.getGamesInCart();
-            return ResponseEntity.ok().body(games);
+
+            List<ShopGameResponse> gamesWithPrice = new ArrayList<>();
+            for (UserCart cart : games) {
+                Shop shop = shopService.findShopById(cart.getShop());
+                GameShopKey key = new GameShopKey(cart.getGame().getId(), cart.getShop());
+                GameShop gameShop = shopService.getGameFromShop(key);
+                gamesWithPrice.add(new ShopGameResponse(shop, cart.getGame(), gameShop.getPrice()));
+            }
+            return ResponseEntity.ok().body(gamesWithPrice);
         } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
     }
 
@@ -122,6 +137,28 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    @PostMapping(value = "/buy",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    private ResponseEntity<HttpStatus> buyGame(@RequestBody String login) {
+        Set<UserCart> games;
+        User user = userService.findByLogin(login);
+        if (user != null) {
+            games = user.getGamesInCart();
+
+            for (UserCart cart : games) {
+                if (cart.getDateOfBuy() == null) {
+                    user.removeGameFromCart(cart);
+                    cart.setDateOfBuy(java.time.LocalDateTime.now());
+                    user.addGameToCart(cart);
+                    userService.updateUser(user);
+                }
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
 
 }
 
