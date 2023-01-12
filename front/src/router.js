@@ -22,22 +22,22 @@ const routes = [
         }
     },
     {
-        path: '/auth',
+        path: '/game_aggregator',
         name: 'auth-page',
         component: Login
     },
     {
-        path: '/auth/user',
+        path: '/game_aggregator/auth/user',
         name: 'user-page',
         component: User
     },
     {
-        path: '/auth/admin',
+        path: '/game_aggregator/auth/admin',
         name: 'admin-page',
         component: Admin
     },
     {
-        path: '/auth/shop',
+        path: '/game_aggregator/auth/shop',
         name: 'shop-page',
         component: Shop
     },
