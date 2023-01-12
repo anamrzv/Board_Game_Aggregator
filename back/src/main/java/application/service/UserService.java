@@ -8,6 +8,7 @@ import application.domain.composite_keys.UserCartKey;
 import application.repository.UserCartRepository;
 import application.repository.UserFavRepository;
 import application.repository.UserRepository;
+import application.repository.UserRoleRepository;
 import application.util.PasswordHasher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private UserRoleRepository userRoleRepository;
+    @Autowired
     private UserFavRepository userFavRepository;
     @Autowired
     private UserCartRepository userCartRepository;
@@ -34,7 +37,7 @@ public class UserService {
         byte[] salt = new byte[6];
         RANDOM.nextBytes(salt);
         String saltString = new String(salt, StandardCharsets.UTF_8);
-        UserRole general_user = new UserRole(1);
+        UserRole general_user = userRoleRepository.getById(1);
         User user = new User(login, PasswordHasher.encryptStringSHA(pepper + password + saltString), saltString, mail, wantsMailing, general_user, null, null, null, null);
         userRepository.save(user);
     }
