@@ -71,7 +71,7 @@ values ('ROLE_USER'),
        ('ROLE_SHOP');
 
 insert into Users (Login, Hashed_Password, Mail, Wants_Mailing, Salt, User_Role, Shop)
-values ('ana.mrzv', '6f8bebb898b8fdbca67cef240e9be19f21d675c2', 'test@mail.ru', true, 'h0wt0d011ph3lp!', 2, null),
+values ('ana.mrzv', '6f8bebb898b8fdbca67ce', 'test@mail.ru', true, 'h0wt0d011ph3lp!', 2, null),
        ('dasxunya', 'd3s1gn3rd4sh4666', 'test2@mail.ru', false, 'h0wt0d011ph3lp?', 2, null),
        ('yuko', '1w0ntt3lluh0wxex', 'yuko@mail.ru', true, 'aoaoaoaoaoaoaoa', 1, null),
        ('serge', 'xicpwndyjhget666', 'serge@mail.ru', true, 'qwertyuiopasdfg', 1, null),

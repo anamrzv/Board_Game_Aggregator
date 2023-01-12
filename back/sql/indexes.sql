@@ -8,8 +8,8 @@ CREATE INDEX User_Role_Index ON Users (user_role);
 --Вывести для игры список магазинов, где она есть
 CREATE INDEX Shop_Index ON Game_to_Shop (Game_ID);
 
---Выбрать все адреса магазинов в городе покупателя
-CREATE INDEX City_Index ON Address (City);
+-- --Выбрать все адреса магазинов в городе покупателя
+-- CREATE INDEX City_Index ON Address (City);
 
 --Выбрать ВИП магазины для продвижения
 CREATE INDEX Vip_Shop_Index ON Shop (Shop_Type_ID) WHERE Shop_Type_ID = 2;
