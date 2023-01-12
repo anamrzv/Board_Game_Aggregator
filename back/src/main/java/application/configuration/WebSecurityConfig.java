@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/game_aggregator/game*").permitAll()
                 .antMatchers("/game_aggregator/forum/*").permitAll()
                 .antMatchers("/game_aggregator/shop/*").permitAll()
-                .antMatchers("/game_aggregator/register/*").permitAll()
+                .antMatchers("/game_aggregator/register*").permitAll()
                 .antMatchers("/game_aggregator/auth/*").permitAll()
                 .anyRequest().authenticated() //требуем авторизацию
                 .and()
