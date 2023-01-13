@@ -58,7 +58,7 @@ public class Game {
     @JoinColumn(name = "publisher")
     private GamePublisher publisher;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "game_to_theme",
             joinColumns = {
                     @JoinColumn(name = "board_id", referencedColumnName = "id")
@@ -68,15 +68,15 @@ public class Game {
             })
     private Set<GameTheme> themes = new HashSet<>();
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserCart> usersWhoAddedInCart = new HashSet<>();
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserFav> usersWhoLiked = new HashSet<>();
 
-    @OneToMany(mappedBy = "game", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<GameShop> shopsHavingInStock = new HashSet<>();
 

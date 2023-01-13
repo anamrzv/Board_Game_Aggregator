@@ -37,7 +37,6 @@ public class ShopController {
     @GetMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured("ROLE_SHOP")
     private ResponseEntity<List<ShopWithStockResponse>> showGamesInStock(@RequestBody String shopName) {
         List<ShopWithStockResponse> response = new ArrayList<>();
         List<Shop> shops = shopService.findAllByName(shopName);
@@ -56,7 +55,6 @@ public class ShopController {
     @PostMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured("ROLE_SHOP")
     private ResponseEntity<HttpStatus> addGameToStock(@RequestBody ShopGameRequest request) {
         Game game = gameService.findById(request.getGameId());
         Shop shop = shopService.findShopById(request.getShopId());
@@ -71,7 +69,6 @@ public class ShopController {
     @DeleteMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured("ROLE_SHOP")
     private ResponseEntity<HttpStatus> deleteGameFromStock(@RequestBody ShopGameRequest request) {
         GameShopKey key = new GameShopKey(request.getGameId(), request.getShopId());
         shopService.deleteGameFromShop(key);
@@ -81,7 +78,6 @@ public class ShopController {
     @PutMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured("ROLE_SHOP")
     private ResponseEntity<HttpStatus> updateGamePrice(@RequestBody ShopGameRequest request) {
             GameShopKey key = new GameShopKey(request.getGameId(), request.getShopId());
             GameShop gameShop = shopService.findGameFromShop(key);

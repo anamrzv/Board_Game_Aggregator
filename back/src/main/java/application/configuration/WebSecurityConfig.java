@@ -30,8 +30,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/api/user").permitAll()
 //                .antMatchers("/api/user/*").permitAll()
 //                .antMatchers("/error").permitAll() // TODO: переделать
+                .antMatchers("/game_aggregator/*").permitAll()
                 .antMatchers("/game_aggregator/user/*").permitAll()
                 .antMatchers("/game_aggregator/game*").permitAll()
+                .antMatchers("/game_aggregator/game/*").permitAll()
                 .antMatchers("/game_aggregator/forum/*").permitAll()
                 .antMatchers("/game_aggregator/shop/*").permitAll()
                 .antMatchers("/game_aggregator/register*").permitAll()

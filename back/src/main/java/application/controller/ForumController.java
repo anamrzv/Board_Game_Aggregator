@@ -56,7 +56,6 @@ public class ForumController {
 
     @PostMapping(value = "/{forum_id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_USER"})
     private ResponseEntity<HttpStatus> addComment(@PathVariable(value = "forum_id") int forumId, @RequestBody CommentRequest comment) {
         try {
             ForumComment forumComment = new ForumComment(forumId, comment.getLogin(), comment.getDateTime(), comment.getContent());
@@ -69,7 +68,6 @@ public class ForumController {
 
     @PostMapping(value = "/",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_USER"})
     private ResponseEntity<HttpStatus> addForum(@RequestBody String forumName) {
         if (forumName != null) {
             Forum forum = new Forum(forumName);
@@ -80,7 +78,6 @@ public class ForumController {
 
     @DeleteMapping(value = "/{forum_id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_ADMIN"})
     private ResponseEntity<HttpStatus> deleteComment(@PathVariable(value = "forum_id") int forumId, @RequestBody Integer commentId) {
         if (commentId != null) {
             forumService.deleteCommentById(commentId);
@@ -90,7 +87,6 @@ public class ForumController {
 
     @DeleteMapping(value = "/",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_ADMIN"})
     private ResponseEntity<HttpStatus> deleteForum(@PathVariable(value = "forum_id") int forumId) {
         forumService.deleteForumById(forumId);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -99,7 +95,6 @@ public class ForumController {
     @PostMapping(value = "/fav_forums",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured("ROLE_USER")
     private ResponseEntity<HttpStatus> addFavForum(@RequestBody ForumRequest forumRequest) {
         Forum forum = forumService.findById(forumRequest.getForum());
         User user = userService.findByLogin(forumRequest.getLogin());

@@ -11,22 +11,16 @@ import java.util.List;
 
 @Service
 public class GameService {
-
     @Autowired
     private GameRepository gameRepository;
-
     @Autowired
     private GameCommentRepository gameCommentRepository;
-
     @Autowired
     private GameThemeRepository gameThemeRepository;
-
     @Autowired
     private GameGenreRepository gameGenreRepository;
-
     @Autowired
     private GameMechanicsRepository gameMechanicsRepository;
-
     @Autowired
     private GamePublisherRepository gamePublisherRepository;
 

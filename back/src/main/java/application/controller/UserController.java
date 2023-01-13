@@ -62,7 +62,6 @@ public class UserController {
     @DeleteMapping(value = "/cart",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_USER"})
     private ResponseEntity<HttpStatus> addGameToCart(@RequestBody CartRequest cartRequest) {
         User user = userService.findByLogin(cartRequest.getLogin());
         Game game = gameService.findById(cartRequest.getGameId());
@@ -95,7 +94,6 @@ public class UserController {
     @DeleteMapping(value = "/fav",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_USER"})
     private ResponseEntity<HttpStatus> deleteGameFromFav(@RequestBody FavRequest favRequest) {
         Game game = gameService.findById(favRequest.getGameId());
         User user = userService.findByLogin(favRequest.getLogin());

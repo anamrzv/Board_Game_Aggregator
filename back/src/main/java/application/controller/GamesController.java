@@ -9,7 +9,6 @@ import application.pojo.request.GameRequest;
 import application.pojo.response.GameResponse;
 import application.pojo.response.GameWithStockResponse;
 import application.service.GameService;
-import application.service.ShopService;
 import application.service.UserService;
 import cz.jirutka.rsql.parser.RSQLParser;
 import cz.jirutka.rsql.parser.RSQLParserException;
@@ -19,7 +18,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,8 +33,6 @@ public class GamesController {
     private GameService gameService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private ShopService shopService;
 
     /**
      * @param search поисковая строка, которая парсится на ноды и ищет игры в соотвествтии с фильтром
@@ -45,6 +41,7 @@ public class GamesController {
      * Пример запросов:
      * /game_aggregator/game?search=minPlayersNumber==2;minPlayTime>50
      */
+
     @GetMapping(value = "/game",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<List<Game>> showAllGames(@RequestParam(value = "search", required = false) String search) {
@@ -87,7 +84,6 @@ public class GamesController {
     @PostMapping(value = "/game/{game_id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_USER"})
     private ResponseEntity<HttpStatus> addComment(@PathVariable(value = "game_id") Integer gameId, @RequestBody CommentRequest comment) {
         if (gameId != null) {
             GameComment gameComment = new GameComment(gameId, comment.getLogin(), comment.getDateTime(), comment.getContent());
@@ -99,7 +95,6 @@ public class GamesController {
     @DeleteMapping(value = "/game/{game_id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_ADMIN"})
     private ResponseEntity<HttpStatus> deleteComment(@PathVariable(value = "game_id") Integer gameId, @RequestBody Integer commentId) {
         if (gameId != null) {
             gameService.deleteComment(commentId);
@@ -110,7 +105,6 @@ public class GamesController {
     @PutMapping(value = "/game/{game_id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_ADMIN"})
     private ResponseEntity<HttpStatus> updateGame(@PathVariable(value = "game_id") Integer gameId, @RequestBody GameRequest game) {
         Game old_game = gameService.findById(gameId);
         if (old_game != null) {
@@ -122,7 +116,6 @@ public class GamesController {
 
     @PatchMapping(value = "/game/{game_id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_ADMIN"})
     private ResponseEntity<HttpStatus> deleteGame(@PathVariable(value = "game_id") Integer gameId) {
         Game game = gameService.findById(gameId);
         if (game != null) {
@@ -139,7 +132,6 @@ public class GamesController {
     @PostMapping(value = "/game/{game_id}/add_fav",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_USER"})
     private ResponseEntity<HttpStatus> addGameToFav(@PathVariable(value = "game_id") Integer gameId, @RequestBody String login) {
         Game game = gameService.findById(gameId);
         User user = userService.findByLogin(login);
@@ -160,7 +152,6 @@ public class GamesController {
     @PostMapping(value = "/game/{game_id}/add_cart",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_USER"})
     private ResponseEntity<HttpStatus> addGameToCart(@PathVariable(value = "game_id") Integer gameId, @RequestBody CartRequest cartRequest) {
         Game game = gameService.findById(gameId);
         User user = userService.findByLogin(cartRequest.getLogin());
@@ -177,7 +168,6 @@ public class GamesController {
     @PostMapping(value = "/new_game",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    @Secured({"ROLE_ADMIN"})
     private ResponseEntity<HttpStatus> addGame(@RequestBody GameRequest game) {
         Game new_game = new Game();
         fillGame(game, new_game);
