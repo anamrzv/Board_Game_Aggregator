@@ -1,0 +1,29 @@
+.body-table {
+    background: whitesmoke;
+    border-radius: 8px 8px 8px 4px;
+    max-width: 95%;
+    display:flex; /*TODO: внимательней к флексу*/
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center
+}
+
+#header {
+    height: 60px;
+    background-color: whitesmoke;
+    /*border-radius: 0 0 8px 4px;*/
+    margin: 0 0 10px;
+}
+
+#games {
+    background: whitesmoke;
+    border-radius: 8px 8px 8px 4px;
+    padding: 1%;
+    margin: 1.5%;
+    width: 315px;
+    height: 300px;
+    box-shadow: 5px 10px 25px #000141;
+}
