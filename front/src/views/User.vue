@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="cyber">User</p>
+    <p class="cyber" >User</p>
     <div class="main">
       <input type="checkbox" id="chk" aria-hidden="true">
 
