@@ -1,7 +1,6 @@
 package application.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "board_game")
+@Table(name = "board_game", indexes = {@Index(name = "Genre_Index", columnList = "Genre_ID"), @Index(name = "Mechanics_Index", columnList = "Mechanics_ID")})
 public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

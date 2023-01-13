@@ -60,6 +60,7 @@ public class GamesController {
                 return ResponseEntity.badRequest().body(null);
             }
         }
+        int gameCount = gameService.getGameCount();
         return ResponseEntity.ok().body(games);
     }
 

@@ -14,7 +14,7 @@ import java.util.Set;
 @EqualsAndHashCode
 @AllArgsConstructor
 @Entity
-@Table(name = "shop")
+@Table(name = "shop", indexes = {@Index(name = "Vip_Shop_Index", columnList = "Shop_Type_ID"), @Index(name = "City_Index", columnList = "city")})
 public class Shop {
     @Id
     @NotNull

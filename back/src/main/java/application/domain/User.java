@@ -14,7 +14,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "users", indexes = {@Index(name = "User_Role_Index", columnList = "user_role")})
+@Table(name = "users", indexes = {@Index(name = "User_Role_Index", columnList = "user_role"), @Index(name = "Mailing_Index", columnList = "wants_mailing")})
 public class User {
     @Id
     @Column(name = "login")

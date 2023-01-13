@@ -43,6 +43,11 @@ public class UserService {
     }
 
     @Transactional
+    public UserRole getRole(Integer id) {
+        return userRoleRepository.getById(id);
+    }
+
+    @Transactional
     public User findByLogin(String login) {
         return userRepository.getByUsername(login);
     }

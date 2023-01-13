@@ -89,4 +89,9 @@ public class GameService {
     public GamePublisher getPublisherByName(String name) {
         return gamePublisherRepository.getGamePublisherByName(name);
     }
+
+    @Transactional
+    public int getGameCount() {
+        return gameRepository.getGameCount();
+    }
 }

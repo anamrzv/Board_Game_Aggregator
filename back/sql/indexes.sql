@@ -2,15 +2,14 @@
 
 --Для еженедельных рассылок: SELECT mail FROM Users WHERE wants_mailing = true
 CREATE INDEX Mailing_Index ON Users (wants_mailing) WHERE wants_mailing = true;
-
+--Для ускорения авторизации
 CREATE INDEX User_Role_Index ON Users (user_role);
 
 --Вывести для игры список магазинов, где она есть
 CREATE INDEX Shop_Index ON Game_to_Shop (Game_ID);
 
 -- --Выбрать все адреса магазинов в городе покупателя
--- CREATE INDEX City_Index ON Address (City);
-
+CREATE INDEX City_Index ON Shop (city);
 --Выбрать ВИП магазины для продвижения
 CREATE INDEX Vip_Shop_Index ON Shop (Shop_Type_ID) WHERE Shop_Type_ID = 2;
 

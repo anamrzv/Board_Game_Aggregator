@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "game_to_shop")
+@Table(name = "game_to_shop", indexes = {@Index(name = "Shop_Index", columnList = "game_id")})
 public class GameShop {
     @EmbeddedId
     @JsonIgnore

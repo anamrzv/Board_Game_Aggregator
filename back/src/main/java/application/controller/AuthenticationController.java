@@ -27,13 +27,13 @@ public class AuthenticationController {
         UserRole role;
         switch (authType) {
             case "user":
-                role = new UserRole(1);
+                role = userService.getRole(1);
                 break;
             case "admin":
-                role = new UserRole(2);
+                role = userService.getRole(2);
                 break;
             case "shop":
-                role = new UserRole(3);
+                role = userService.getRole(3);
                 break;
             default:
                 return new ResponseEntity<>("Неверный параметр для логина", HttpStatus.NOT_FOUND);
