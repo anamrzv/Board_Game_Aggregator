@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface GameRepository extends JpaRepository<Game, Integer>, JpaSpecificationExecutor<Game> {
-    @Query(nativeQuery = true, value = "SELECT cheap_board_game()")
-    Integer getGameCount();
+    //@Query(nativeQuery = true, value = "SELECT cheap_board_game()")
+    //Integer getGameCount();
 }
