@@ -90,8 +90,8 @@ public class GameService {
         return gamePublisherRepository.getGamePublisherByName(name);
     }
 
-    @Transactional
-    public int getGameCount() {
-        return gameRepository.getGameCount();
-    }
+//    @Transactional
+//    public int getGameCount() {
+//        return gameRepository.getGameCount();
+//    }
 }
