@@ -91,7 +91,7 @@ create table User_Role
 create table Users
 (
     Login           varchar(20) primary key,
-    Hashed_Password varchar(32)                                                       not null,
+    Hashed_Password varchar(40)                                                       not null,
     Mail            varchar(320)                                                      not null,
     Wants_Mailing   boolean                                                           not null,
     Salt            varchar(15)                                                       not null,

@@ -1,7 +1,5 @@
 <template>
   <div>
-    <div class="header"></div>
-
     <div class=container>
       <div class="screen">
         <div class="cyber">board games</div>
@@ -24,7 +22,6 @@
 </script>
 
 <style>
-@import "../assets/header.css";
 @import "../assets/login.css";
 @import "../assets/fonts.css";
 </style>

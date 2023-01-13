@@ -13,15 +13,6 @@ Vue.use(Router);
 
 const routes = [
     {
-        path: '/',
-        name: 'default-page',
-        component: Login,
-        beforeEnter: (to, from, next) => {
-            if (localStorage.getItem("jwt") !== null) next({name: 'main'});
-            else next({name: 'auth-page'});
-        }
-    },
-    {
         path: '/game_aggregator',
         name: 'auth-page',
         component: Login
@@ -42,7 +33,7 @@ const routes = [
         component: Shop
     },
     {
-        path: '/main',
+        path: '/game_aggregator/game',
         name: 'main',
         component: Main,
         beforeEnter: (to, from, next) => {

@@ -12,13 +12,15 @@
 </template>
 
 <style>
-@import "../assets/header.css";
 @import "../assets/body.css";
 
 .errors {
   text-align: center;
   margin-top: 40px;
   color: whitesmoke;
+  position: absolute;
+  left: 34%;
+  top: 35%;
 }
 </style>
 
