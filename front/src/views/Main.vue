@@ -2,12 +2,17 @@
   <div>
     <div id="header"></div>
 
-      <div class="d2">
-        <form>
-          <input type="text" placeholder="Искать здесь...">
-          <button @click="searching"></button>
-        </form>
+    <div class="search_row">
+    <div class="d2">
+      <form>
+        <input type="text" placeholder="Search me...">
+        <button @click="searching"></button>
+      </form>
+    </div>
+      <div class="for_filter" title="show filters">
+        <button></button>
       </div>
+    </div>
 
     <div class="body-table">
       <div id="games" v-for="item in games" :key="item.id">
@@ -43,7 +48,10 @@ export default {
             this.games = response.data;
           })
     },
-    searching(){},
+    searching() {
+      axios
+          .get('')
+    },
     logout() {
       this.$swal.fire({
         icon: "success",

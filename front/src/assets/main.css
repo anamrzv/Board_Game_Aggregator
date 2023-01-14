@@ -27,6 +27,8 @@
     box-shadow: 5px 10px 25px #040528;
     display: block;
     align-items: center;
+
+
 }
 
 .for_games_image {
@@ -58,8 +60,9 @@
 .d2 input, .d2 button {
     border: none;
     outline: none;
-    border-radius: 3px;
+    border-radius: 0 3px 3px 3px;
 }
+
 .d2 input {
     width: 100%;
     height: 42px;
@@ -67,6 +70,11 @@
     padding-left: 15px;
     margin: 15% 0 0;
 }
+
+.d2 input:hover {
+    background: whitesmoke;
+}
+
 .d2 button {
     height: 26px;
     width: 26px;
@@ -76,6 +84,7 @@
     background: #2f2a5f;
     cursor: pointer;
 }
+
 .d2 button:before {
     content: "\f105";
     font-family: "FontAwesome", sans-serif;
@@ -93,4 +102,36 @@
 #name_settings {
     font-size: 130%;
     font-weight: bold;
+}
+
+.for_filter button {
+    width: 18px;
+    height: 26px;
+    background: white;
+    border-radius: 3px 0 0 3px;
+    position: relative;
+    top:10px;
+}
+
+.for_filter button:before {
+    content: "\f142";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.for_filter button:hover {
+    background: whitesmoke;
+}
+
+.for_filter button:focus {
+    background: #573b8a;
+}
+
+.search_row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
 }
