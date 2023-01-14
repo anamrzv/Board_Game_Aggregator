@@ -5,11 +5,11 @@
     <div class="search_row">
     <div class="d2">
       <form>
-        <input type="text" placeholder="Искать здесь...">
+        <input type="text" placeholder="Search me...">
         <button @click="searching"></button>
       </form>
     </div>
-      <div class="for_filter">
+      <div class="for_filter" title="show filters">
         <button></button>
       </div>
     </div>

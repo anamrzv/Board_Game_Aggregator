@@ -71,6 +71,10 @@
     margin: 15% 0 0;
 }
 
+.d2 input:hover {
+    background: whitesmoke;
+}
+
 .d2 button {
     height: 26px;
     width: 26px;
@@ -115,6 +119,14 @@
     color: #2f2a5f;
     font-size: 25px;
     font-weight: bold;
+}
+
+.for_filter button:hover {
+    background: whitesmoke;
+}
+
+.for_filter button:focus {
+    background: #573b8a;
 }
 
 .search_row {
