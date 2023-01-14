@@ -6,7 +6,8 @@
 
     <div class="body-table">
       <div id="games" v-for="item in games" :key="item.id">
-        {{ item }}
+        <p>{{ item.name }}</p><br>
+        <div class="for_games_image"><img width="200px" v-bind:src="item.image"></div>
       </div>
     </div>
 
