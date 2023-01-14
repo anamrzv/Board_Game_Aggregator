@@ -24,9 +24,6 @@ DELETE
 FROM "shop_type";
 
 DELETE
-FROM "address";
-
-DELETE
 FROM "game_theme";
 
 DELETE
