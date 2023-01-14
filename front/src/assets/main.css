@@ -2,10 +2,9 @@
 .body-table {
     border-radius: 8px 8px 8px 4px;
     max-width: 95%;
-    display:flex; /*внимательней к флексу*/
+    display: flex; /*внимательней к флексу*/
     margin-right: auto;
     margin-left: auto;
-    margin-top: 5%;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center
@@ -24,16 +23,74 @@
     padding: 1%;
     margin: 1.5%;
     width: 248px;
-    /*width: 300px;*/
-    height: 400px;
-    box-shadow: 5px 10px 25px #000141;
-    display: flex; /*флекс*/
-    justify-content: center;
-    flex-direction: column;
-    font-family: "Code 7x5", sans-serif;
+    height: 375px;
+    box-shadow: 5px 10px 25px #040528;
+    display: block;
     align-items: center;
 }
 
 .for_games_image {
+    border-radius: 8px 8px 8px 4px;
+}
 
+.games_container {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.games_container > * {
+    margin-bottom: 7%;
+    font-family: "Roboto Regular", sans-serif;
+    background: linear-gradient(90deg, #EC3939 0%, #8E36C4 38.92%, #3FE2C5 76.32%, #55DC3F 112.95%, #FF2FEA 146.53%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+.name_container {
+    background-color: #302b63;
+    border-radius: 8px 8px 8px 4px;
+    min-height: 30px;
+}
+
+.d2 input, .d2 button {
+    border: none;
+    outline: none;
+    border-radius: 3px;
+}
+.d2 input {
+    width: 100%;
+    height: 42px;
+    background: #ffffff;
+    padding-left: 15px;
+    margin: 15% 0 0;
+}
+.d2 button {
+    height: 26px;
+    width: 26px;
+    position: absolute;
+    top: -12px;
+    right: 8px;
+    background: #2f2a5f;
+    cursor: pointer;
+}
+.d2 button:before {
+    content: "\f105";
+    font-family: "FontAwesome", sans-serif;
+    color: #fdfdfe;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.d2 > form {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+}
+
+#name_settings {
+    font-size: 130%;
+    font-weight: bold;
 }
