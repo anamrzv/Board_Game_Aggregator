@@ -1,13 +1,24 @@
 <template>
   <div>
-    <div id="header">
+    <div id="header"></div>
 
-    </div>
+      <div class="d2">
+        <form>
+          <input type="text" placeholder="Искать здесь...">
+          <button @click="searching"></button>
+        </form>
+      </div>
 
     <div class="body-table">
       <div id="games" v-for="item in games" :key="item.id">
-        <p>{{ item.name }}</p><br>
-        <div class="for_games_image"><img width="200px" v-bind:src="item.image"></div>
+
+        <div class="games_container">
+          <p id="name_settings">{{ item.name }}</p>
+          <img class="for_games_image" width="200px" height="178" v-bind:src="item.image">
+          <p>{{ item.minPlayersNumber }} - {{ item.maxPlayersNumber }}</p>
+          <p>{{ item.minPlayAge }} +</p>
+        </div>
+
       </div>
     </div>
 
@@ -18,7 +29,7 @@
 import axios from "axios";
 
 export default {
-  name: "main",
+  name: "Main",
   data() {
     return {
       games: null
@@ -32,6 +43,7 @@ export default {
             this.games = response.data;
           })
     },
+    searching(){},
     logout() {
       this.$swal.fire({
         icon: "success",
@@ -49,4 +61,5 @@ export default {
 
 <style>
 @import "../assets/main.css";
+@import "../assets/fonts.css";
 </style>
