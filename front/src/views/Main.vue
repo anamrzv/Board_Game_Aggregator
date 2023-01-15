@@ -3,28 +3,54 @@
     <div id="header"></div>
 
     <div class="search_row">
-    <div class="d2">
-      <form>
-        <input type="text" placeholder="Search me...">
-        <button @click="searching"></button>
-      </form>
-    </div>
+      <div class="d2">
+        <form>
+          <input type="text" placeholder="Search me...">
+          <button id="search" @click="searching"></button>
+        </form>
+      </div>
       <div class="for_filter" title="show filters">
-        <button></button>
+        <b-button v-b-toggle.my-sidebar></b-button>
       </div>
     </div>
 
+
+    <div>
+<!--      <div>-->
+<!--        <b-button v-b-toggle.my-collapse>Переключатель свернутого содержимого</b-button>-->
+<!--        <b-button v-b-toggle.my-sidebar></b-button>-->
+<!--      </div>-->
+
+<!--      <b-collapse id="my-collapse">-->
+<!--        <b-card title="Сворачиваемая карточка">-->
+<!--          Привет мир!-->
+<!--        </b-card>-->
+<!--      </b-collapse>-->
+      <b-sidebar id="my-sidebar" title="Filters" shadow>
+        <div class="px-3 py-2">
+          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+          in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+        </div>
+      </b-sidebar>
+    </div>
+
+<!--    <div v-for="i in games" :key="i.id">-->
+<!--      {{i}}-->
+
+<!--      <p>min players<input type="range" min="1" max="20" value="2"></p>-->
+<!--    </div>-->
+
+
     <div class="body-table">
       <div id="games" v-for="item in games" :key="item.id">
-
         <div class="games_container">
           <p id="name_settings">{{ item.name }}</p>
           <img class="for_games_image" width="200px" height="178" v-bind:src="item.image">
           <p>{{ item.minPlayersNumber }} - {{ item.maxPlayersNumber }}</p>
           <p>{{ item.minPlayAge }} +</p>
         </div>
-
       </div>
+
     </div>
 
   </div>
@@ -37,7 +63,10 @@ export default {
   name: "Main",
   data() {
     return {
-      games: null
+      games: null,
+      settings: [
+
+      ]
     };
   },
   methods: {

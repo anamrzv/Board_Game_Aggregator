@@ -1,6 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+/*боковая панель*/
+import { BootstrapVue} from 'bootstrap-vue'
+
+// Импортируйте файлы CSS Bootstrap и BootstrapVue (порядок важен)
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+// Сделайте BootstrapVue доступным для всего проекта
+
+/*боковая панель*/
+
 import Main from "./views/Main.vue";
 import Login from "./views/Login.vue";
 import NotFound from "./views/NotFound";
@@ -9,9 +20,11 @@ import User from "./views/User.vue";
 import Admin from "./views/Admin.vue";
 import Shop from "./views/Shop.vue";
 
+Vue.use(BootstrapVue);
 Vue.use(Router);
 
 const routes = [
+
     {
         path: '/game_aggregator',
         name: 'auth-page',
