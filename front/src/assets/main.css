@@ -56,7 +56,9 @@
     border-radius: 8px 8px 8px 4px;
     min-height: 30px;
 }
-
+.d2 #search {
+    border-radius: 3px;
+}
 .d2 input, .d2 button {
     border: none;
     outline: none;
@@ -110,7 +112,10 @@
     background: white;
     border-radius: 3px 0 0 3px;
     position: relative;
-    top:10px;
+    top: 10px;
+    border-color: white;
+    display: flex;
+    align-items: center;
 }
 
 .for_filter button:before {
@@ -125,13 +130,34 @@
     background: whitesmoke;
 }
 
-.for_filter button:focus {
-    background: #573b8a;
-}
-
 .search_row {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row-reverse;
 }
+
+input, button, select, optgroup, textarea {
+    margin: 0;
+    font-family: Roboto Regular, sans-serif;
+    line-height: normal;
+    outline: none;
+    /*исправление базовых настроек bootstrap*/
+}
+
+#my-sidebar {
+
+}
+
+.px-3.py-2 {
+    font-family: "Roboto Regular", sans-serif;
+}
+
+button.close {
+    width: 20%;
+}
+
+.b-sidebar > .b-sidebar-header {
+    padding-left: 2rem;
+}
+

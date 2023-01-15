@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "bootstrap-vue": "^2.23.1",
     "core-js": "^3.6.5",
     "sweetalert2": "^11.3.0",
     "vue": "^2.6.11",
@@ -19,13 +20,13 @@
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "vue-resource": "^1.5.1",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "vue-resource": "^1.5.1",
     "vue-template-compiler": "^2.6.11",
-    "webpack-dev-server": "^4.6.0",
-    "axios": "^0.21.1"
+    "webpack-dev-server": "^4.6.0"
   },
   "eslintConfig": {
     "root": true,
