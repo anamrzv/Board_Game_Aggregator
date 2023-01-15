@@ -15,7 +15,7 @@
             <button class="invisible_cart" title="needed login"></button>
           </div>
           <div class="for_login">
-            <button @click="login"></button>
+            <button @click="login" title="login"></button>
           </div>
         </div>
 
@@ -31,7 +31,7 @@
             <button @click="userCart" title="cart"></button>
           </div>
           <div class="for_logout">
-            <button @click="logout"></button>
+            <button @click="logout" title="logout"></button>
           </div>
         </div>
       </div>
