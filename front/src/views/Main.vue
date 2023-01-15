@@ -16,29 +16,33 @@
 
 
     <div>
-<!--      <div>-->
-<!--        <b-button v-b-toggle.my-collapse>Переключатель свернутого содержимого</b-button>-->
-<!--        <b-button v-b-toggle.my-sidebar></b-button>-->
-<!--      </div>-->
+      <!--      <div>-->
+      <!--        <b-button v-b-toggle.my-collapse>Переключатель свернутого содержимого</b-button>-->
+      <!--        <b-button v-b-toggle.my-sidebar></b-button>-->
+      <!--      </div>-->
 
-<!--      <b-collapse id="my-collapse">-->
-<!--        <b-card title="Сворачиваемая карточка">-->
-<!--          Привет мир!-->
-<!--        </b-card>-->
-<!--      </b-collapse>-->
+      <!--      <b-collapse id="my-collapse">-->
+      <!--        <b-card title="Сворачиваемая карточка">-->
+      <!--          Привет мир!-->
+      <!--        </b-card>-->
+      <!--      </b-collapse>-->
       <b-sidebar id="my-sidebar" title="Filters" shadow>
         <div class="px-3 py-2">
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-          in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
+<!--          TODO: фильтры сделать и привязать, create style for filters in css file-->
+          <div class="body_for_filters">
+            <p>minPlayers: <input type="range"></p>
+          </div>
+
+
         </div>
       </b-sidebar>
     </div>
 
-<!--    <div v-for="i in games" :key="i.id">-->
-<!--      {{i}}-->
+    <!--    <div v-for="i in games" :key="i.id">-->
+    <!--      {{i}}-->
 
-<!--      <p>min players<input type="range" min="1" max="20" value="2"></p>-->
-<!--    </div>-->
+    <!--      <p>min players<input type="range" min="1" max="20" value="2"></p>-->
+    <!--    </div>-->
 
 
     <div class="body-table">
@@ -64,9 +68,7 @@ export default {
   data() {
     return {
       games: null,
-      settings: [
-
-      ]
+      settings: []
     };
   },
   methods: {
