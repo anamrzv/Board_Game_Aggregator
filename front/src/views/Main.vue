@@ -22,13 +22,13 @@
         <div v-else>
           <div class="for_forum">
             <!--            TODO: обработать и сделать вьюшки для форума, корзины-->
-            <button @click="forumes"></button>
+            <button @click="forums" title="forums"></button>
           </div>
           <div class="for_fav">
-            <button @click="userFav"></button>
+            <button @click="userFav" title="favorite"></button>
           </div>
           <div class="for_cart">
-            <button @click="userCart"></button>
+            <button @click="userCart" title="cart"></button>
           </div>
           <div class="for_logout">
             <button @click="logout"></button>
@@ -136,7 +136,7 @@ export default {
             this.games = response.data;
           })
     },
-    forumes() {
+    forums() {
       this.$router.push({name: "forum-page"})
     },
     userFav() {
