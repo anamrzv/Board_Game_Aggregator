@@ -19,6 +19,9 @@ import NotFound from "./views/NotFound";
 import User from "./views/User.vue";
 import Admin from "./views/Admin.vue";
 import Shop from "./views/Shop.vue";
+import Cart from "./views/Cart.vue";
+import Favorite from "./views/Favorite.vue";
+import Forum from "./views/Forum.vue";
 
 Vue.use(BootstrapVue);
 Vue.use(Router);
@@ -49,12 +52,21 @@ const routes = [
         path: '/game_aggregator/game',
         name: 'main',
         component: Main,
-        beforeEnter: (to, from, next) => {
-            if (localStorage.getItem("jwt")) next();
-            else next({
-                name: 'error-page-app',
-            });
-        }
+    },
+    {
+        path: '/game_aggregator/user/cart',
+        name: 'cart-page',
+        component: Cart
+    },
+    {
+        path: '/game_aggregator/user/fav',
+        name: 'favorite-page',
+        component: Favorite
+    },
+    {
+        path: '/game_aggregator/forum',
+        name: 'forum-page',
+        component: Forum
     },
     {
         path: '/*',

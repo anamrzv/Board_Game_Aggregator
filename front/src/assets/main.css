@@ -56,9 +56,11 @@
     border-radius: 8px 8px 8px 4px;
     min-height: 30px;
 }
+
 .d2 #search {
     border-radius: 3px;
 }
+
 .d2 input, .d2 button {
     border: none;
     outline: none;
@@ -145,19 +147,167 @@ input, button, select, optgroup, textarea {
     /*исправление базовых настроек bootstrap*/
 }
 
+.px-3.py-2 {
+    font-family: "Roboto Regular", sans-serif;
+    padding-left: 1rem;
+}
+
+button.close {
+    width: 15%;
+    margin-right: 0;
+    margin-top: 0;
+}
+
+.b-sidebar > .b-sidebar-header {
+    margin-left: 1rem;
+}
+
+.body_for_filters p {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 270px;
+}
+
+/*вид фильтров для ввода форм*/
+.body_for_filters p > input {
+    width: 40%;
+    height: 30px;
+    margin-right: 0;
+}
+
+/*вид выдвижной панели*/
 #my-sidebar {
 
 }
 
-.px-3.py-2 {
-    font-family: "Roboto Regular", sans-serif;
+.for_logout button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 16.5px;
+    margin-left: 90%;
 }
 
-button.close {
-    width: 20%;
+.for_logout button:before {
+    content: "\f08b";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 25px;
+    font-weight: bold;
 }
 
-.b-sidebar > .b-sidebar-header {
-    padding-left: 2rem;
+.for_logout button:hover {
+    background: none;
 }
 
+.for_cart button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 16.5px;
+    margin-left: 69%;
+}
+
+.for_cart button:before {
+    content: "\f291";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.for_cart button:hover {
+    background: none;
+}
+
+button.invisible_cart:before {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.icons_container {
+    position: absolute;
+    width: 150px;
+    margin-left: 80%;
+}
+
+.for_login button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 16.5px;
+    margin-left: 90%;
+}
+
+.for_login button:before {
+    content: "\f090";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.for_login button:hover {
+    background: none;
+}
+
+.for_fav button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 17px;
+    margin-left: 50%;
+}
+
+.for_fav button:before {
+    content: "\f02e";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.for_fav button:hover {
+    background: none;
+}
+
+button.invisible_fav:before {
+    color: gray;
+    cursor: not-allowed;
+}
+/*можно собрать все икнонки в семейство, чтобы не плодить стили*/
+.for_forum button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 16.5px;
+    margin-left: 28%;
+}
+
+.for_forum button:before {
+    content: "\f075";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.for_forum button:hover {
+    background: none;
+}
+
+button.invisible_forum:before {
+    color: gray;
+    cursor: not-allowed;
+}

@@ -16,3 +16,7 @@
     src: local("Roboto Regular"),
     url("../fonts/Roboto-Regular.ttf") format("truetype");
 }
+
+.swal2-styled {
+    width: 100px;
+}
