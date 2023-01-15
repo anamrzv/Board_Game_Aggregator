@@ -56,9 +56,11 @@
     border-radius: 8px 8px 8px 4px;
     min-height: 30px;
 }
+
 .d2 #search {
     border-radius: 3px;
 }
+
 .d2 input, .d2 button {
     border: none;
     outline: none;
@@ -145,19 +147,36 @@ input, button, select, optgroup, textarea {
     /*исправление базовых настроек bootstrap*/
 }
 
-#my-sidebar {
-
-}
-
 .px-3.py-2 {
     font-family: "Roboto Regular", sans-serif;
+    padding-left: 1rem;
 }
 
 button.close {
-    width: 20%;
+    width: 15%;
+    margin-right: 0;
+    margin-top: 0;
 }
 
 .b-sidebar > .b-sidebar-header {
-    padding-left: 2rem;
+    margin-left: 1rem;
 }
 
+.body_for_filters p {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    width: 270px;
+}
+
+/*вид фильтров для ввода форм*/
+.body_for_filters p > input {
+    width: 40%;
+    height: 30px;
+    margin-right: 0;
+}
+
+/*вид выдвижной панели*/
+#my-sidebar {
+
+}

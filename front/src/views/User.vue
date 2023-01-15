@@ -21,8 +21,8 @@
       <div class="login">
         <form>
           <label for="chk" aria-hidden="true">Login</label>
-          <input type="text" name="login" placeholder="Login" required="">
-          <input type="password" name="password" placeholder="Password" required="">
+          <input type="text" name="login" placeholder="Login" required="" v-model.trim="login">
+          <input type="password" name="password" placeholder="Password" required="" v-model.trim="password">
           <button type="submit" @click="loging">Login</button>
         </form>
       </div>

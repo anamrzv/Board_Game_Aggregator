@@ -31,22 +31,24 @@
         <div class="px-3 py-2">
           <!--          TODO: фильтры сделать и привязать, create style for filters in css file, add field for hand input-->
           <div class="body_for_filters">
-            <p>minPlayers: <input type="range"></p>
-            <p>maxPlayers: <input type="range"></p>
-            <p>recPlayers: <input type="range"></p>
-            <p>minPlayTime: <input type="range"></p>
-            <p>maxPlayTime: <input type="range"></p>
-            <p>minPublishYear: <input type="range"></p>
-            <p>preferDesigner: <input type="range"></p>
-            <p>minPlayAge: <input type="range"></p>
-            <p>maxPlayAge: <input type="range"></p>
-            <p>difficult: <input type="range"></p>
-            <p>weight: <input type="range"></p>
-            <p>genre: <input type="range"></p>
-            <p>mechanic: <input type="range"></p>
-            <p>publisher: <input type="range"></p>
-            <p>country: <input type="range"></p>
-            <p>theme: <input type="range"></p>
+            <form>
+              <p>minPlayers: <input type="range"></p>
+              <p>maxPlayers: <input type="range"></p>
+              <p>recPlayers: <input type="range"></p>
+              <p>minPlayTime: <input type="range"></p>
+              <p>maxPlayTime: <input type="range"></p>
+              <p>minPublishYear: <input type="range"></p>
+              <p>minPlayAge: <input type="range"></p>
+              <p>maxPlayAge: <input type="range"></p>
+              <p>difficult: <input type="range"></p>
+              <p>weight: <input type="range"></p>
+              <p>preferDesigner: <input type="text"></p>
+              <p>genre: <input type="text"></p>
+              <p>mechanic: <input type="text"></p>
+              <p>publisher: <input type="text"></p>
+              <p>country: <input type="text"></p>
+              <p>theme: <input type="text"></p>
+            </form>
           </div>
         </div>
       </b-sidebar>
