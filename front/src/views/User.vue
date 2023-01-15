@@ -21,8 +21,8 @@
       <div class="login">
         <form>
           <label for="chk" aria-hidden="true">Login</label>
-          <input type="text" name="login" placeholder="Login" required="" v-model.trim="login">
-          <input type="password" name="password" placeholder="Password" required="" v-model.trim="password">
+          <input type="text" name="login" placeholder="Login" required="" v-model.trim="get_login">
+          <input type="password" name="password" placeholder="Password" required="" v-model.trim="get_password">
           <button type="submit" @click="loging">Login</button>
         </form>
       </div>
@@ -41,6 +41,8 @@ export default {
     return {
       login: "",
       password: "",
+      get_login: "",
+      get_password: "",
       mailPreferences: false,
       mail: ""
     }
@@ -65,8 +67,8 @@ export default {
     loging(e) {
       e.preventDefault();
       axios.post('http://localhost:8083/game_aggregator/auth/user', {
-        login: this.login,
-        password: this.password
+        login: this.get_login,
+        password: this.get_password
       }).then(response => {
         localStorage.setItem("jwt", response.data);
         this.$router.push({name: 'main'});

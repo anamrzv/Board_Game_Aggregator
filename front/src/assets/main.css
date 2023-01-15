@@ -180,3 +180,134 @@ button.close {
 #my-sidebar {
 
 }
+
+.for_logout button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 16.5px;
+    margin-left: 90%;
+}
+
+.for_logout button:before {
+    content: "\f08b";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.for_logout button:hover {
+    background: none;
+}
+
+.for_cart button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 16.5px;
+    margin-left: 69%;
+}
+
+.for_cart button:before {
+    content: "\f291";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.for_cart button:hover {
+    background: none;
+}
+
+button.invisible_cart:before {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.icons_container {
+    position: absolute;
+    width: 150px;
+    margin-left: 80%;
+}
+
+.for_login button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 16.5px;
+    margin-left: 90%;
+}
+
+.for_login button:before {
+    content: "\f090";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.for_login button:hover {
+    background: none;
+}
+
+.for_fav button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 17px;
+    margin-left: 50%;
+}
+
+.for_fav button:before {
+    content: "\f02e";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.for_fav button:hover {
+    background: none;
+}
+
+button.invisible_fav:before {
+    color: gray;
+    cursor: not-allowed;
+}
+/*можно собрать все икнонки в семейство, чтобы не плодить стили*/
+.for_forum button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 16.5px;
+    margin-left: 28%;
+}
+
+.for_forum button:before {
+    content: "\f075";
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.for_forum button:hover {
+    background: none;
+}
+
+button.invisible_forum:before {
+    color: gray;
+    cursor: not-allowed;
+}

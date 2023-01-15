@@ -1,6 +1,43 @@
 <template>
   <div>
-    <div id="header"></div>
+    <!--    шапочка   -->
+    <div id="header">
+
+      <div class="icons_container">
+        <div v-if="requestPermissionValue === 'null'">
+          <div class="for_forum">
+            <button class="invisible_forum" title="needed login"></button>
+          </div>
+          <div class="for_fav">
+            <button class="invisible_fav" title="needed login"></button>
+          </div>
+          <div class="for_cart">
+            <button class="invisible_cart" title="needed login"></button>
+          </div>
+          <div class="for_login">
+            <button @click="login"></button>
+          </div>
+        </div>
+
+        <div v-else>
+          <div class="for_forum">
+            <!--            TODO: обработать и сделать вьюшки для форума, корзины-->
+            <button @click="forumes"></button>
+          </div>
+          <div class="for_fav">
+            <button @click="userFav"></button>
+          </div>
+          <div class="for_cart">
+            <button @click="userCart"></button>
+          </div>
+          <div class="for_logout">
+            <button @click="logout"></button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
 
     <div class="search_row">
       <div class="d2">
@@ -83,11 +120,15 @@ export default {
   name: "Main",
   data() {
     return {
+      requestPermissionValue: null,
       games: null,
       settings: []
     };
   },
   methods: {
+    userCart() {
+      this.$router.push({name: "cart-page"})
+    },
     getGames() {
       axios
           .get('http://localhost:8083/game_aggregator/game')
@@ -95,9 +136,18 @@ export default {
             this.games = response.data;
           })
     },
+    forumes() {
+      this.$router.push({name: "forum-page"})
+    },
+    userFav() {
+      this.$router.push({name: "favorite-page"})
+    },
     searching() {
       axios
           .get('')
+    },
+    login() {
+      this.$router.push({name: "user-page"})
     },
     logout() {
       this.$swal.fire({
@@ -105,11 +155,14 @@ export default {
         text: "До встречи!",
         title: "Вы успешно вышли",
       });
-      this.$router.push({name: "auth-page"}, () => localStorage.clear());
+      this.$router.push({name: "auth-page"}, () => localStorage.setItem('jwt', null));
     }
   },
   mounted() {
     this.getGames();
+  },
+  created() {
+    this.requestPermissionValue = localStorage.getItem('jwt')
   }
 }
 </script>

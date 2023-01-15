@@ -80,3 +80,7 @@ a.login__link {
     text-decoration: none;
     padding: 5px;
 }
+
+#viewer {
+    color: #ff0404;
+}
