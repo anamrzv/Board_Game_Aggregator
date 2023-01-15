@@ -26,23 +26,36 @@
       <!--          Привет мир!-->
       <!--        </b-card>-->
       <!--      </b-collapse>-->
+
       <b-sidebar id="my-sidebar" title="Filters" shadow>
         <div class="px-3 py-2">
-<!--          TODO: фильтры сделать и привязать, create style for filters in css file-->
+          <!--          TODO: фильтры сделать и привязать, create style for filters in css file, add field for hand input-->
           <div class="body_for_filters">
             <p>minPlayers: <input type="range"></p>
+            <p>maxPlayers: <input type="range"></p>
+            <p>recPlayers: <input type="range"></p>
+            <p>minPlayTime: <input type="range"></p>
+            <p>maxPlayTime: <input type="range"></p>
+            <p>minPublishYear: <input type="range"></p>
+            <p>preferDesigner: <input type="range"></p>
+            <p>minPlayAge: <input type="range"></p>
+            <p>maxPlayAge: <input type="range"></p>
+            <p>difficult: <input type="range"></p>
+            <p>weight: <input type="range"></p>
+            <p>genre: <input type="range"></p>
+            <p>mechanic: <input type="range"></p>
+            <p>publisher: <input type="range"></p>
+            <p>country: <input type="range"></p>
+            <p>theme: <input type="range"></p>
           </div>
-
-
         </div>
       </b-sidebar>
     </div>
 
-    <!--    <div v-for="i in games" :key="i.id">-->
-    <!--      {{i}}-->
-
-    <!--      <p>min players<input type="range" min="1" max="20" value="2"></p>-->
-    <!--    </div>-->
+    <!--    для просмотра возвращаемых значений-->
+    <!--        <div v-for="i in games" :key="i.id">-->
+    <!--          {{i}}-->
+    <!--        </div>-->
 
 
     <div class="body-table">
@@ -52,6 +65,7 @@
           <img class="for_games_image" width="200px" height="178" v-bind:src="item.image">
           <p>{{ item.minPlayersNumber }} - {{ item.maxPlayersNumber }}</p>
           <p>{{ item.minPlayAge }} +</p>
+          <!--          добавить количество людей, которым понравилась игра||фирма-->
         </div>
       </div>
 
