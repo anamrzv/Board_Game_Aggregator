@@ -15,7 +15,7 @@
             <button class="invisible_cart" title="needed login"></button>
           </div>
           <div class="for_login">
-            <button @click="login"></button>
+            <button @click="login" title="login"></button>
           </div>
         </div>
 
@@ -31,7 +31,7 @@
             <button @click="userCart" title="cart"></button>
           </div>
           <div class="for_logout">
-            <button @click="logout"></button>
+            <button @click="logout" title="logout"></button>
           </div>
         </div>
       </div>
@@ -53,49 +53,41 @@
 
 
     <div>
-      <!--      <div>-->
-      <!--        <b-button v-b-toggle.my-collapse>Переключатель свернутого содержимого</b-button>-->
-      <!--        <b-button v-b-toggle.my-sidebar></b-button>-->
-      <!--      </div>-->
-
-      <!--      <b-collapse id="my-collapse">-->
-      <!--        <b-card title="Сворачиваемая карточка">-->
-      <!--          Привет мир!-->
-      <!--        </b-card>-->
-      <!--      </b-collapse>-->
-
       <b-sidebar id="my-sidebar" title="Filters" shadow>
         <div class="px-3 py-2">
-          <!--          TODO: фильтры сделать и привязать, create style for filters in css file, add field for hand input-->
           <div class="body_for_filters">
-            <form>
-              <p>minPlayers: <input type="range"></p>
-              <p>maxPlayers: <input type="range"></p>
-              <p>recPlayers: <input type="range"></p>
-              <p>minPlayTime: <input type="range"></p>
-              <p>maxPlayTime: <input type="range"></p>
-              <p>minPublishYear: <input type="range"></p>
-              <p>minPlayAge: <input type="range"></p>
-              <p>maxPlayAge: <input type="range"></p>
-              <p>difficult: <input type="range"></p>
-              <p>weight: <input type="range"></p>
-              <p>preferDesigner: <input type="text"></p>
-              <p>genre: <input type="text"></p>
-              <p>mechanic: <input type="text"></p>
-              <p>publisher: <input type="text"></p>
-              <p>country: <input type="text"></p>
-              <p>theme: <input type="text"></p>
+            <form class="filters_form">
+              <p>minPlayers: <input id="text_form" type="text" v-model.trim="filters.minPlayers" maxlength="2"><input
+                  type="range" value="0" min="0" max="20" step="1" v-model="filters.minPlayers"></p>
+              <p>maxPlayers: <input id="text_form" type="text" v-model.trim="filters.maxPlayers" maxlength="2"><input
+                  type="range" value="20" min="2" max="20" step="1" v-model="filters.maxPlayers"></p>
+              <p>recPlayers: <input id="text_form" type="text" v-model.trim="filters.recPlayers" maxlength="2"><input
+                  type="range" min="0" max="20" step="1" v-model="filters.recPlayers"></p>
+              <p>minPlayTime: <input title="min" id="text_form_min" type="text" v-model.trim="filters.minPlayTime"
+                                     maxlength="5" value="0">min</p>
+              <p>maxPlayTime: <input title="min" id="text_form_min" type="text" v-model.trim="filters.maxPlayTime"
+                                     maxlength="5" value="60000">min</p>
+              <p>minPublishYear: <input title="min" id="text_form_year" type="text" v-model.trim="filters.minPublishYear"
+                                        maxlength="4" value="1969">year</p>
+              <p>minPlayAge: <input id="text_form_age" type="text" v-model.trim="filters.minPlayAge" maxlength="2"><input
+                  type="range" value="0" min="0" max="120" step="10" v-model="filters.minPlayAge"></p>
+              <p>maxPlayAge: <input id="text_form_age" type="text" v-model.trim="filters.maxPlayAge" maxlength="3"><input
+                  type="range" value="120" min="0" max="99" step="10" v-model="filters.maxPlayAge"></p>
+              <p>difficult: <input id="text_form" type="text" v-model.trim="filters.difficult" maxlength="2"><input
+                  type="range" min="1" max="5" step="1" v-model="filters.difficult"></p>
+              <p>maxWeight: <input title="kg" id="text_form_min" type="text" v-model.trim="filters.maxWeight"
+                                   maxlength="3" value="150">kg</p>
+              <p>preferDesigner: <input type="text" v-model.trim="filters.preferDesigner"></p>
+              <p>genre: <input type="text" v-model.trim="filters.genre"></p>
+              <p>mechanic: <input type="text" v-model.trim="filters.mechanic"></p>
+              <p>publisher: <input type="text" v-model.trim="filters.publisher"></p>
+              <p>country: <input type="text" v-model.trim="filters.country"></p>
+              <p>theme: <input type="text" v-model.trim="filters.theme"></p>
             </form>
           </div>
         </div>
       </b-sidebar>
     </div>
-
-    <!--    для просмотра возвращаемых значений-->
-    <!--        <div v-for="i in games" :key="i.id">-->
-    <!--          {{i}}-->
-    <!--        </div>-->
-
 
     <div class="body-table">
       <div id="games" v-for="item in games" :key="item.id">
@@ -122,7 +114,25 @@ export default {
     return {
       requestPermissionValue: null,
       games: null,
-      settings: []
+      settings: [],
+      filters: {
+        minPlayers: 0,
+        maxPlayers: 20,
+        recPlayers: null,
+        minPlayTime: 0,
+        maxPlayTime: 60000,
+        minPublishYear: 1969,
+        minPlayAge: 0,
+        maxPlayAge: 100,
+        difficult: null,
+        maxWeight: 100,
+        preferDesigner: null,
+        genre: null,
+        mechanic: null,
+        publisher: null,
+        country: null,
+        theme: null
+      }
     };
   },
   methods: {
