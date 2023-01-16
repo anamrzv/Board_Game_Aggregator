@@ -65,7 +65,7 @@ create table Board_Game
     Min_Age             integer check (Min_Age >= 0)                                           not null,
     Max_Age             integer check (Max_Age >= 0)                                           not null,
     Mechanics_ID        integer references Game_Mechanics on delete restrict on update cascade not null,
-    Difficultness       real check (Difficultness >= 0 and Difficultness <= 10)                not null,
+    Difficultness       real check (Difficultness > 0 and Difficultness <= 5)                not null,
     Weight              integer check ( Weight > 0 )                                           not null,
     Wishlist            integer check (Board_Game.Wishlist >= 0)                               not null,
     Own                 integer check (Own >= 0)                                               not null,

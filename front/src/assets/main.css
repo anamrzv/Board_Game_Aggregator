@@ -171,7 +171,7 @@ button.close {
 
 /*вид фильтров для ввода форм*/
 .body_for_filters p > input {
-    width: 40%;
+    width: 45%;
     height: 30px;
     margin-right: 0;
 }
@@ -284,6 +284,7 @@ button.invisible_fav:before {
     color: gray;
     cursor: not-allowed;
 }
+
 /*можно собрать все икнонки в семейство, чтобы не плодить стили*/
 .for_forum button {
     width: 18px;
@@ -310,4 +311,29 @@ button.invisible_fav:before {
 button.invisible_forum:before {
     color: gray;
     cursor: not-allowed;
+}
+
+#text_form {
+    width: 38px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+#text_form_min {
+    width: 65px;
+    margin-right: 0;
+    text-align: center;
+}
+
+#text_form_year {
+    width: 65px;
+    margin-left: 22%;
+    margin-right: auto;
+    text-align: center;
+}
+
+#text_form_age {
+    width: 47px;
+    text-align: center;
 }

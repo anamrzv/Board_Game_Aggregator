@@ -46,7 +46,7 @@ const routes = [
     {
         path: '/game_aggregator/auth/shop',
         name: 'shop-page',
-        component: Shop
+        component: Shop,
     },
     {
         path: '/game_aggregator/game',
@@ -56,17 +56,35 @@ const routes = [
     {
         path: '/game_aggregator/user/cart',
         name: 'cart-page',
-        component: Cart
+        component: Cart,
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem("jwt") !== 'null') next();
+            else next({
+                name: 'error-page-app',
+            });
+        }
     },
     {
         path: '/game_aggregator/user/fav',
         name: 'favorite-page',
-        component: Favorite
+        component: Favorite,
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem("jwt") !== 'null') next();
+            else next({
+                name: 'error-page-app',
+            });
+        }
     },
     {
         path: '/game_aggregator/forum',
         name: 'forum-page',
-        component: Forum
+        component: Forum,
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem("jwt") !== 'null') next();
+            else next({
+                name: 'error-page-app',
+            });
+        }
     },
     {
         path: '/*',
@@ -85,7 +103,7 @@ const routes = [
         props: {
             default: true,
             errorCode: "401",
-            errorMsg: "Для доступа к приложению требуется авторизация."
+            errorMsg: "Для доступа требуется авторизация."
         }
     },
     {

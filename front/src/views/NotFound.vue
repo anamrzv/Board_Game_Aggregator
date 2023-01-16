@@ -18,9 +18,6 @@
   text-align: center;
   margin-top: 40px;
   color: whitesmoke;
-  position: absolute;
-  left: 34%;
-  top: 35%;
 }
 </style>
 
