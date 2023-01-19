@@ -2,16 +2,15 @@ package application.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 @Table(name = "users", indexes = {@Index(name = "User_Role_Index", columnList = "user_role"), @Index(name = "Mailing_Index", columnList = "wants_mailing")})
@@ -51,8 +50,9 @@ public class User {
         forum.getUsersWhoLiked().remove(this);
     }
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    ////////////////////
     @JsonIgnore
+    @OneToMany(mappedBy = "user")
     private Set<UserCart> gamesInCart = new HashSet<>();
 
     public void addGameToCart(UserCart userCart){
@@ -64,6 +64,8 @@ public class User {
         this.gamesInCart.remove(userCart);
         userCart.getGame().getUsersWhoAddedInCart().remove(userCart);
     }
+
+    //////////////////////
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore

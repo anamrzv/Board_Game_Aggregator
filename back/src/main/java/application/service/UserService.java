@@ -4,7 +4,6 @@ import application.domain.User;
 import application.domain.UserCart;
 import application.domain.UserFav;
 import application.domain.UserRole;
-import application.domain.composite_keys.UserCartKey;
 import application.repository.UserCartRepository;
 import application.repository.UserFavRepository;
 import application.repository.UserRepository;
@@ -64,7 +63,6 @@ public class UserService {
         return null;
     }
 
-
     @Transactional
     public void updateUser(User user) { userRepository.save(user); }
 
@@ -72,9 +70,13 @@ public class UserService {
     public void addFavToUser(UserFav fav) { userFavRepository.save(fav); }
 
     @Transactional
-    public UserFav getFavByKey(UserCartKey key) { return userFavRepository.findById(key).orElse(null); }
+    public void saveUserCart(UserCart userCart) { userCartRepository.save(userCart); }
 
     @Transactional
-    public UserCart getCartByKey(UserCartKey key) { return userCartRepository.findById(key).orElse(null); }
+    public void removeUserCart(UserCart userCart) { userCartRepository.delete(userCart); }
+
+    @Transactional
+    public void removeUserFav(UserFav userFav) { userFavRepository.delete(userFav); }
+
 
 }

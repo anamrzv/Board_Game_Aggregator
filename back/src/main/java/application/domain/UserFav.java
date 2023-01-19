@@ -1,6 +1,5 @@
 package application.domain;
 
-import application.domain.composite_keys.UserCartKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,29 +14,21 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(name = "favorites_of_users")
 public class UserFav {
-    @EmbeddedId
-    @JsonIgnore
-    UserCartKey id;
+    @Id
+    private Integer id;
 
-    @ManyToOne
-    @MapsId("gameId")
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "game_id")
+    @JsonIgnore
     Game game;
 
-    @ManyToOne
-    @MapsId("userLogin")
-    @JoinColumn(name = "user_login")
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
+    @JoinColumn(name = "user_login")
     User user;
 
     @Column(name = "date_of_add")
     LocalDateTime dateOfAdd;
-
-    public UserFav(UserCartKey id, Game game, User user) {
-        this.id = id;
-        this.game = game;
-        this.user = user;
-    }
 
     @Override
     public int hashCode() {
