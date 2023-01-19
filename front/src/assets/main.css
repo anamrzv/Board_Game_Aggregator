@@ -41,7 +41,7 @@
     text-align: center;
 }
 
-.games_container > * {
+.games_container > p {
     margin-bottom: 7%;
     font-family: "Roboto Regular", sans-serif;
     background: linear-gradient(90deg, #EC3939 0%, #8E36C4 38.92%, #3FE2C5 76.32%, #55DC3F 112.95%, #FF2FEA 146.53%);
@@ -337,20 +337,41 @@ button.invisible_forum:before {
     width: 47px;
     text-align: center;
 }
-#add_to_cart button{
+
+#add_to_cart {
+    margin-left: 97.5px;
+}
+#add_to_cart button {
     margin-left: auto;
     margin-right: auto;
 }
 
-#add_to_cart button:before{
-    content: "\f217";
-    font-size: 27px;
+#add_to_cart button:before {
+    content: "\f0fe";
+    font-size: 40px;
+    color: #41beaa;
 }
 
 #games {
     transition: 400ms;
 }
+
 #games:hover {
     transform: scale(1.07);
     cursor: move;
+}
+
+.shops_view {
+    top: 60px;
+    position: relative;
+    cursor: pointer;
+    background: #d2d2d2;
+    border-radius: 8px 8px 8px 8px;
+    margin-bottom: 3px;
+    transition: 800ms;
+    font-family: "Roboto Regular", sans-serif;
+
+}
+.shops_view:hover {
+    background: #a6a0e5;
 }
