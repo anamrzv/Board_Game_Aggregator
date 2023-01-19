@@ -27,6 +27,7 @@
 
 #back_icon button:before {
     content: "\f015";
+    color: #e924ff;
 }
 
 #back_icon button {
