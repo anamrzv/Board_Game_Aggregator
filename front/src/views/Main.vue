@@ -95,25 +95,23 @@
       <div id="games" v-for="item in games" :key="item.id">
         <div class="games_container">
           <p id="name_settings">{{ item.name }}</p>
-          <img class="for_games_image" width="200px" height="178" v-bind:src="item.image">
+          <img class="for_games_image" width="200px" height="178" v-bind:src="item.image" @click="showGame(item.id)">
           <p>{{ item.minPlayersNumber }} - {{ item.maxPlayersNumber }}</p>
           <p>{{ item.minPlayAge }} +</p>
 
+          <div class="icon" id="add_to_cart">
+            <button @click="showShops(item.id)"></button>
+          </div>
 
           <div v-if="requestPermissionValue !== 'null'" class="back_for_button">
-            <div class="icon_p" id="add_to_cart">
-              <button @click="showShops(item.id)"></button>
-
               <div v-if="item.id === get_gameId">
                 <div v-if="shops_for_game !== null">
                   <div v-for="k in shops_for_game.prices" :key="k.id">
-                    <div v-for="z in k" :key="z.id">{{ z.name }}</div>
+                    <div  class="shops_view" v-for="z in k" :key="z.id" @click="addToCart(item.id, z.id)">{{ z.name }}</div>
                   </div>
                 </div>
               </div>
 
-
-            </div>
           </div>
 
 
@@ -159,6 +157,10 @@ export default {
     };
   },
   methods: {
+    showGame(game_id){
+      let msg = '/game_aggregator/game/'
+      this.$router.push(msg + game_id)
+    },
     showShops(game_id) {
       if (this.shops_for_game == null && this.get_gameId == null) {
         let msg3 = 'http://localhost:8083/game_aggregator/game/';
@@ -172,14 +174,14 @@ export default {
         this.get_gameId = null
       }
     },
-    addToCart(game_id) {
+    addToCart(game_id, shop_id) {
       let msg1 = 'http://localhost:8083/game_aggregator/game/';
       let msg2 = '/add_cart';
 
       axios
           .post(msg1 + game_id + msg2, {
             login: localStorage.getItem("login"),
-            shopId: localStorage.getItem('shopId'),
+            shopId: shop_id,
             gameId: game_id
           })
     },

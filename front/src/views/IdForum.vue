@@ -23,16 +23,19 @@
         </div>
       </div>
 
-      <div v-if="comments !== null" class="forum_container">{{ comments.forum.name }}
+      <div v-if="comments" class="forum_container">{{ comments.forum.name }}
       </div>
 
-      <div v-for="item in comments.comments" :key="item.id">
-        <div class="comments_container">
-          <div class="username">{{ item.user }}</div>
-          <div class="comment">{{ item.content }}</div>
+      <div v-if="comments">
+        <div v-for="item in comments.comments" :key="item.id">
+          <div class="comments_container">
+            <div class="username">{{ item.user }}</div>
+            <div class="comment">{{ item.content }}</div>
+          </div>
+          <div class="for_date">{{ item.date }}</div>
         </div>
-        <div class="for_date">{{ item.date }}</div>
       </div>
+
     </div>
 
   </div>
