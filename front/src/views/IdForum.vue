@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div v-if="comments.forum !== null" class="forum_container">{{ comments.forum.name }}
+      <div v-if="comments !== null" class="forum_container">{{ comments.forum.name }}
       </div>
 
       <div v-for="item in comments.comments" :key="item.id">
