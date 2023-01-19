@@ -18,7 +18,20 @@
 
 <script>
 export default {
-  name: "Game"
+  name: "Game",
+  methods: {
+    goHome() {
+      this.$router.push({name: "main"})
+    },
+    logout() {
+      this.$swal.fire({
+        icon: "success",
+        text: "До встречи!",
+        title: "Вы успешно вышли",
+      });
+      this.$router.push({name: "auth-page"}, () => localStorage.setItem('jwt', null));
+    },
+  }
 }
 </script>
 

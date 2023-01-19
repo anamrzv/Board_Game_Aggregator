@@ -92,10 +92,10 @@
     </div>
 
     <div class="body-table">
-      <div id="games" v-for="item in games" :key="item.id" @click="showGame(item.id)">
+      <div id="games" v-for="item in games" :key="item.id">
         <div class="games_container">
           <p id="name_settings">{{ item.name }}</p>
-          <img class="for_games_image" width="200px" height="178" v-bind:src="item.image">
+          <img class="for_games_image" width="200px" height="178" v-bind:src="item.image" @click="showGame(item.id)">
           <p>{{ item.minPlayersNumber }} - {{ item.maxPlayersNumber }}</p>
           <p>{{ item.minPlayAge }} +</p>
 

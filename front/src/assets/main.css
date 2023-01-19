@@ -33,6 +33,7 @@
 
 .for_games_image {
     border-radius: 8px 8px 8px 4px;
+    cursor: pointer;
 }
 
 .games_container {
