@@ -92,7 +92,7 @@
     </div>
 
     <div class="body-table">
-      <div id="games" v-for="item in games" :key="item.id">
+      <div id="games" v-for="item in games" :key="item.id" @click="showGame(item.id)">
         <div class="games_container">
           <p id="name_settings">{{ item.name }}</p>
           <img class="for_games_image" width="200px" height="178" v-bind:src="item.image">
@@ -157,6 +157,10 @@ export default {
     };
   },
   methods: {
+    showGame(game_id){
+      let msg = '/game_aggregator/game/'
+      this.$router.push(msg + game_id)
+    },
     showShops(game_id) {
       if (this.shops_for_game == null && this.get_gameId == null) {
         let msg3 = 'http://localhost:8083/game_aggregator/game/';

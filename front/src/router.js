@@ -23,6 +23,7 @@ import Cart from "./views/Cart.vue";
 import Favorite from "./views/Favorite.vue";
 import Forum from "./views/Forum.vue";
 import IdForum from "./views/IdForum.vue";
+import Game from "./views/Game.vue";
 
 Vue.use(BootstrapVue);
 Vue.use(Router);
@@ -57,6 +58,17 @@ const routes = [
         path: '/game_aggregator/game',
         name: 'main',
         component: Main,
+    },
+    {
+        path: '/game_aggregator/game/*',
+        name: 'id-forum-page',
+        component: Game,
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem("jwt") !== 'null') next();
+            else next({
+                name: 'error-page-app',
+            });
+        }
     },
     {
         path: '/game_aggregator/forum/*',
