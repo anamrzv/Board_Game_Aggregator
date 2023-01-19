@@ -1,0 +1,169 @@
+.forum-table {
+    display: flex;
+    font-family: "Roboto Regular", sans-serif;
+    color: #1c1840;
+}
+
+.icon button {
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+    position: absolute;
+    margin-top: 16.5px;
+    margin-left: 28%;
+}
+
+.icon button:before {
+    font-family: "FontAwesome", sans-serif;
+    color: #2f2a5f;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.icon button:hover {
+    background: none;
+}
+
+#back_icon button:before {
+    content: "\f015";
+}
+
+#back_icon button {
+    margin-left: 69%;
+}
+
+#logout_icon button:before {
+    content: "\f08b";
+}
+
+#logout_icon button {
+    margin-left: 90%;
+}
+
+.forum-table {
+    border-radius: 8px 8px 8px 4px;
+    max-width: 85%;
+    display: flex; /*внимательней к флексу*/
+    margin-right: auto;
+    margin-left: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    background-color: white;
+    align-items: center;
+}
+
+div.forum-table {
+    margin-bottom: 10px;
+    height: 60px;
+    padding-left: 15px;
+    background: linear-gradient(90deg, #ffffff 0%, #9e63c2 38.92%, #a6a0e5 76.32%, #c4c4ff 112.95%, #FF2FEA 146.53%);
+}
+
+#forum_view {
+    cursor: pointer;
+    border: 0 solid;
+    box-shadow: inset 0 0 20px rgba(236, 167, 216, 0.9);
+    text-shadow: none;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+#forum_view:hover {
+    box-shadow: inset 0 0 20px rgba(110, 5, 80, 0.88), 0 0 20px rgba(157, 87, 142, 0.86);
+    text-shadow: 1px 1px 2px #5d015b;
+}
+
+.for_button {
+    width: 300px;
+    display: flex;
+}
+
+.comments {
+    background: white;
+    border-radius: 8px 8px 8px 4px;
+}
+
+/*для определенного форума*/
+.main_container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 55%;
+}
+
+.forum_container {
+    border-radius: 8px 8px 8px 4px;
+    padding: 5px;
+    text-shadow: 3px 3px 3px #1c1840;
+    background: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 25px;
+    background: linear-gradient(90deg, #ffffff 0%, #9e63c2 38.92%, #a6a0e5 76.32%, #c4c4ff 112.95%, #FF2FEA 146.53%);
+    color: white;
+    font-family: Pixel, sans-serif;
+    margin-bottom: 20px;
+}
+
+.comments_container {
+    padding: 7px 3px 7px 13px;
+    margin-right: auto;
+    margin-top: 10px;
+    background: linear-gradient(135deg, #ffffff 50%, #c4c4ff 100%);
+    border-radius: 20px 20px 20px 0;
+}
+
+.for_date {
+    font-size: 15px;
+    font-family: "Roboto Regular", sans-serif;
+    color: #67648f;
+    font-weight: bold;
+}
+
+.username {
+    font-family: Pixel, sans-serif;
+}
+
+#plus_icon button {
+    display: block;
+    margin-bottom: 3px;
+    margin-right: 0;
+}
+
+.icons_container_forum {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 3px;
+
+}
+#plus_icon button {
+   padding-right: 33px;
+}
+
+#plus_icon button:before {
+    content: "\f055";
+}
+
+#favorite_icon button:before {
+    content: "\f02e";
+}
+
+#forum {
+    cursor: pointer;
+}
+
+.icon_p button {
+    margin: 0;
+    width: 18px;
+    height: 26px;
+    background: none;
+    align-items: center;
+}
+
+.icon_p button:before {
+    font-family: "FontAwesome", sans-serif;
+    color: #c4c4ff;
+    font-size: 25px;
+    font-weight: bold;
+}

@@ -22,12 +22,17 @@ import Shop from "./views/Shop.vue";
 import Cart from "./views/Cart.vue";
 import Favorite from "./views/Favorite.vue";
 import Forum from "./views/Forum.vue";
+import IdForum from "./views/IdForum.vue";
 
 Vue.use(BootstrapVue);
 Vue.use(Router);
 
 const routes = [
-
+    {
+        path: '/',
+        name: 'auth-page',
+        component: Login
+    },
     {
         path: '/game_aggregator',
         name: 'auth-page',
@@ -52,6 +57,17 @@ const routes = [
         path: '/game_aggregator/game',
         name: 'main',
         component: Main,
+    },
+    {
+        path: '/game_aggregator/forum/*',
+        name: 'id-forum-page',
+        component: IdForum,
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem("jwt") !== 'null') next();
+            else next({
+                name: 'error-page-app',
+            });
+        }
     },
     {
         path: '/game_aggregator/user/cart',
