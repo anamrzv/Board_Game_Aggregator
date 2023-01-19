@@ -337,3 +337,20 @@ button.invisible_forum:before {
     width: 47px;
     text-align: center;
 }
+#add_to_cart button{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#add_to_cart button:before{
+    content: "\f217";
+    font-size: 27px;
+}
+
+#games {
+    transition: 400ms;
+}
+#games:hover {
+    transform: scale(1.07);
+    cursor: move;
+}

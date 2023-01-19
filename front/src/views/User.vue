@@ -70,6 +70,7 @@ export default {
         login: this.get_login,
         password: this.get_password
       }).then(response => {
+        localStorage.setItem("login", this.$data.get_login);
         localStorage.setItem("jwt", response.data);
         this.$router.push({name: 'main'});
       }).catch(error => {

@@ -1,10 +1,15 @@
 <template>
-<div>привет</div>
+  <div>привет</div>
 </template>
 
 <script>
 export default {
-  name: "Cart"
+  name: "Cart",
+  data() {
+    return {
+      game_info: null
+    }
+  }
 }
 </script>
 
