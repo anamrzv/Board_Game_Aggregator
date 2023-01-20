@@ -39,7 +39,7 @@
           <b-collapse id="add">
           <form id="for_comment">
             <input type="text" required="" v-model.trim="get_comment">
-            <button class="icon_p" type="submit" @click="sendComment">></button>
+            <button class="icon_p" type="submit" @click="sendComment" title="send">></button>
           </form>
           </b-collapse>
         </div>
@@ -67,8 +67,8 @@ export default {
     axios
         .post(msg + this.$data.forum_id, {
           login: localStorage.getItem('login'),
-          content: this.$data.get_comment,
-          dateTime: null
+          dateTime: null,
+          content: this.$data.get_comment
         }).then((response) => {
       this.comments = response.data;
     })
