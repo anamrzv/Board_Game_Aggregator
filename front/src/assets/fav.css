@@ -5,11 +5,13 @@
     display: flex;
     flex-direction: column;
     font-family: Pixel, sans-serif;
+    align-items: center
 }
 
 .fav-content {
     display: flex;
 }
+
 .fav-body .btn-secondary:focus {
     background: white;
 }
@@ -25,14 +27,31 @@
     align-items: center;
 }
 
-.fav-body #collapse-1,#collapse-2 {
+.fav-body #collapse-1, #collapse-2 {
     display: flex;
     justify-content: space-between;
-    max-width: 70%;
-    background: white;
+    margin: 0;
     font-family: Roboto Regular, sans-serif;
     border-radius: 20px;
-    padding: 10px;
     transition: 200ms;
-    margin: 7px;
+}
+
+.fav-body #forum_view {
+    max-width: 100%;
+    padding: 20px;
+}
+
+.oneLine {
+    display: flex;
+    align-items: center;
+}
+#delete_icon button{
+    margin-left: 50%;
+}
+#delete_icon button:before{
+    content:'\f1f8';
+    color: darkred;
+}
+#delete_icon button:hover{
+    transform: scale(1.2);
 }
