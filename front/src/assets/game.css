@@ -74,7 +74,13 @@
     justify-content: center;
     flex-direction: column;
 }
-
+.oneLine button:before {
+    color: #b17dc3;
+}
+.buy_header .btn-secondary:hover {
+    background: #8E36C4;
+    border-color: #8E36C4;
+}
 .buy_header .btn-secondary:focus, .btn-secondary.focus,
 .buy_header {
     align-items: center;

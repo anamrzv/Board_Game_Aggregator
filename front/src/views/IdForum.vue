@@ -18,7 +18,7 @@
         <div class="icon_p" id="plus_icon">
           <button></button>
         </div>
-        <div class="icon_p" id="favorite_icon">
+        <div class="icon_p" id="favorite_icon" @click="addToFav">
           <button></button>
         </div>
       </div>
@@ -53,6 +53,10 @@ export default {
     }
   },
   methods: {
+    addToFav() {
+      axios
+          .post('http://localhost:8083/game_aggregator/forum/fav_forums', {login: localStorage.getItem('login'), forum: this.$data.forum_id})
+    },
     goHome() {
       this.$router.push({name: "main"})
     },
