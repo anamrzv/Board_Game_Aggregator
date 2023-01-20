@@ -1,4 +1,53 @@
 .cart-body {
     max-width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 8px;
+}
+
+.game_cart_view {
+    margin-top: 10px;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
     background: white;
+    border-radius: 30px;
+    padding: 4px 30px 4px 15px;
+    box-shadow: 0 3px 3px 4px #8f87de;
+    transition: 500ms;
+}
+
+.game_cart_view:hover {
+    transform: scale(1.02);
+}
+
+.game_cart_view > *{
+    text-align: center;
+    align-content: center;
+}
+.total_price:hover {
+    background: #7efa6a;
+    transform: scale(1.03);
+}
+.total_price{
+    cursor: pointer;
+    text-align: center;
+    transition: 300ms;
+    margin-top: 20px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 20%;
+    padding: 10px;
+    background: white;
+    border-radius: 30px;
+}
+.delete_from_cart:hover {
+    transform: scale(1.8);
+    text-shadow: 1px 1px 3px #302b63;
+    transition: 500ms;
+}
+.delete_from_cart {
+    cursor: pointer;
+    font-weight: bold;
+    color: red;
 }

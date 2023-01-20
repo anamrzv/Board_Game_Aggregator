@@ -15,8 +15,16 @@
 
     <div v-if="games_in_cart !== null" class="cart-body">
       <div v-for="item in games_in_cart" :key="item.id">
-        <div>{{ item }}</div>
+        <!--        крестик, картинка, -->
+        <div class="game_cart_view">
+          <div class="delete_from_cart" @click="deleteFromCart">x</div>
+          <img width="200px" height="178" v-bind:src="item.game.image">
+          <div>Name<br>{{ item.game.name }}</div>
+          <div>Shop<br>{{ item.shop.name }}</div>
+          <div>Price<br>{{ item.price }}<B>P</B></div>
+        </div>
       </div>
+      <div class="total_price">Total: </div>
     </div>
 
 
@@ -34,10 +42,14 @@ export default {
     }
   },
   methods: {
+    deleteFromCart () {
+
+    },
     getCartGames() {
       axios
           .post('http://localhost:8083/game_aggregator/user/cart',
-              { login: localStorage.getItem("login"), password: "", mail: "", mailPreferences: ""
+              {
+                login: localStorage.getItem("login"), password: "", mail: "", mailPreferences: ""
               }).then((res) => {
         this.games_in_cart = res.data
       },)
