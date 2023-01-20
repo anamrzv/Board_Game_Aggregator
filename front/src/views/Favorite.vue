@@ -1,19 +1,25 @@
 <template>
-<div>
-  <div id="header">
-    <div class="icons_container">
-      <div class="icon" id="back_icon">
-        <button @click="goHome" title="homepage"></button>
-      </div>
-      <div class="icon" id="logout_icon">
-        <button @click="logout" title="logout"></button>
+  <div>
+    <div id="header">
+      <div class="icons_container">
+        <div class="icon" id="back_icon">
+          <button @click="goHome" title="homepage"></button>
+        </div>
+        <div class="icon" id="logout_icon">
+          <button @click="logout" title="logout"></button>
+        </div>
       </div>
     </div>
+    <p class="cyber">favorites</p>
+
+
+
+    <div class="fav-body">
+      <b-button class="cyber">games</b-button>
+    </div>
+
+
   </div>
-
-  <p class="cyber">favorites</p>
-
-</div>
 </template>
 
 <script>
@@ -36,6 +42,5 @@ export default {
 </script>
 
 <style>
-@import "../assets/cart.css";
-@import "../assets/fonts.css";
+@import "../assets/fav.css";
 </style>

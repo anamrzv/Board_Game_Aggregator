@@ -27,7 +27,7 @@
 }
 .total_price:hover {
     background: #7efa6a;
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 .total_price{
     cursor: pointer;
