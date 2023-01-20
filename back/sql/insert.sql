@@ -71,11 +71,11 @@ values ('ROLE_USER'),
        ('ROLE_SHOP');
 
 insert into Users (Login, Hashed_Password, Mail, Wants_Mailing, Salt, User_Role, Shop)
-values ('ana.mrzv', '6f8bebb898b8fdbca67ce', 'test@mail.ru', true, 'h0wt0d011ph3lp!', 2, null),
-       ('dasxunya', 'd3s1gn3rd4sh4666', 'test2@mail.ru', false, 'h0wt0d011ph3lp?', 2, null),
+values ('ana.mrzv', '6f8bebb898b8fdbca67cef240e9be19f21d675c2', 'test@mail.ru', true, 'h0wt0d011ph3lp!', 2, null),
+       ('dasxunya', '8855c150d3632240ed543f9544bee77a6ddaae92', 'test2@mail.ru', false, 'h0wt0d011ph3lp?', 2, null),
        ('yuko', '1w0ntt3lluh0wxex', 'yuko@mail.ru', true, 'aoaoaoaoaoaoaoa', 1, null),
        ('serge', 'xicpwndyjhget666', 'serge@mail.ru', true, 'qwertyuiopasdfg', 1, null),
-       ('shop1', ';kqclboqeoucvqo', 'shop@mail.ru', false, 'qwertyuiopasdfg', 3, 'GaGa');
+       ('shop1', '4bf32cc8d6b13d3a4ffbff034f233a498923d2a2', 'shop@mail.ru', false, 'qwertyuiopasdfg', 3, 'GaGa');
 
 insert into Game_Comment (Game_ID, User_Login, Content)
 values (1, 'yuko', 'Лучшая игра в моей жизни, напишу ее реализацию на Си'),
