@@ -11,6 +11,8 @@
     </div>
   </div>
 
+  <p class="cyber">favorites</p>
+
 </div>
 </template>
 

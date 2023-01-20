@@ -11,19 +11,41 @@
       </div>
     </div>
 
+    <p class="cyber">cart</p>
+
+    <div v-if="games_in_cart !== null" class="cart-body">
+      <div v-for="item in games_in_cart" :key="item.id">
+        <div>{{ item }}</div>
+      </div>
+    </div>
+
 
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Cart",
   data() {
     return {
-      game_info: null
+      games_in_cart: null
     }
   },
   methods: {
+    getCartGames() {
+      axios
+          .get('http://localhost:8083/game_aggregator/user/cart',
+              {
+                headers: {
+                  'Content-Type': 'application/json;charset=utf-8'
+                },
+                data: [localStorage.getItem("login")]
+              }).then((res) => {
+        this.games_in_cart = res.data
+      },)
+    },
     goHome() {
       this.$router.push({name: "main"})
     },
@@ -35,6 +57,9 @@ export default {
       });
       this.$router.push({name: "auth-page"}, () => localStorage.setItem('jwt', null));
     },
+  },
+  mounted() {
+    this.getCartGames();
   }
 }
 </script>
