@@ -16,7 +16,17 @@
     <div class="fav-body">
       <b-button v-b-toggle.collapse-1 @click="getFavGames">games</b-button>
       <b-collapse id="collapse-1">
-        afafaf
+        <div class="oneLine">
+
+          <div class="forum-table" id="game_view" v-for="item in fav_games" :key="item.id">
+            <span @click="goToGame(item.id)">{{ item.name }}</span>
+
+            <div class="icon_p" id="delete_icon">
+              <button @click="deleteForumFromFav(item.id)"></button>
+            </div>
+          </div>
+
+        </div>
       </b-collapse>
     </div>
 
@@ -27,9 +37,9 @@
           <div class="forum-table" id="forum_view" v-for="item in fav_forums" :key="item.id">
             <span @click="goToForum(item.id)">{{ item.name }}</span>
 
-          <div class="icon_p" id="delete_icon">
-            <button @click="deleteForumFromFav(item.id)"></button>
-          </div>
+            <div class="icon_p" id="delete_icon">
+              <button @click="deleteForumFromFav(item.id)"></button>
+            </div>
           </div>
         </div>
 
@@ -47,19 +57,23 @@ export default {
   name: "Favorite",
   data() {
     return {
-      fav_forums: null
+      fav_forums: null,
+      fav_games: null
     }
   },
   methods: {
+    goToGame() {
+
+    },
     deleteForumFromFav(forum_id) {
       axios
           .delete('http://localhost:8083/game_aggregator/user/fav_forums', {
-            data:{
+            data: {
               login: localStorage.getItem('login'),
               forum: forum_id
             }
           }).then((res => {
-            this.fav_forums = res.data
+        this.fav_forums = res.data
       }))
     },
     goToForum(forum_id) {

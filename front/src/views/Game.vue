@@ -26,7 +26,11 @@
 
           <div class="main_info">
             <img width="450px" height="406" v-bind:src="game_info.game.image" class="leftimg">
-            <div class="description"><b>Свойства:</b><br>Минимум игроков: <b>{{ game_info.game.minPlayersNumber }}</b>
+            <div class="description">
+              <div class="icon_p" id="icon_addGameToFav" title="add to favorite">
+                <button @click="addGameToFav"></button>
+              </div>
+              <b>Свойства:</b><br>Минимум игроков: <b>{{ game_info.game.minPlayersNumber }}</b>
               <br>
               Максимум игроков: <b>{{ game_info.game.maxPlayersNumber }}</b>
               <br>
@@ -59,10 +63,12 @@
 
             <div class="for-buy">
               <div class="showPrice">
-                <b-button v-b-toggle.collapse-1 class="buy_header">Price</b-button><br>
+                <b-button v-b-toggle.collapse-1 class="buy_header">Price</b-button>
+                <br>
                 <b-collapse id="collapse-1">
                   <div v-for="i in game_info.prices" :key="i.id" class="prices">
-                    <div>{{ i.shop.name}}</div> <div>{{ i.price}}</div>
+                    <div>{{ i.shop.name }}</div>
+                    <div>{{ i.price }}</div>
                   </div>
                 </b-collapse>
               </div>
@@ -80,10 +86,10 @@
           </div>
         </div>
 
-<!--здесь есть нформация о поставщиках, пригодится для страницы платежа в будущем-->
-<!--        <div>-->
-<!--          {{ game_info.prices }}-->
-<!--        </div>-->
+        <!--здесь есть нформация о поставщиках, пригодится для страницы платежа в будущем-->
+        <!--        <div>-->
+        <!--          {{ game_info.prices }}-->
+        <!--        </div>-->
       </div>
     </div>
     <p class="cyber">comments</p>
@@ -97,7 +103,6 @@
         <div class="for_date">{{ item.date }}</div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -112,6 +117,14 @@ export default {
     }
   },
   methods: {
+    addGameToFav() {
+      let msg1 = 'http://localhost:8083/game_aggregator/game/'
+      let msg2 = '/add_fav'
+      axios
+          .post(msg1 + this.$data.game_info.game.id + msg2, {
+            login: localStorage.getItem('login'), password: "", mail: "", mailPreferences: ""
+          })
+    },
     getGameInfo() {
       let game_msg = 'http://localhost:8083/game_aggregator/game/'
       axios
