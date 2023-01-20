@@ -138,9 +138,11 @@ public class GamesController {
             fav.setGame(game);
             fav.setUser(user);
             fav.setDateOfAdd(java.time.LocalDateTime.now());
-            user.addGameToFav(fav);
-            userService.updateUser(user);
             userService.addFavToUser(fav);
+
+            UserFav userFavWithId = userService.getUserFavByUserAndGame(user, game);
+            user.addGameToFav(userFavWithId);
+            userService.updateUser(user);
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -152,7 +154,7 @@ public class GamesController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<HttpStatus> addGameToCart(@PathVariable(value = "game_id") Integer gameId, @RequestBody CartRequest cartRequest) {
-        Game game = gameService.findById(gameId);
+        Game game = gameService.findById(cartRequest.getGameId());
         User user = userService.findByLogin(cartRequest.getLogin());
         if (game != null && user != null) {
             UserCart userCart = new UserCart();
@@ -160,9 +162,11 @@ public class GamesController {
             userCart.setGame(game);
             userCart.setShop(cartRequest.getShopId());
             userCart.setDateOfAdd(java.time.LocalDateTime.now());
-            user.addGameToCart(userCart);
-            userService.updateUser(user);
             userService.saveUserCart(userCart);
+
+            UserCart userCartWithId = userService.getUserCartByUserAndGame(user, game);
+            user.addGameToCart(userCartWithId);
+            userService.updateUser(user);
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
