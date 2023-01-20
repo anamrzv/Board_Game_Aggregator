@@ -73,6 +73,9 @@ public class UserService {
     public void removeUserCart(UserCart userCart) { userCartRepository.delete(userCart); }
 
     @Transactional
+    public void removeUserCartByUserAndGame(User user, Game game) { userCartRepository.deleteUserCartByUserAndGame(user, game); }
+
+    @Transactional
     public UserCart getUserCartByUserAndGame(User user, Game game) {return userCartRepository.getUserCartByUserAndGame(user, game);}
 
     @Transactional
