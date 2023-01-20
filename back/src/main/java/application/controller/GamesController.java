@@ -1,7 +1,6 @@
 package application.controller;
 
 import application.domain.*;
-import application.domain.composite_keys.UserCartKey;
 import application.parsing.CustomRsqlVisitor;
 import application.pojo.request.CartRequest;
 import application.pojo.request.CommentRequest;
@@ -57,7 +56,6 @@ public class GamesController {
                 return ResponseEntity.badRequest().body(null);
             }
         }
-        //int gameCount = gameService.getGameCount();
         return ResponseEntity.ok().body(games);
     }
 
@@ -126,8 +124,7 @@ public class GamesController {
 
     /**
      * @param gameId
-     * @param login
-     * Добавить игру в избранное
+     * @param login  Добавить игру в избранное
      */
     @PostMapping(value = "/game/{game_id}/add_fav",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
@@ -136,18 +133,19 @@ public class GamesController {
         Game game = gameService.findById(gameId);
         User user = userService.findByLogin(login);
         if (game != null && user != null) {
-            UserCartKey key = new UserCartKey(gameId, login);
-            UserFav fav = new UserFav(key, game, user);
+            UserFav fav = new UserFav();
+            fav.setGame(game);
+            fav.setUser(user);
+            fav.setDateOfAdd(java.time.LocalDateTime.now());
             user.addGameToFav(fav);
             userService.updateUser(user);
-            gameService.addGame(game);
+            userService.addFavToUser(fav);
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     /**
-     * @param gameId
-     * Добавить игру в корзину
+     * @param gameId Добавить игру в корзину
      */
     @PostMapping(value = "/game/{game_id}/add_cart",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
@@ -156,11 +154,14 @@ public class GamesController {
         Game game = gameService.findById(gameId);
         User user = userService.findByLogin(cartRequest.getLogin());
         if (game != null && user != null) {
-            UserCartKey key = new UserCartKey(gameId, cartRequest.getLogin());
-            UserCart cart = new UserCart(key, game, user, cartRequest.getShopId());
-            user.addGameToCart(cart);
+            UserCart userCart = new UserCart();
+            userCart.setUser(user);
+            userCart.setGame(game);
+            userCart.setShop(cartRequest.getShopId());
+            userCart.setDateOfAdd(java.time.LocalDateTime.now());
+            user.addGameToCart(userCart);
             userService.updateUser(user);
-            gameService.addGame(game);
+            userService.saveUserCart(userCart);
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

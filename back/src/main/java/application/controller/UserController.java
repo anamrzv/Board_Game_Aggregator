@@ -2,7 +2,6 @@ package application.controller;
 
 import application.domain.*;
 import application.domain.composite_keys.GameShopKey;
-import application.domain.composite_keys.UserCartKey;
 import application.pojo.request.CartRequest;
 import application.pojo.request.FavRequest;
 import application.pojo.request.ForumRequest;
@@ -62,15 +61,18 @@ public class UserController {
     @DeleteMapping(value = "/cart",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<HttpStatus> addGameToCart(@RequestBody CartRequest cartRequest) {
+    private ResponseEntity<HttpStatus> deleteGameFromCart(@RequestBody CartRequest cartRequest) {
         User user = userService.findByLogin(cartRequest.getLogin());
         Game game = gameService.findById(cartRequest.getGameId());
         if (game != null && user != null) {
-            UserCartKey key = new UserCartKey(cartRequest.getGameId(), cartRequest.getLogin());
-            UserCart cart = userService.getCartByKey(key);
-            user.removeGameFromCart(cart);
+            UserCart userCart = new UserCart();
+            userCart.setUser(user);
+            userCart.setGame(game);
+
+            user.removeGameFromCart(userCart);
             userService.updateUser(user);
-            gameService.addGame(game);
+
+            userService.removeUserCart(userCart);
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
@@ -98,11 +100,14 @@ public class UserController {
         Game game = gameService.findById(favRequest.getGameId());
         User user = userService.findByLogin(favRequest.getLogin());
         if (game != null && user != null) {
-            UserCartKey key = new UserCartKey(favRequest.getGameId(), favRequest.getLogin());
-            UserFav fav = userService.getFavByKey(key);
+            UserFav fav = new UserFav();
+            fav.setGame(game);
+            fav.setUser(user);
+
             user.removeGameFromFav(fav);
             userService.updateUser(user);
-            gameService.addGame(game);
+
+            userService.removeUserFav(fav);
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

@@ -1,16 +1,15 @@
 package application.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 @Table(name = "board_game", indexes = {@Index(name = "Genre_Index", columnList = "Genre_ID"), @Index(name = "Mechanics_Index", columnList = "Mechanics_ID")})
@@ -68,9 +67,22 @@ public class Game {
             })
     private Set<GameTheme> themes = new HashSet<>();
 
+
+    ////////////////////////////////////
+
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserCart> usersWhoAddedInCart = new HashSet<>();
+
+    public Set<UserCart> getUsersWhoAddedInCart() {
+        return usersWhoAddedInCart;
+    }
+
+    public void addUserWhoAddedInCart(UserCart userCart) {
+        this.usersWhoAddedInCart.add(userCart);
+    }
+
+    //////////////////////////////////////
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     @JsonIgnore

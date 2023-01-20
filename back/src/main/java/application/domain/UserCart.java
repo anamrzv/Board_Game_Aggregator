@@ -1,34 +1,30 @@
 package application.domain;
 
-import application.domain.composite_keys.UserCartKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "carts_of_users")
 public class UserCart {
-    @EmbeddedId
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer id;
     @JsonIgnore
-    UserCartKey id;
-
-    @ManyToOne
-    @MapsId("gameId")
-    @JoinColumn(name = "game_id")
-    Game game;
-
-    @ManyToOne
-    @MapsId("userLogin")
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_login")
+    private User user;
+
     @JsonIgnore
-    User user;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "game_id")
+    private Game game;
 
     @Column(name = "date_of_add")
     LocalDateTime dateOfAdd;
@@ -38,13 +34,14 @@ public class UserCart {
 
     Integer shop;
 
-    public UserCart(UserCartKey id, Game game, User user, Integer shop) {
-        this.id = id;
-        this.game = game;
-        this.user = user;
-        this.shop = shop;
+
+    public User getUser() {
+        return user;
     }
 
+    public Game getGame() {
+        return game;
+    }
     @Override
     public int hashCode() {
         return 413;

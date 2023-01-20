@@ -138,21 +138,23 @@ create table Topic_Comment
 --Ассоциация-Корзина-Игра(15)
 create table Carts_of_Users
 (
+    Id          serial primary key,
     User_Login  varchar(20) references Users on delete restrict on update cascade  not null,
     Game_ID     integer references Board_Game on delete restrict on update cascade not null,
     Date_of_add timestamp default current_timestamp                                not null,
     Date_of_buy timestamp,
     Shop        integer references Shop on delete restrict on update cascade       not null,
-    primary key (User_Login, Game_ID)
+    unique (User_Login, Game_ID)
 );
 
 --Ассоциация-Фавориты-Игры(16)
 create table Favorites_of_Users
 (
+    Id          serial primary key,
     User_Login  varchar(20) references Users on delete restrict on update cascade  not null,
     Game_ID     integer references Board_Game on delete restrict on update cascade not null,
     Date_of_add timestamp default current_timestamp                                not null,
-    primary key (User_Login, Game_ID)
+    unique (User_Login, Game_ID)
 );
 
 --Связь-Пользователи-Темы(17)
