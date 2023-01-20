@@ -36,12 +36,8 @@ export default {
   methods: {
     getCartGames() {
       axios
-          .get('http://localhost:8083/game_aggregator/user/cart',
-              {
-                headers: {
-                  'Content-Type': 'application/json;charset=utf-8'
-                },
-                data: [localStorage.getItem("login")]
+          .post('http://localhost:8083/game_aggregator/user/cart',
+              { login: localStorage.getItem("login"), password: "", mail: "", mailPreferences: ""
               }).then((res) => {
         this.games_in_cart = res.data
       },)

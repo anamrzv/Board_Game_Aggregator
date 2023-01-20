@@ -37,7 +37,7 @@ public class UserController {
      * @param request
      * @return все игры, добавленные в корзину пользователем
      */
-    @GetMapping(value = "/cart",
+    @PostMapping(value = "/cart",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.ALL_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<List<ShopGameResponse>> showCart(@RequestBody UserRequest request) {
