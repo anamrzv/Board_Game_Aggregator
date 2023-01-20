@@ -17,12 +17,12 @@ public class UserFav {
     @Id
     private Integer id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "game_id")
     @JsonIgnore
     Game game;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "user_login")
     User user;

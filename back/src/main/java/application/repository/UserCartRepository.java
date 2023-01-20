@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface UserCartRepository extends JpaRepository<UserCart, Integer> {
 
     UserCart getUserCartByUserAndGame(User user, Game game);
+
+    void deleteUserCartByUserAndGame(User user, Game game);
 }

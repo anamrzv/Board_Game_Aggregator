@@ -17,12 +17,12 @@ public class UserCart {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_login")
     private User user;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;
 

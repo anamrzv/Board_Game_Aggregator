@@ -69,7 +69,7 @@ public class UserController {
             user.removeGameFromCart(userCart);
             userService.updateUser(user);
 
-            userService.removeUserCart(userCart);
+            userService.removeUserCartByUserAndGame(user, game);
 
             Set<UserCart> games = user.getGamesInCart();
 
