@@ -64,9 +64,7 @@ public class UserController {
         User user = userService.findByLogin(cartRequest.getLogin());
         Game game = gameService.findById(cartRequest.getGameId());
         if (game != null && user != null) {
-            UserCart userCart = new UserCart();
-            userCart.setUser(user);
-            userCart.setGame(game);
+            UserCart userCart = userService.getUserCartByUserAndGame(user, game);
 
             user.removeGameFromCart(userCart);
             userService.updateUser(user);
@@ -99,9 +97,7 @@ public class UserController {
         Game game = gameService.findById(favRequest.getGameId());
         User user = userService.findByLogin(favRequest.getLogin());
         if (game != null && user != null) {
-            UserFav fav = new UserFav();
-            fav.setGame(game);
-            fav.setUser(user);
+            UserFav fav = userService.getUserFavByUserAndGame(user, game);
 
             user.removeGameFromFav(fav);
             userService.updateUser(user);

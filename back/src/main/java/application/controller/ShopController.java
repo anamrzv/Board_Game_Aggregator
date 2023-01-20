@@ -76,9 +76,7 @@ public class ShopController {
         Game game = gameService.findById(request.getGameId());
         Shop shop = shopService.findShopById(request.getShopId());
         if (game != null && shop != null) {
-            GameShop gameShop = new GameShop();
-            gameShop.setGame(game);
-            gameShop.setShop(shop);
+            GameShop gameShop = shopService.getGameFromShop(game, shop);
 
             shop.removeGameFromStock(gameShop);
             shopService.saveShop(shop);
@@ -95,9 +93,7 @@ public class ShopController {
         Game game = gameService.findById(request.getGameId());
         Shop shop = shopService.findShopById(request.getShopId());
         if (game != null && shop != null) {
-            GameShop gameShop = new GameShop();
-            gameShop.setGame(game);
-            gameShop.setShop(shop);
+            GameShop gameShop = shopService.getGameFromShop(game, shop);
             gameShop.setPrice(request.getPrice());
             shop.addGameToStock(gameShop);
             shopService.saveShop(shop);

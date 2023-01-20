@@ -1,9 +1,6 @@
 package application.service;
 
-import application.domain.User;
-import application.domain.UserCart;
-import application.domain.UserFav;
-import application.domain.UserRole;
+import application.domain.*;
 import application.repository.UserCartRepository;
 import application.repository.UserFavRepository;
 import application.repository.UserRepository;
@@ -74,6 +71,12 @@ public class UserService {
 
     @Transactional
     public void removeUserCart(UserCart userCart) { userCartRepository.delete(userCart); }
+
+    @Transactional
+    public UserCart getUserCartByUserAndGame(User user, Game game) {return userCartRepository.getUserCartByUserAndGame(user, game);}
+
+    @Transactional
+    public UserFav getUserFavByUserAndGame(User user, Game game) {return userFavRepository.getUserFavByUserAndGame(user, game);}
 
     @Transactional
     public void removeUserFav(UserFav userFav) { userFavRepository.delete(userFav); }
