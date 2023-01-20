@@ -45,13 +45,21 @@
     display: flex;
     align-items: center;
 }
-#delete_icon button{
+
+#delete_icon button {
     margin-left: 50%;
 }
-#delete_icon button:before{
-    content:'\f1f8';
+
+#delete_icon button:before {
+    content: '\f1f8';
     color: darkred;
 }
-#delete_icon button:hover{
+
+#delete_icon button:hover {
     transform: scale(1.2);
+}
+
+.oneLine {
+    display: flex;
+    flex-direction: column;
 }

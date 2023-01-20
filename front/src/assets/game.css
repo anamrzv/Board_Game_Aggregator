@@ -74,14 +74,12 @@
     justify-content: center;
     flex-direction: column;
 }
+
 .oneLine button:before {
     color: #b17dc3;
 }
-.buy_header .btn-secondary:hover {
-    background: #8E36C4;
-    border-color: #8E36C4;
-}
-.buy_header .btn-secondary:focus, .btn-secondary.focus,
+
+.buy_header.btn.btn-secondary:focus, .buy_header.btn.btn-secondary:hover, .btn-secondary.focus,
 .buy_header {
     align-items: center;
     margin-top: 0;
@@ -93,4 +91,9 @@
     border-width: 3px 7px;
     border-radius: 40px;
     color: white;
+}
+
+#icon_addGameToFav button:before{
+    content: '\f005';
+    color: #4b0979;
 }
