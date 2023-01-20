@@ -3,10 +3,36 @@
     margin-right: auto;
     max-width: 65%;
     display: flex;
+    flex-direction: column;
     font-family: Pixel, sans-serif;
-    font-size: 15px;
 }
 
 .fav-content {
     display: flex;
+}
+.fav-body .btn-secondary:focus {
+    background: white;
+}
+
+.fav-body .btn-secondary {
+    border-color: #302b63;
+    background: white;
+    color: #302b63;
+    font-family: Pixel, sans-serif;
+    font-size: 30px;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+}
+
+.fav-body #collapse-1,#collapse-2 {
+    display: flex;
+    justify-content: space-between;
+    max-width: 70%;
+    background: white;
+    font-family: Roboto Regular, sans-serif;
+    border-radius: 20px;
+    padding: 10px;
+    transition: 200ms;
+    margin: 7px;
 }
