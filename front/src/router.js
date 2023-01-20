@@ -31,7 +31,6 @@ Vue.use(Router);
 const routes = [
     {
         path: '/',
-        name: 'auth-page',
         component: Login
     },
     {
@@ -61,7 +60,7 @@ const routes = [
     },
     {
         path: '/game_aggregator/game/*',
-        name: 'id-forum-page',
+        name: 'game-page',
         component: Game,
         beforeEnter: (to, from, next) => {
             if (localStorage.getItem("jwt") !== 'null') next();
