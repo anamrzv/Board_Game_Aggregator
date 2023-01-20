@@ -12,7 +12,7 @@
     </div>
 
     <p class="cyber">cart</p>
-
+    <!--сделать удаление без обновления страницы-->
     <div v-if="games_in_cart !== null" class="cart-body">
       <div v-for="item in games_in_cart" :key="item.id">
         <div class="game_cart_view">
@@ -50,7 +50,9 @@ export default {
                   shopId: shop_id,
                   gameId: game_id
                 }
-              })
+              }).then((res) => {
+        this.games_in_cart = res.data
+      })
     },
     getCartGames() {
       axios

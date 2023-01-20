@@ -13,9 +13,11 @@
     <p class="cyber">favorites</p>
 
 
-
     <div class="fav-body">
-      <b-button class="cyber">games</b-button>
+        <b-button>games</b-button>
+    </div>
+    <div class="fav-content">
+      fg
     </div>
 
 
