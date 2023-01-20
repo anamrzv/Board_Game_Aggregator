@@ -4,6 +4,7 @@ import application.domain.Game;
 import application.domain.GameShop;
 import application.domain.Shop;
 import application.pojo.request.ShopGameRequest;
+import application.pojo.request.NameRequest;
 import application.pojo.response.ShopWithStockResponse;
 import application.service.GameService;
 import application.service.ShopService;
@@ -29,15 +30,15 @@ public class ShopController {
     private GameService gameService;
 
     /**
-     * @param shopName имя сети магазинов
+     * @param nameRequest имя сети магазинов
      * @return все игры в наличии во всех магазинах этой сети, магазины сети
      */
-    @GetMapping(value = "/stock",
+    @PostMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<List<ShopWithStockResponse>> showGamesInStock(@RequestBody String shopName) {
+    private ResponseEntity<List<ShopWithStockResponse>> showGamesInStock(@RequestBody NameRequest nameRequest) {
         List<ShopWithStockResponse> response = new ArrayList<>();
-        List<Shop> shops = shopService.findAllByName(shopName);
+        List<Shop> shops = shopService.findAllByName(nameRequest.getName());
         for (Shop shop : shops) {
             ShopWithStockResponse shopWithStockResponse = new ShopWithStockResponse(shop, shop.getGamesInStock());
             response.add(shopWithStockResponse);
@@ -50,7 +51,7 @@ public class ShopController {
      * @param request shop id, game id, цена
      *                добавить в наличие в определенный магазин игру, которая есть на сайте
      */
-    @PostMapping(value = "/stock",
+    @PatchMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<HttpStatus> addGameToStock(@RequestBody ShopGameRequest request) {

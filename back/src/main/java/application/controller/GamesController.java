@@ -124,7 +124,8 @@ public class GamesController {
 
     /**
      * @param gameId
-     * @param login  Добавить игру в избранное
+     * @param request
+     * Добавить игру в избранное
      */
     @PostMapping(value = "/game/{game_id}/add_fav",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
