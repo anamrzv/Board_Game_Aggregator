@@ -15,11 +15,8 @@
 
     <div class="main_container">
       <div class="icons_container_forum">
-        <div class="icon_p" id="plus_icon">
-          <button></button>
-        </div>
-        <div class="icon_p" id="favorite_icon" @click="addToFav">
-          <button></button>
+        <div class="icon_p" id="favorite_icon">
+          <button @click="addToFav" title="add in favorite"></button>
         </div>
       </div>
 
@@ -36,6 +33,17 @@
         </div>
       </div>
 
+      <div class="icon_p" id="plus_icon" title="add comment">
+        <div class="add_comment">
+          <b-button v-b-toggle.add>+</b-button>
+          <b-collapse id="add">
+          <form id="for_comment">
+            <input type="text" required="" v-model.trim="get_comment">
+            <button class="icon_p" type="submit" @click="sendComment" title="send">></button>
+          </form>
+          </b-collapse>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -48,11 +56,23 @@ export default {
   name: "IdForum",
   data() {
     return {
+      get_comment: null,
       forum_id: 0,
       comments: null
     }
   },
   methods: {
+    sendComment(){
+      let msg ='localhost:8083/game_aggregator/forum/'
+    axios
+        .post(msg + this.$data.forum_id, {
+          login: localStorage.getItem('login'),
+          dateTime: null,
+          content: this.$data.get_comment
+        }).then((response) => {
+      this.comments = response.data;
+    })
+    },
     addToFav() {
       axios
           .post('http://localhost:8083/game_aggregator/forum/fav_forums', {login: localStorage.getItem('login'), forum: this.$data.forum_id})
