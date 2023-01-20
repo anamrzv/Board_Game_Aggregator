@@ -60,11 +60,21 @@ export default {
     }
   },
   methods: {
-    goToGame() {
-
+    goToGame(game_id) {
+      let msg = '/game_aggregator/game/'
+      localStorage.setItem('game_id', game_id)
+      this.$router.push(msg + game_id)
     },
     deleteGameFromFav(game_id) {
-
+      axios
+          .delete('http://localhost:8083/game_aggregator/user/fav', {
+            data: {
+              login: localStorage.getItem('login'),
+              gameId: game_id
+            }
+          }).then((res => {
+        this.fav_games = res.data
+      }))
     },
     deleteForumFromFav(forum_id) {
       axios
