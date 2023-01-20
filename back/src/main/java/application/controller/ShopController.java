@@ -33,7 +33,7 @@ public class ShopController {
      * @param nameRequest имя сети магазинов
      * @return все игры в наличии во всех магазинах этой сети, магазины сети
      */
-    @GetMapping(value = "/stock",
+    @PostMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<List<ShopWithStockResponse>> showGamesInStock(@RequestBody NameRequest nameRequest) {
@@ -51,7 +51,7 @@ public class ShopController {
      * @param request shop id, game id, цена
      *                добавить в наличие в определенный магазин игру, которая есть на сайте
      */
-    @PostMapping(value = "/stock",
+    @PatchMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<HttpStatus> addGameToStock(@RequestBody ShopGameRequest request) {

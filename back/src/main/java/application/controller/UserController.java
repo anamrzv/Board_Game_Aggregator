@@ -37,8 +37,8 @@ public class UserController {
      * @param request
      * @return все игры, добавленные в корзину пользователем
      */
-    @GetMapping(value = "/cart",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.ALL_VALUE},
+    @PostMapping(value = "/cart",
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<List<ShopGameResponse>> showCart(@RequestBody UserRequest request) {
         Set<UserCart> games;
@@ -80,7 +80,7 @@ public class UserController {
      * @param request
      * @return все игры, добавленные в избранное пользователем
      */
-    @GetMapping(value = "/fav",
+    @PostMapping(value = "/fav",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<Set<UserFav>> showFavourites(@RequestBody UserRequest request) {
@@ -115,7 +115,7 @@ public class UserController {
      * @param request
      * @return все игры, добавленные в избранное пользователем
      */
-    @GetMapping(value = "/fav_forums",
+    @PostMapping(value = "/fav_forums",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<Set<Forum>> showFavouriteForums(@RequestBody UserRequest request) {
