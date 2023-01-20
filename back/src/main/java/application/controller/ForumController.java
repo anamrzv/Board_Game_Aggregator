@@ -5,6 +5,7 @@ import application.domain.ForumComment;
 import application.domain.User;
 import application.pojo.request.CommentRequest;
 import application.pojo.request.ForumRequest;
+import application.pojo.request.NameRequest;
 import application.pojo.response.ForumResponse;
 import application.service.ForumService;
 import application.service.UserService;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class ForumController {
      */
     @GetMapping(value = "/{forum_id}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<ForumResponse> showGameById(@PathVariable(value = "forum_id") int forumId) {
+    private ResponseEntity<ForumResponse> showForumById(@PathVariable(value = "forum_id") int forumId) {
         Forum forum = forumService.findById(forumId);
         if (forum != null) {
             List<ForumComment> comments = forumService.findAllForumComments(forumId);
@@ -68,21 +68,19 @@ public class ForumController {
 
     @PostMapping(value = "/",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<HttpStatus> addForum(@RequestBody String forumName) {
-        if (forumName != null) {
-            Forum forum = new Forum(forumName);
+    private ResponseEntity<HttpStatus> addForum(@RequestBody NameRequest nameRequest) {
+        if (nameRequest.getName() != null) {
+            Forum forum = new Forum(nameRequest.getName());
             forumService.saveForum(forum);
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @DeleteMapping(value = "/{forum_id}",
+    @DeleteMapping(value = "/{forum_id}/{comment_id}",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<HttpStatus> deleteComment(@PathVariable(value = "forum_id") int forumId, @RequestBody Integer commentId) {
-        if (commentId != null) {
-            forumService.deleteCommentById(commentId);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    private ResponseEntity<HttpStatus> deleteComment(@PathVariable(value = "forum_id") int forumId, @PathVariable(value = "comment_id") int commentId) {
+        forumService.deleteCommentById(commentId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/",

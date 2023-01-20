@@ -54,7 +54,7 @@ public class UserController {
                 gamesWithPrice.add(new ShopGameResponse(shop, cart.getGame(), gameShop.getPrice()));
             }
             return ResponseEntity.ok().body(gamesWithPrice);
-        } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
+        } else return new ResponseEntity("Пользователь с переданным логином не найден", HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(value = "/cart",
@@ -73,7 +73,7 @@ public class UserController {
 
             userService.removeUserCart(userCart);
             return new ResponseEntity<>(HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else return new ResponseEntity("Пользователь/игра с переданными ключами не найден/а",HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -89,7 +89,7 @@ public class UserController {
         if (user != null) {
             games = user.getGamesInFavourites();
             return ResponseEntity.ok().body(games);
-        } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
+        } else return new ResponseEntity("Пользователь с переданным логином не найден", HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(value = "/fav",
@@ -108,7 +108,7 @@ public class UserController {
 
             userService.removeUserFav(fav);
             return new ResponseEntity<>(HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else return new ResponseEntity("Пользователь/игра с переданными ключами не найден/а",HttpStatus.BAD_REQUEST);
     }
 
     /**
@@ -124,7 +124,7 @@ public class UserController {
         if (user != null) {
             forums = user.getFavouriteForums();
             return ResponseEntity.ok().body(forums);
-        } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
+        } else return new ResponseEntity("Пользователь с переданным логином не найден", HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(value = "/fav_forums",
@@ -137,7 +137,7 @@ public class UserController {
             user.removeForumFromFav(forum);
             userService.updateUser(user);
             return new ResponseEntity<>(HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else return new ResponseEntity("Пользователь/форум с переданными ключами не найден",HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(value = "/buy",
@@ -158,9 +158,8 @@ public class UserController {
                 }
             }
             return new ResponseEntity<>(HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else return new ResponseEntity("Пользователь с переданным логином не найден", HttpStatus.NO_CONTENT);
     }
-
 
 }
 
