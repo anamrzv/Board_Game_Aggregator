@@ -38,7 +38,7 @@ public class UserController {
      * @return все игры, добавленные в корзину пользователем
      */
     @PostMapping(value = "/cart",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.ALL_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<List<ShopGameResponse>> showCart(@RequestBody UserRequest request) {
         Set<UserCart> games;
@@ -54,7 +54,7 @@ public class UserController {
                 gamesWithPrice.add(new ShopGameResponse(shop, cart.getGame(), gameShop.getPrice()));
             }
             return ResponseEntity.ok().body(gamesWithPrice);
-        } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
+        } else return new ResponseEntity("Пользователь с переданным логином не найден", HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(value = "/cart",
@@ -88,7 +88,7 @@ public class UserController {
      * @param request
      * @return все игры, добавленные в избранное пользователем
      */
-    @GetMapping(value = "/fav",
+    @PostMapping(value = "/fav",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<Set<UserFav>> showFavourites(@RequestBody UserRequest request) {
@@ -97,7 +97,7 @@ public class UserController {
         if (user != null) {
             games = user.getGamesInFavourites();
             return ResponseEntity.ok().body(games);
-        } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
+        } else return new ResponseEntity("Пользователь с переданным логином не найден", HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(value = "/fav",
@@ -114,14 +114,14 @@ public class UserController {
 
             userService.removeUserFav(fav);
             return new ResponseEntity<>(HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else return new ResponseEntity("Пользователь/игра с переданными ключами не найден/а",HttpStatus.BAD_REQUEST);
     }
 
     /**
      * @param request
      * @return все игры, добавленные в избранное пользователем
      */
-    @GetMapping(value = "/fav_forums",
+    @PostMapping(value = "/fav_forums",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<Set<Forum>> showFavouriteForums(@RequestBody UserRequest request) {
@@ -130,7 +130,7 @@ public class UserController {
         if (user != null) {
             forums = user.getFavouriteForums();
             return ResponseEntity.ok().body(forums);
-        } else return new ResponseEntity("Проблемы на нашей стороне, попробуйте зайти позже", HttpStatus.NO_CONTENT);
+        } else return new ResponseEntity("Пользователь с переданным логином не найден", HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping(value = "/fav_forums",
@@ -143,7 +143,7 @@ public class UserController {
             user.removeForumFromFav(forum);
             userService.updateUser(user);
             return new ResponseEntity<>(HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else return new ResponseEntity("Пользователь/форум с переданными ключами не найден",HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(value = "/buy",
@@ -164,9 +164,8 @@ public class UserController {
                 }
             }
             return new ResponseEntity<>(HttpStatus.OK);
-        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        } else return new ResponseEntity("Пользователь с переданным логином не найден", HttpStatus.NO_CONTENT);
     }
-
 
 }
 

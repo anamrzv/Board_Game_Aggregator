@@ -159,6 +159,7 @@ export default {
   methods: {
     showGame(game_id){
       let msg = '/game_aggregator/game/'
+      localStorage.setItem('game_id', game_id)
       this.$router.push(msg + game_id)
     },
     showShops(game_id) {
