@@ -60,7 +60,7 @@ public class UserController {
     @DeleteMapping(value = "/cart",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<HttpStatus> deleteGameFromCart(@RequestBody CartRequest cartRequest) {
+    private ResponseEntity<List<ShopGameResponse>> deleteGameFromCart(@RequestBody CartRequest cartRequest) {
         User user = userService.findByLogin(cartRequest.getLogin());
         Game game = gameService.findById(cartRequest.getGameId());
         if (game != null && user != null) {
@@ -70,7 +70,17 @@ public class UserController {
             userService.updateUser(user);
 
             userService.removeUserCart(userCart);
-            return new ResponseEntity<>(HttpStatus.OK);
+
+            Set<UserCart> games = user.getGamesInCart();
+
+            List<ShopGameResponse> gamesWithPrice = new ArrayList<>();
+            for (UserCart cart : games) {
+                Game user_game = gameService.findById(cart.getGame().getId());
+                Shop shop = shopService.findShopById(cart.getShop());
+                GameShop gameShop = shopService.getGameFromShop(user_game, shop);
+                gamesWithPrice.add(new ShopGameResponse(shop, cart.getGame(), gameShop.getPrice()));
+            }
+            return ResponseEntity.ok().body(gamesWithPrice);
         } else return new ResponseEntity("Пользователь/игра с переданными ключами не найден/а",HttpStatus.BAD_REQUEST);
     }
 
