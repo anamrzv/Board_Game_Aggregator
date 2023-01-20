@@ -144,6 +144,7 @@ create table Carts_of_Users
     Date_of_add timestamp default current_timestamp                                not null,
     Date_of_buy timestamp,
     Shop        integer references Shop on delete restrict on update cascade       not null,
+    unique (User_Login, Game_ID)
 );
 
 --Ассоциация-Фавориты-Игры(16)
@@ -153,6 +154,7 @@ create table Favorites_of_Users
     User_Login  varchar(20) references Users on delete restrict on update cascade  not null,
     Game_ID     integer references Board_Game on delete restrict on update cascade not null,
     Date_of_add timestamp default current_timestamp                                not null,
+    unique (User_Login, Game_ID)
 );
 
 --Связь-Пользователи-Темы(17)
