@@ -17,12 +17,10 @@
       <b-button v-b-toggle.collapse-1 @click="getFavGames">games</b-button>
       <b-collapse id="collapse-1">
         <div class="oneLine">
-
-          <div class="forum-table" id="game_view" v-for="item in fav_games" :key="item.id">
+          <div class="forum-table" id="forum_view" v-for="item in fav_games" :key="item.id">
             <span @click="goToGame(item.id)">{{ item.name }}</span>
-
             <div class="icon_p" id="delete_icon">
-              <button @click="deleteForumFromFav(item.id)"></button>
+              <button @click="deleteGameFromFav(item.id)"></button>
             </div>
           </div>
 
@@ -65,6 +63,9 @@ export default {
     goToGame() {
 
     },
+    deleteGameFromFav(game_id) {
+
+    },
     deleteForumFromFav(forum_id) {
       axios
           .delete('http://localhost:8083/game_aggregator/user/fav_forums', {
@@ -87,7 +88,10 @@ export default {
           }).then((res => this.fav_forums = res.data))
     },
     getFavGames() {
-
+      axios
+          .post('http://localhost:8083/game_aggregator/user/fav', {
+            login: localStorage.getItem('login')
+          }).then((res => this.fav_games = res.data))
     },
     goHome() {
       this.$router.push({name: "main"})
@@ -103,6 +107,7 @@ export default {
   },
   mounted() {
     this.getFavForums()
+    this.getFavGames()
   }
 }
 </script>
