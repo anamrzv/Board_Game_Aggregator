@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -91,12 +92,17 @@ public class UserController {
     @PostMapping(value = "/fav",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<Set<UserFav>> showFavourites(@RequestBody UserRequest request) {
+    private ResponseEntity<Set<Game>> showFavourites(@RequestBody UserRequest request) {
         Set<UserFav> games;
+        Set<Game> return_games = new HashSet<>();
         User user = userService.findByLogin(request.getLogin());
         if (user != null) {
             games = user.getGamesInFavourites();
-            return ResponseEntity.ok().body(games);
+            for (UserFav fav : games) {
+                Game user_game = gameService.findById(fav.getGame().getId());
+                return_games.add(user_game);
+            }
+            return ResponseEntity.ok().body(return_games);
         } else return new ResponseEntity("Пользователь с переданным логином не найден", HttpStatus.NO_CONTENT);
     }
 
