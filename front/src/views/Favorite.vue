@@ -14,10 +14,17 @@
 
 
     <div class="fav-body">
-        <b-button>games</b-button>
+      <b-button v-b-toggle.collapse-1 @click="getFavGames">games</b-button>
+      <b-collapse id="collapse-1">
+        afafaf
+      </b-collapse>
     </div>
-    <div class="fav-content">
-      fg
+
+    <div class="fav-body">
+      <b-button v-b-toggle.collapse-2 @click="getFavForums">forums</b-button>
+      <b-collapse id="collapse-2">
+        afafaf
+      </b-collapse>
     </div>
 
 
@@ -28,6 +35,12 @@
 export default {
   name: "Favorite",
   methods: {
+    getFavForums() {
+
+    },
+    getFavGames() {
+
+    },
     goHome() {
       this.$router.push({name: "main"})
     },
