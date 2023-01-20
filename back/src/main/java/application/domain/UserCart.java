@@ -34,14 +34,6 @@ public class UserCart {
 
     Integer shop;
 
-
-    public User getUser() {
-        return user;
-    }
-
-    public Game getGame() {
-        return game;
-    }
     @Override
     public int hashCode() {
         return 413;

@@ -1,8 +1,8 @@
 package application.service;
 
+import application.domain.Game;
 import application.domain.GameShop;
 import application.domain.Shop;
-import application.domain.composite_keys.GameShopKey;
 import application.repository.GameShopRepository;
 import application.repository.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,8 @@ public class ShopService {
 
     @Autowired
     private GameShopRepository gameShopRepository;
+    @Transactional
+    public void saveShop(Shop shop) { shopRepository.save(shop); }
 
     @Transactional
     public List<Shop> findAllByName(String name) {
@@ -35,20 +37,14 @@ public class ShopService {
     }
 
     @Transactional
-    public void deleteGameFromShop(GameShopKey key) {
-        gameShopRepository.deleteById(key);
+    public void removeGameToShop(GameShop gameShop) {
+        gameShopRepository.delete(gameShop);
     }
 
     @Transactional
-    public GameShop getGameFromShop(GameShopKey key) {
-        return gameShopRepository.findById(key).orElse(null);
+    public GameShop getGameFromShop(Game game, Shop shop) {
+        return gameShopRepository.getGameShopsByGameAndShop(game, shop);
     }
-
-    @Transactional
-    public GameShop findGameFromShop(GameShopKey key) {
-        return gameShopRepository.findById(key).orElse(null);
-    }
-
 
 
 }

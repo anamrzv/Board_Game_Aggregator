@@ -1,10 +1,10 @@
 package application.controller;
 
 import application.domain.*;
-import application.domain.composite_keys.GameShopKey;
 import application.pojo.request.CartRequest;
 import application.pojo.request.FavRequest;
 import application.pojo.request.ForumRequest;
+import application.pojo.request.UserRequest;
 import application.pojo.response.ShopGameResponse;
 import application.service.ForumService;
 import application.service.GameService;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -35,23 +34,23 @@ public class UserController {
     private ShopService shopService;
 
     /**
-     * @param login
+     * @param request
      * @return все игры, добавленные в корзину пользователем
      */
     @GetMapping(value = "/cart",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, MediaType.ALL_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<List<ShopGameResponse>> showCart(@RequestBody String login) {
+    private ResponseEntity<List<ShopGameResponse>> showCart(@RequestBody UserRequest request) {
         Set<UserCart> games;
-        User user = userService.findByLogin(login);
+        User user = userService.findByLogin(request.getLogin());
         if (user != null) {
             games = user.getGamesInCart();
 
             List<ShopGameResponse> gamesWithPrice = new ArrayList<>();
             for (UserCart cart : games) {
+                Game game = gameService.findById(cart.getGame().getId());
                 Shop shop = shopService.findShopById(cart.getShop());
-                GameShopKey key = new GameShopKey(cart.getGame().getId(), cart.getShop());
-                GameShop gameShop = shopService.getGameFromShop(key);
+                GameShop gameShop = shopService.getGameFromShop(game, shop);
                 gamesWithPrice.add(new ShopGameResponse(shop, cart.getGame(), gameShop.getPrice()));
             }
             return ResponseEntity.ok().body(gamesWithPrice);
@@ -78,15 +77,15 @@ public class UserController {
     }
 
     /**
-     * @param login
+     * @param request
      * @return все игры, добавленные в избранное пользователем
      */
     @GetMapping(value = "/fav",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<Set<UserFav>> showFavourites(@RequestBody String login) {
+    private ResponseEntity<Set<UserFav>> showFavourites(@RequestBody UserRequest request) {
         Set<UserFav> games;
-        User user = userService.findByLogin(login);
+        User user = userService.findByLogin(request.getLogin());
         if (user != null) {
             games = user.getGamesInFavourites();
             return ResponseEntity.ok().body(games);
@@ -113,15 +112,15 @@ public class UserController {
     }
 
     /**
-     * @param login
+     * @param request
      * @return все игры, добавленные в избранное пользователем
      */
     @GetMapping(value = "/fav_forums",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<Set<Forum>> showFavouriteForums(@RequestBody String login) {
+    private ResponseEntity<Set<Forum>> showFavouriteForums(@RequestBody UserRequest request) {
         Set<Forum> forums;
-        User user = userService.findByLogin(login);
+        User user = userService.findByLogin(request.getLogin());
         if (user != null) {
             forums = user.getFavouriteForums();
             return ResponseEntity.ok().body(forums);
@@ -144,9 +143,9 @@ public class UserController {
     @PostMapping(value = "/buy",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<HttpStatus> buyGame(@RequestBody String login) {
+    private ResponseEntity<HttpStatus> buyGame(@RequestBody UserRequest request) {
         Set<UserCart> games;
-        User user = userService.findByLogin(login);
+        User user = userService.findByLogin(request.getLogin());
         if (user != null) {
             games = user.getGamesInCart();
 

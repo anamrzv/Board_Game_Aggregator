@@ -5,6 +5,7 @@ import application.parsing.CustomRsqlVisitor;
 import application.pojo.request.CartRequest;
 import application.pojo.request.CommentRequest;
 import application.pojo.request.GameRequest;
+import application.pojo.request.UserRequest;
 import application.pojo.response.GameResponse;
 import application.pojo.response.GameWithStockResponse;
 import application.service.GameService;
@@ -40,7 +41,6 @@ public class GamesController {
      * Пример запросов:
      * /game_aggregator/game?search=minPlayersNumber==2;minPlayTime>50
      */
-
     @GetMapping(value = "/game",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<List<Game>> showAllGames(@RequestParam(value = "search", required = false) String search) {
@@ -50,7 +50,7 @@ public class GamesController {
         } else {
             try {
                 Node rootNode = new RSQLParser().parse(search);
-                Specification<Game> spec = rootNode.accept(new CustomRsqlVisitor<Game>());
+                Specification<Game> spec = rootNode.accept(new CustomRsqlVisitor<>());
                 games = gameService.findAll(spec);
             } catch (RSQLParserException e) {
                 return ResponseEntity.badRequest().body(null);
@@ -129,9 +129,9 @@ public class GamesController {
     @PostMapping(value = "/game/{game_id}/add_fav",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    private ResponseEntity<HttpStatus> addGameToFav(@PathVariable(value = "game_id") Integer gameId, @RequestBody String login) {
+    private ResponseEntity<HttpStatus> addGameToFav(@PathVariable(value = "game_id") Integer gameId, @RequestBody UserRequest request) {
         Game game = gameService.findById(gameId);
-        User user = userService.findByLogin(login);
+        User user = userService.findByLogin(request.getLogin());
         if (game != null && user != null) {
             UserFav fav = new UserFav();
             fav.setGame(game);

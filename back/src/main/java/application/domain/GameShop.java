@@ -1,33 +1,29 @@
 package application.domain;
 
-import application.domain.composite_keys.GameShopKey;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "game_to_shop", indexes = {@Index(name = "Shop_Index", columnList = "game_id")})
 public class GameShop {
-    @EmbeddedId
-    @JsonIgnore
-    GameShopKey id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer id;
 
-    @ManyToOne
-    @MapsId("gameId")
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "game_id")
-    Game game;
+    private Game game;
 
-    @ManyToOne
-    @MapsId("shopId")
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shop_id")
     @JsonIgnore
-    Shop shop;
+    private Shop shop;
 
     Float price;
 

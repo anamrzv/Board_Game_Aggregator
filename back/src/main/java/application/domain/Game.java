@@ -67,22 +67,9 @@ public class Game {
             })
     private Set<GameTheme> themes = new HashSet<>();
 
-
-    ////////////////////////////////////
-
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<UserCart> usersWhoAddedInCart = new HashSet<>();
-
-    public Set<UserCart> getUsersWhoAddedInCart() {
-        return usersWhoAddedInCart;
-    }
-
-    public void addUserWhoAddedInCart(UserCart userCart) {
-        this.usersWhoAddedInCart.add(userCart);
-    }
-
-    //////////////////////////////////////
 
     @OneToMany(mappedBy = "game", fetch = FetchType.EAGER)
     @JsonIgnore

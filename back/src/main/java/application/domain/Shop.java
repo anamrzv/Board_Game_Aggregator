@@ -26,9 +26,19 @@ public class Shop {
     private String city;
     private String phone;
 
-    @OneToMany(mappedBy = "shop", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "shop", fetch = FetchType.EAGER)
     @JsonIgnore
     private Set<GameShop> gamesInStock = new HashSet<>();
+
+    public void addGameToStock(GameShop gameShop){
+        this.gamesInStock.add(gameShop);
+        gameShop.getGame().getShopsHavingInStock().add(gameShop);
+    }
+
+    public void removeGameFromStock(GameShop gameShop){
+        this.gamesInStock.remove(gameShop);
+        gameShop.getGame().getShopsHavingInStock().remove(gameShop);
+    }
 
     @Override
     public int hashCode() {

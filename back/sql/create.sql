@@ -112,10 +112,11 @@ create table Game_Comment
 --Сущность-Игра-магазин(12)
 create table Game_to_Shop
 (
+    ID      serial primary key,
     Game_ID integer references Board_Game on delete restrict on update cascade not null,
     Shop_ID integer references Shop on delete restrict on update cascade       not null,
     Price   real check (Price >= 0)                                            not null,
-    primary key (Game_ID, Shop_ID)
+    unique (Game_ID, Shop_ID)
 );
 
 --Тема Форума(13)

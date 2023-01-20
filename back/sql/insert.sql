@@ -81,7 +81,7 @@ insert into Game_Comment (Game_ID, User_Login, Content)
 values (1, 'yuko', 'Лучшая игра в моей жизни, напишу ее реализацию на Си'),
        (2, 'serge', 'Неплохо');
 
-insert into Game_to_Shop
+insert into Game_to_Shop (Game_ID, Shop_ID, Price)
 values (1,1,5327),
        (1,2,5200),
        (2,3,2870),

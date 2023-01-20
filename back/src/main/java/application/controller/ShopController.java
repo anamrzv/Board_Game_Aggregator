@@ -3,7 +3,6 @@ package application.controller;
 import application.domain.Game;
 import application.domain.GameShop;
 import application.domain.Shop;
-import application.domain.composite_keys.GameShopKey;
 import application.pojo.request.ShopGameRequest;
 import application.pojo.response.ShopWithStockResponse;
 import application.service.GameService;
@@ -13,7 +12,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -50,7 +48,7 @@ public class ShopController {
 
     /**
      * @param request shop id, game id, цена
-     * добавить в наличие в определенный магазин игру, которая есть на сайте
+     *                добавить в наличие в определенный магазин игру, которая есть на сайте
      */
     @PostMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
@@ -59,8 +57,12 @@ public class ShopController {
         Game game = gameService.findById(request.getGameId());
         Shop shop = shopService.findShopById(request.getShopId());
         if (game != null && shop != null) {
-            GameShopKey key = new GameShopKey(request.getGameId(), request.getShopId());
-            GameShop gameShop = new GameShop(key, game, shop, request.getPrice());
+            GameShop gameShop = new GameShop();
+            gameShop.setGame(game);
+            gameShop.setShop(shop);
+            gameShop.setPrice(request.getPrice());
+            shop.addGameToStock(gameShop);
+            shopService.saveShop(shop);
             shopService.addGameToShop(gameShop);
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -70,21 +72,37 @@ public class ShopController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<HttpStatus> deleteGameFromStock(@RequestBody ShopGameRequest request) {
-        GameShopKey key = new GameShopKey(request.getGameId(), request.getShopId());
-        shopService.deleteGameFromShop(key);
-        return new ResponseEntity<>(HttpStatus.OK);
+        Game game = gameService.findById(request.getGameId());
+        Shop shop = shopService.findShopById(request.getShopId());
+        if (game != null && shop != null) {
+            GameShop gameShop = new GameShop();
+            gameShop.setGame(game);
+            gameShop.setShop(shop);
+
+            shop.removeGameFromStock(gameShop);
+            shopService.saveShop(shop);
+
+            shopService.removeGameToShop(gameShop);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping(value = "/stock",
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<HttpStatus> updateGamePrice(@RequestBody ShopGameRequest request) {
-            GameShopKey key = new GameShopKey(request.getGameId(), request.getShopId());
-            GameShop gameShop = shopService.findGameFromShop(key);
-        if (gameShop != null) {
+        Game game = gameService.findById(request.getGameId());
+        Shop shop = shopService.findShopById(request.getShopId());
+        if (game != null && shop != null) {
+            GameShop gameShop = new GameShop();
+            gameShop.setGame(game);
+            gameShop.setShop(shop);
             gameShop.setPrice(request.getPrice());
+            shop.addGameToStock(gameShop);
+            shopService.saveShop(shop);
             shopService.addGameToShop(gameShop);
             return new ResponseEntity<>(HttpStatus.OK);
         } else return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
     }
 }
