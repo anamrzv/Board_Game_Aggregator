@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "favorites_of_users")
 public class UserFav {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
