@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "topic_comment")
 public class ForumComment {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "forum_id")
     @NotNull

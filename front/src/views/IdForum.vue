@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     sendComment(){
-      let msg ='localhost:8083/game_aggregator/forum/'
+      let msg ='http://localhost:8083/game_aggregator/forum/'
     axios
         .post(msg + this.$data.forum_id, {
           login: localStorage.getItem('login'),

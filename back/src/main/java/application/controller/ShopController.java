@@ -3,11 +3,13 @@ package application.controller;
 import application.domain.Game;
 import application.domain.GameShop;
 import application.domain.Shop;
+import application.domain.User;
 import application.pojo.request.ShopGameRequest;
 import application.pojo.request.NameRequest;
 import application.pojo.response.ShopWithStockResponse;
 import application.service.GameService;
 import application.service.ShopService;
+import application.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,9 @@ public class ShopController {
     @Autowired
     private GameService gameService;
 
+    @Autowired
+    private UserService userService;
+
     /**
      * @param nameRequest имя сети магазинов
      * @return все игры в наличии во всех магазинах этой сети, магазины сети
@@ -38,7 +43,8 @@ public class ShopController {
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<List<ShopWithStockResponse>> showGamesInStock(@RequestBody NameRequest nameRequest) {
         List<ShopWithStockResponse> response = new ArrayList<>();
-        List<Shop> shops = shopService.findAllByName(nameRequest.getName());
+        User shopUser = userService.findByLogin(nameRequest.getName());
+        List<Shop> shops = shopService.findAllByName(shopUser.getShop());
         for (Shop shop : shops) {
             ShopWithStockResponse shopWithStockResponse = new ShopWithStockResponse(shop, shop.getGamesInStock());
             response.add(shopWithStockResponse);

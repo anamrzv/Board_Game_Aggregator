@@ -55,10 +55,11 @@ public class ForumController {
     }
 
     @PostMapping(value = "/{forum_id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     private ResponseEntity<HttpStatus> addComment(@PathVariable(value = "forum_id") int forumId, @RequestBody CommentRequest comment) {
         try {
-            ForumComment forumComment = new ForumComment(forumId, comment.getLogin(), comment.getDateTime(), comment.getContent());
+            ForumComment forumComment = new ForumComment(forumId, comment.getLogin(), java.time.LocalDateTime.now(), comment.getContent());
             forumService.saveForumComment(forumComment);
         } catch (NullPointerException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
