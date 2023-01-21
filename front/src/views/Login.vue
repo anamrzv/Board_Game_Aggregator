@@ -7,7 +7,6 @@
           <p class="login__link">Who am I?</p><br>
           <a href="game_aggregator/game" class="login__link" id="viewer">Viewer</a>
           <a href="game_aggregator/auth/user" class="login__link">User</a>
-          <a href="game_aggregator/auth/admin" class="login__link">Admin</a>
           <a href="game_aggregator/auth/shop" class="login__link">Shop owner</a>
         </div>
       </div>

@@ -24,6 +24,7 @@ import Favorite from "./views/Favorite.vue";
 import Forum from "./views/Forum.vue";
 import IdForum from "./views/IdForum.vue";
 import Game from "./views/Game.vue";
+import ShopOwn from "./views/ShopOwn.vue";
 
 Vue.use(BootstrapVue);
 Vue.use(Router);
@@ -64,6 +65,17 @@ const routes = [
         component: Game,
         beforeEnter: (to, from, next) => {
             if (localStorage.getItem("jwt") !== 'null') next();
+            else next({
+                name: 'error-page-app',
+            });
+        }
+    },
+    {
+        path: '/game_aggregator/shop',
+        name: 'shop-own',
+        component: ShopOwn,
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem("shop_jwt") !== 'null') next();
             else next({
                 name: 'error-page-app',
             });

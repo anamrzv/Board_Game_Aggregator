@@ -57,11 +57,11 @@
           <div class="body_for_filters">
             <form class="filters_form">
               <p>minPlayers: <input id="text_form" type="text" v-model.trim="filters.minPlayers" maxlength="2"><input
-                  type="range" value="0" min="0" max="20" step="1" v-model="filters.minPlayers"></p>
+                  type="range" value="0" min="0" max="20" step="1" v-model.number="filters.minPlayers"></p>
               <p>maxPlayers: <input id="text_form" type="text" v-model.trim="filters.maxPlayers" maxlength="2"><input
-                  type="range" value="20" min="2" max="20" step="1" v-model="filters.maxPlayers"></p>
+                  type="range" value="20" min="2" max="20" step="1" v-model.number="filters.maxPlayers"></p>
               <p>recPlayers: <input id="text_form" type="text" v-model.trim="filters.recPlayers" maxlength="2"><input
-                  type="range" min="0" max="20" step="1" v-model="filters.recPlayers"></p>
+                  type="range" min="0" max="20" step="1" v-model.number="filters.recPlayers"></p>
               <p>minPlayTime: <input title="min" id="text_form_min" type="text" v-model.trim="filters.minPlayTime"
                                      maxlength="5" value="0">min</p>
               <p>maxPlayTime: <input title="min" id="text_form_min" type="text" v-model.trim="filters.maxPlayTime"
@@ -71,12 +71,12 @@
                                         maxlength="4" value="1969">year</p>
               <p>minPlayAge: <input id="text_form_age" type="text" v-model.trim="filters.minPlayAge"
                                     maxlength="2"><input
-                  type="range" value="0" min="0" max="120" step="10" v-model="filters.minPlayAge"></p>
+                  type="range" value="0" min="0" max="120" step="10" v-model.number="filters.minPlayAge"></p>
               <p>maxPlayAge: <input id="text_form_age" type="text" v-model.trim="filters.maxPlayAge"
                                     maxlength="3"><input
-                  type="range" value="120" min="0" max="99" step="10" v-model="filters.maxPlayAge"></p>
+                  type="range" value="120" min="0" max="99" step="10" v-model.number="filters.maxPlayAge"></p>
               <p>difficult: <input id="text_form" type="text" v-model.trim="filters.difficult" maxlength="2"><input
-                  type="range" min="1" max="5" step="1" v-model="filters.difficult"></p>
+                  type="range" min="1" max="5" step="1" v-model.number="filters.difficult"></p>
               <p>maxWeight: <input title="kg" id="text_form_min" type="text" v-model.trim="filters.maxWeight"
                                    maxlength="3" value="150">kg</p>
               <p>preferDesigner: <input type="text" v-model.trim="filters.preferDesigner"></p>
@@ -203,18 +203,11 @@ export default {
       this.$router.push({name: "favorite-page"})
     },
     searching() {
-      let i;
-      let s = "";
-      for (i = 0; i < this.filters.length; i++) {
-        if (this.filters[i].equal != null) {
-          s = s + this.filters[i];
-        }
-      }
-      axios
-          .get('http://localhost:8083/game_aggregator/game', {params: {search: s}})
-          .then((response) => {
-            this.games = response.data;
-          })
+      let vm = this;
+      this.games = [...this.PRODUCTS];
+      this.games = this.games.filter(function (item){
+        return item.minPlayers >= vm.minPlayers && item.maxPlayers <= vm.maxPlayers
+      })
     },
     login() {
       this.$router.push({name: "user-page"})
@@ -230,6 +223,7 @@ export default {
   },
   mounted() {
     this.getGames();
+    this.searching();
   },
   created() {
     this.requestPermissionValue = localStorage.getItem('jwt')
