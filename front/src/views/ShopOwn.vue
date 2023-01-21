@@ -40,7 +40,7 @@ export default {
         text: "До встречи!",
         title: "Вы успешно вышли",
       });
-      this.$router.push({name: "auth-page"}, () => localStorage.setItem('jwt', null));
+      this.$router.push({name: "auth-page"}, () => localStorage.setItem('shop_jwt', null));
     }
   },
   mounted() {
