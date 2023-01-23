@@ -31,7 +31,7 @@ export default {
     getShops() {
       axios
           .post('http://localhost:8083/game_aggregator/shop/stock', {
-            name: 'GaGa'
+            name: localStorage.getItem('shop_login')
           }).then((res => this.games = res.data))
     },
     logout() {

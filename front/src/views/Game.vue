@@ -27,7 +27,8 @@
           <div class="main_info">
             <img width="450px" height="406" v-bind:src="game_info.game.image" class="leftimg">
             <div class="description">
-              <div class="icon_p" id="icon_addGameToFav" title="add to favorite">
+
+              <div v-if="requestPermissionValue !== 'null'" class="icon_p" id="icon_addGameToFav" title="add to favorite">
                 <button @click="addGameToFav"></button>
               </div>
               <b>Свойства:</b><br>Минимум игроков: <b>{{ game_info.game.minPlayersNumber }}</b>
@@ -113,6 +114,7 @@ export default {
   name: "Game",
   data() {
     return {
+      requestPermissionValue: null,
       game_info: null
     }
   },
@@ -144,7 +146,9 @@ export default {
   },
   mounted() {
     this.getGameInfo()
-  }
+    this.requestPermissionValue = localStorage.getItem('jwt')
+    alert(this.requestPermissionValue)
+  },
 }
 </script>
 
