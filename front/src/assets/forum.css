@@ -114,6 +114,7 @@ div.forum-table {
     margin-top: 10px;
     background: linear-gradient(135deg, #ffffff 50%, #c4c4ff 100%);
     border-radius: 20px 20px 20px 0;
+    word-wrap: break-word;
 }
 
 .for_date {
