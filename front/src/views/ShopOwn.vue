@@ -6,12 +6,29 @@
           <button @click="logout" title="logout"></button>
         </div>
       </div>
+    </div>
 
-      <div v-for="i in games" :key="i.id" class="body-table">
-        {{i}}
+    <p v-if="games !==null" class="cyber">hi, {{games[0].shop.name}}</p>
+
+    <div class="body-table" id="shop-body">
+      <div v-for="i in games" :key="i.id">
+        <div class="shop_cart">
+
+          <div class="align">
+            <p>{{i.shop.city}}</p>
+            <p>{{i.shop.address}}</p>
+            <p>{{i.shop.phone}}</p>
+          </div>
+
+        </div>
       </div>
 
     </div>
+
+
+
+
+
 
 
   </div>
@@ -31,7 +48,7 @@ export default {
     getShops() {
       axios
           .post('http://localhost:8083/game_aggregator/shop/stock', {
-            name: 'GaGa'
+            name: localStorage.getItem('shop_login')
           }).then((res => this.games = res.data))
     },
     logout() {
@@ -50,5 +67,5 @@ export default {
 </script>
 
 <style>
-
+@import "../assets/shop.css";
 </style>

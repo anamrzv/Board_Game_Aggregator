@@ -1,0 +1,22 @@
+.shop_cart {
+    background: white;
+    border-radius: 15px;
+    max-width: 518px;
+    max-height: 282px;
+    display: flex;
+    padding: 7px;
+    font-family: Roboto Regular, sans-serif;
+    margin-bottom: 10%;
+    transition: 300ms;
+    background: linear-gradient(150deg, #ffffff 40%, #c4c4ff 80%);
+}
+.shop_cart:hover {
+    transform: scale(1.03);
+}
+#shop-body {
+    justify-content: space-evenly;
+}
+
+.align {
+    text-align: center;
+}

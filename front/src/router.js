@@ -62,13 +62,7 @@ const routes = [
     {
         path: '/game_aggregator/game/*',
         name: 'game-page',
-        component: Game,
-        beforeEnter: (to, from, next) => {
-            if (localStorage.getItem("jwt") !== 'null') next();
-            else next({
-                name: 'error-page-app',
-            });
-        }
+        component: Game
     },
     {
         path: '/game_aggregator/shop',

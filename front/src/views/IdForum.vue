@@ -26,10 +26,17 @@
       <div v-if="comments">
         <div v-for="item in comments.comments" :key="item.id">
           <div class="comments_container">
-            <div class="username">{{ item.user }}</div>
-            <div class="comment">{{ item.content }}</div>
+              <div class="username">{{ item.user }}</div>
+              <div class="comment">{{ item.content }}</div>
           </div>
-          <div class="for_date">{{ item.date }}</div>
+
+          <div class="delete_comm">
+            <div class="for_date">{{ item.date }}</div>
+            <div v-if="item.user === get_login && comments" class="icon_p" id="delete_icon_comment">
+              <button @click="deleteComment(comments.forum.id, item.id)"></button>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -37,10 +44,10 @@
         <div class="add_comment">
           <b-button v-b-toggle.add>+</b-button>
           <b-collapse id="add">
-          <form id="for_comment">
-            <input type="text" required="" v-model.trim="get_comment">
-            <button class="icon_p" type="submit" @click="sendComment" title="send">></button>
-          </form>
+            <form id="for_comment">
+              <input type="text" required="" v-model.trim="get_comment">
+              <button class="icon_p" type="submit" @click="sendComment" title="send">></button>
+            </form>
           </b-collapse>
         </div>
       </div>
@@ -51,31 +58,46 @@
 
 <script>
 import axios from "axios";
+import login from "@/views/Login.vue";
 
 export default {
   name: "IdForum",
+  computed: {
+    login() {
+      return login
+    }
+  },
   data() {
     return {
+      comment_id: null,
+      get_login: localStorage.getItem('login'),
       get_comment: null,
       forum_id: 0,
       comments: null
     }
   },
   methods: {
-    sendComment(){
-      let msg ='http://localhost:8083/game_aggregator/forum/'
-    axios
-        .post(msg + this.$data.forum_id, {
-          login: localStorage.getItem('login'),
-          dateTime: null,
-          content: this.$data.get_comment
-        }).then((response) => {
-      this.comments = response.data;
-    })
+    deleteComment(f_id, c_id) {
+      axios
+          .delete('http://localhost:8083/game_aggregator/' + f_id + '/' + c_id)
+    },
+    sendComment() {
+      let msg = 'http://localhost:8083/game_aggregator/forum/'
+      axios
+          .post(msg + this.$data.forum_id, {
+            login: localStorage.getItem('login'),
+            dateTime: null,
+            content: this.$data.get_comment
+          }).then((response) => {
+        this.comments = response.data;
+      })
     },
     addToFav() {
       axios
-          .post('http://localhost:8083/game_aggregator/forum/fav_forums', {login: localStorage.getItem('login'), forum: this.$data.forum_id})
+          .post('http://localhost:8083/game_aggregator/forum/fav_forums', {
+            login: localStorage.getItem('login'),
+            forum: this.$data.forum_id
+          })
     },
     goHome() {
       this.$router.push({name: "main"})

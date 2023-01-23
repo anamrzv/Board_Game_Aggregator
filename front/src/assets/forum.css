@@ -114,6 +114,7 @@ div.forum-table {
     margin-top: 10px;
     background: linear-gradient(135deg, #ffffff 50%, #c4c4ff 100%);
     border-radius: 20px 20px 20px 0;
+    word-wrap: break-word;
 }
 
 .for_date {
@@ -194,12 +195,29 @@ div.forum-table {
 }
 
 #for_comment input {
-    margin-left:0;
+    margin-left: 0;
     margin-top: 1%;
     background: white;
     max-width: 70%;
     border-width: 3px 7px;
     border-radius: 40px;
     border: dashed;
+}
+
+#delete_icon_comment button:before {
+    content: '\f1f8';
+    color: #c4c4ff;
+    font-weight: normal;
+}
+
+#delete_icon_comment button {
+    margin-top: 3px;
+    margin-left: auto;
+    margin-right: 17px;
+}
+
+.delete_comm {
+    display: flex;
+    justify-content: space-between;
 }
 

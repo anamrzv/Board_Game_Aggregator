@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/api/user").permitAll()
 //                .antMatchers("/api/user/*").permitAll()
 //                .antMatchers("/error").permitAll() // TODO: переделать
-                .antMatchers("/game_aggregator/*").permitAll()
+                .antMatchers("/game_aggregator/*/*").permitAll() /*я тут изменила, чтобы работали запросы на удаление коммента*/
                 .antMatchers("/game_aggregator/user/*").permitAll()
                 .antMatchers("/game_aggregator/game*").permitAll()
                 .antMatchers("/game_aggregator/game/*").permitAll()
