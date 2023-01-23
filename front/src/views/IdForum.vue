@@ -26,12 +26,15 @@
       <div v-if="comments">
         <div v-for="item in comments.comments" :key="item.id">
           <div class="comments_container">
-            <div class="username">{{ item.user }}</div>
-            <div class="comment">{{ item.content }}</div>
+              <div class="username">{{ item.user }}</div>
+              <div class="comment">{{ item.content }}</div>
           </div>
-          <div class="for_date">{{ item.date }}</div>
-          <div v-if="item.user === get_login && comments" class="icon_p" id="delete_icon">
-            <button @click="deleteComment(comments.forum.id, item.id)"></button>
+
+          <div class="delete_comm">
+            <div class="for_date">{{ item.date }}</div>
+            <div v-if="item.user === get_login && comments" class="icon_p" id="delete_icon_comment">
+              <button @click="deleteComment(comments.forum.id, item.id)"></button>
+            </div>
           </div>
 
         </div>
