@@ -42,7 +42,8 @@
       <div class="d2">
         <form>
           <input type="text" placeholder="Search me...">
-          <button id="search" @click="searching"></button>
+<!--          @click="searching"-->
+          <button id="search" ></button>
         </form>
       </div>
       <div class="for_filter" title="show filters">
@@ -202,13 +203,13 @@ export default {
     userFav() {
       this.$router.push({name: "favorite-page"})
     },
-    searching() {
-      let vm = this;
-      this.games = [...this.PRODUCTS];
-      this.games = this.games.filter(function (item){
-        return item.minPlayers >= vm.minPlayers && item.maxPlayers <= vm.maxPlayers
-      })
-    },
+    // searching() {
+    //   let vm = this;
+    //   this.games = [...this.PRODUCTS];
+    //   this.games = this.games.filter(function (item){
+    //     return item.minPlayers >= vm.minPlayers && item.maxPlayers <= vm.maxPlayers
+    //   })
+    // },
     login() {
       this.$router.push({name: "user-page"})
     },
@@ -223,7 +224,7 @@ export default {
   },
   mounted() {
     this.getGames();
-    this.searching();
+    // this.searching();
   },
   created() {
     this.requestPermissionValue = localStorage.getItem('jwt')

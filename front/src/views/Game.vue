@@ -147,7 +147,6 @@ export default {
   mounted() {
     this.getGameInfo()
     this.requestPermissionValue = localStorage.getItem('jwt')
-    alert(this.requestPermissionValue)
   },
 }
 </script>
